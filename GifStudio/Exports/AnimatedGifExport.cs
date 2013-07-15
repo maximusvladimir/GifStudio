@@ -21,15 +21,18 @@ namespace GifStudio
             Height = h;
             textBoxCropH.Text = h + "";
             textBoxCropW.Text = w + "";
+
+            ChromaKey = Color.Fuchsia;
+            Quality = 50;
         }
 
-        public int Width
+        public int IWidth
         {
             get;
             set;
         }
 
-        public int Height
+        public int IHeight
         {
             get;
             set;
@@ -62,6 +65,12 @@ namespace GifStudio
             set;
         }
 
+        public int Quality
+        {
+            get;
+            set;
+        }
+
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
@@ -87,6 +96,7 @@ namespace GifStudio
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             labelQuality.Text = trackBar1.Value + "";
+            Quality = trackBar1.Value;
         }
 
         private void helpBoxQuality_Click(object sender, EventArgs e)
@@ -169,6 +179,40 @@ namespace GifStudio
                 textBoxCropW.Enabled = false;
                 textBoxCropH.Enabled = false;
             }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTransparency.Checked)
+                buttonColorPicker.Enabled = true;
+            else
+                buttonColorPicker.Enabled = false;
+        }
+
+        public Color ChromaKey
+        {
+            get;
+            set;
+        }
+
+        private void buttonColorPicker_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.AllowFullOpen = true;
+            cd.AnyColor = true;
+            cd.Color = buttonColorPicker.BackColor;
+            cd.FullOpen = true;
+            cd.ShowDialog();
+
+            if (cd.Color != null)
+                buttonColorPicker.BackColor = cd.Color;
+
+            ChromaKey = buttonColorPicker.BackColor;
         }
     }
 }

@@ -33,6 +33,12 @@
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxLoop = new System.Windows.Forms.CheckBox();
+            this.helpBoxCrop = new System.Windows.Forms.PictureBox();
+            this.textBoxCropH = new System.Windows.Forms.TextBox();
+            this.labelCrop = new System.Windows.Forms.Label();
+            this.textBoxCropW = new System.Windows.Forms.TextBox();
+            this.checkBoxCrop = new System.Windows.Forms.CheckBox();
             this.trimLength = new System.Windows.Forms.MaskedTextBox();
             this.labelTrim2 = new System.Windows.Forms.Label();
             this.trimStart = new System.Windows.Forms.MaskedTextBox();
@@ -49,17 +55,14 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.checkBoxCrop = new System.Windows.Forms.CheckBox();
-            this.textBoxCropW = new System.Windows.Forms.TextBox();
-            this.labelCrop = new System.Windows.Forms.Label();
-            this.textBoxCropH = new System.Windows.Forms.TextBox();
-            this.helpBoxCrop = new System.Windows.Forms.PictureBox();
+            this.checkBoxTransparency = new System.Windows.Forms.CheckBox();
+            this.buttonColorPicker = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxFPS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxTrim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -90,6 +93,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonColorPicker);
+            this.groupBox1.Controls.Add(this.checkBoxTransparency);
+            this.groupBox1.Controls.Add(this.checkBoxLoop);
             this.groupBox1.Controls.Add(this.helpBoxCrop);
             this.groupBox1.Controls.Add(this.textBoxCropH);
             this.groupBox1.Controls.Add(this.labelCrop);
@@ -110,10 +116,69 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(562, 213);
+            this.groupBox1.Size = new System.Drawing.Size(562, 252);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // checkBoxLoop
+            // 
+            this.checkBoxLoop.AutoSize = true;
+            this.checkBoxLoop.Checked = true;
+            this.checkBoxLoop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxLoop.Location = new System.Drawing.Point(9, 182);
+            this.checkBoxLoop.Name = "checkBoxLoop";
+            this.checkBoxLoop.Size = new System.Drawing.Size(98, 17);
+            this.checkBoxLoop.TabIndex = 18;
+            this.checkBoxLoop.Text = "Loop animation";
+            this.checkBoxLoop.UseVisualStyleBackColor = true;
+            // 
+            // helpBoxCrop
+            // 
+            this.helpBoxCrop.Image = global::GifStudio.Properties.Resources.help;
+            this.helpBoxCrop.Location = new System.Drawing.Point(526, 133);
+            this.helpBoxCrop.Name = "helpBoxCrop";
+            this.helpBoxCrop.Size = new System.Drawing.Size(16, 16);
+            this.helpBoxCrop.TabIndex = 17;
+            this.helpBoxCrop.TabStop = false;
+            this.helpBoxCrop.Click += new System.EventHandler(this.helpBoxCrop_Click);
+            // 
+            // textBoxCropH
+            // 
+            this.textBoxCropH.Enabled = false;
+            this.textBoxCropH.Location = new System.Drawing.Point(115, 156);
+            this.textBoxCropH.Name = "textBoxCropH";
+            this.textBoxCropH.Size = new System.Drawing.Size(60, 20);
+            this.textBoxCropH.TabIndex = 16;
+            // 
+            // labelCrop
+            // 
+            this.labelCrop.AutoSize = true;
+            this.labelCrop.Enabled = false;
+            this.labelCrop.Location = new System.Drawing.Point(95, 159);
+            this.labelCrop.Name = "labelCrop";
+            this.labelCrop.Size = new System.Drawing.Size(14, 13);
+            this.labelCrop.TabIndex = 15;
+            this.labelCrop.Text = "X";
+            // 
+            // textBoxCropW
+            // 
+            this.textBoxCropW.Enabled = false;
+            this.textBoxCropW.Location = new System.Drawing.Point(26, 156);
+            this.textBoxCropW.Name = "textBoxCropW";
+            this.textBoxCropW.Size = new System.Drawing.Size(63, 20);
+            this.textBoxCropW.TabIndex = 14;
+            // 
+            // checkBoxCrop
+            // 
+            this.checkBoxCrop.AutoSize = true;
+            this.checkBoxCrop.Location = new System.Drawing.Point(9, 133);
+            this.checkBoxCrop.Name = "checkBoxCrop";
+            this.checkBoxCrop.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxCrop.TabIndex = 13;
+            this.checkBoxCrop.Text = "Crop:";
+            this.checkBoxCrop.UseVisualStyleBackColor = true;
+            this.checkBoxCrop.CheckedChanged += new System.EventHandler(this.checkBoxCrop_CheckedChanged);
             // 
             // trimLength
             // 
@@ -247,16 +312,17 @@
             // buttonSave
             // 
             this.buttonSave.Enabled = false;
-            this.buttonSave.Location = new System.Drawing.Point(506, 259);
+            this.buttonSave.Location = new System.Drawing.Point(499, 298);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
-            this.buttonSave.Text = "Save";
+            this.buttonSave.Text = "Export";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(425, 259);
+            this.buttonCancel.Location = new System.Drawing.Point(418, 298);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -267,65 +333,41 @@
             // progressBar1
             // 
             this.progressBar1.Enabled = false;
-            this.progressBar1.Location = new System.Drawing.Point(15, 259);
+            this.progressBar1.Location = new System.Drawing.Point(8, 298);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(404, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 6;
             this.progressBar1.Value = 50;
             // 
-            // checkBoxCrop
+            // checkBoxTransparency
             // 
-            this.checkBoxCrop.AutoSize = true;
-            this.checkBoxCrop.Location = new System.Drawing.Point(9, 133);
-            this.checkBoxCrop.Name = "checkBoxCrop";
-            this.checkBoxCrop.Size = new System.Drawing.Size(51, 17);
-            this.checkBoxCrop.TabIndex = 13;
-            this.checkBoxCrop.Text = "Crop:";
-            this.checkBoxCrop.UseVisualStyleBackColor = true;
-            this.checkBoxCrop.CheckedChanged += new System.EventHandler(this.checkBoxCrop_CheckedChanged);
+            this.checkBoxTransparency.AutoSize = true;
+            this.checkBoxTransparency.Location = new System.Drawing.Point(9, 210);
+            this.checkBoxTransparency.Name = "checkBoxTransparency";
+            this.checkBoxTransparency.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxTransparency.TabIndex = 19;
+            this.checkBoxTransparency.Text = "Transparency?";
+            this.checkBoxTransparency.UseVisualStyleBackColor = true;
+            this.checkBoxTransparency.CheckedChanged += new System.EventHandler(this.checkBoxTransparency_CheckedChanged);
             // 
-            // textBoxCropW
+            // buttonColorPicker
             // 
-            this.textBoxCropW.Enabled = false;
-            this.textBoxCropW.Location = new System.Drawing.Point(26, 156);
-            this.textBoxCropW.Name = "textBoxCropW";
-            this.textBoxCropW.Size = new System.Drawing.Size(63, 20);
-            this.textBoxCropW.TabIndex = 14;
-            // 
-            // labelCrop
-            // 
-            this.labelCrop.AutoSize = true;
-            this.labelCrop.Enabled = false;
-            this.labelCrop.Location = new System.Drawing.Point(95, 159);
-            this.labelCrop.Name = "labelCrop";
-            this.labelCrop.Size = new System.Drawing.Size(14, 13);
-            this.labelCrop.TabIndex = 15;
-            this.labelCrop.Text = "X";
-            // 
-            // textBoxCropH
-            // 
-            this.textBoxCropH.Enabled = false;
-            this.textBoxCropH.Location = new System.Drawing.Point(115, 156);
-            this.textBoxCropH.Name = "textBoxCropH";
-            this.textBoxCropH.Size = new System.Drawing.Size(60, 20);
-            this.textBoxCropH.TabIndex = 16;
-            // 
-            // helpBoxCrop
-            // 
-            this.helpBoxCrop.Image = global::GifStudio.Properties.Resources.help;
-            this.helpBoxCrop.Location = new System.Drawing.Point(526, 133);
-            this.helpBoxCrop.Name = "helpBoxCrop";
-            this.helpBoxCrop.Size = new System.Drawing.Size(16, 16);
-            this.helpBoxCrop.TabIndex = 17;
-            this.helpBoxCrop.TabStop = false;
-            this.helpBoxCrop.Click += new System.EventHandler(this.helpBoxCrop_Click);
+            this.buttonColorPicker.BackColor = System.Drawing.Color.Fuchsia;
+            this.buttonColorPicker.Enabled = false;
+            this.buttonColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonColorPicker.Location = new System.Drawing.Point(113, 206);
+            this.buttonColorPicker.Name = "buttonColorPicker";
+            this.buttonColorPicker.Size = new System.Drawing.Size(30, 23);
+            this.buttonColorPicker.TabIndex = 20;
+            this.buttonColorPicker.UseVisualStyleBackColor = false;
+            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPicker_Click);
             // 
             // AnimatedGifExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 294);
+            this.ClientSize = new System.Drawing.Size(586, 333);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
@@ -339,11 +381,11 @@
             this.Text = "Save as Animated Gif";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxFPS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxTrim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,5 +418,8 @@
         private System.Windows.Forms.TextBox textBoxCropW;
         private System.Windows.Forms.CheckBox checkBoxCrop;
         private System.Windows.Forms.PictureBox helpBoxCrop;
+        private System.Windows.Forms.CheckBox checkBoxLoop;
+        private System.Windows.Forms.Button buttonColorPicker;
+        private System.Windows.Forms.CheckBox checkBoxTransparency;
     }
 }
