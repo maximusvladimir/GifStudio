@@ -1,0 +1,4 @@
+GifStudio
+=========
+
+Gif building studio.
