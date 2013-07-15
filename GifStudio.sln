@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gifbrary", "Gifbrary\Gifbrary.csproj", "{347C01C8-9CCD-4D46-9D92-F856EE20550E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GifStudio", "GifStudio\GifStudio.csproj", "{51EBD0B6-0692-44C3-BBD9-B308F6F79595}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{347C01C8-9CCD-4D46-9D92-F856EE20550E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{347C01C8-9CCD-4D46-9D92-F856EE20550E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{347C01C8-9CCD-4D46-9D92-F856EE20550E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{347C01C8-9CCD-4D46-9D92-F856EE20550E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EBD0B6-0692-44C3-BBD9-B308F6F79595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EBD0B6-0692-44C3-BBD9-B308F6F79595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EBD0B6-0692-44C3-BBD9-B308F6F79595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EBD0B6-0692-44C3-BBD9-B308F6F79595}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
