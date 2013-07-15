@@ -65,11 +65,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimatedGifChildForm.cs">
+    <Compile Include="ChildForms\AnimatedGifChildForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AnimatedGifChildForm.Designer.cs">
+    <Compile Include="ChildForms\AnimatedGifChildForm.Designer.cs">
       <DependentUpon>AnimatedGifChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exports\AnimatedGifExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Exports\AnimatedGifExport.Designer.cs">
+      <DependentUpon>AnimatedGifExport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,17 +85,20 @@
     <Compile Include="Studio.Designer.cs">
       <DependentUpon>Studio.cs</DependentUpon>
     </Compile>
-    <Compile Include="VideoChildForm.cs">
+    <Compile Include="ChildForms\VideoChildForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VideoChildForm.Designer.cs">
+    <Compile Include="ChildForms\VideoChildForm.Designer.cs">
       <DependentUpon>VideoChildForm.cs</DependentUpon>
     </Compile>
     <Compile Include="VideoFeedback.xaml.cs">
       <DependentUpon>VideoFeedback.xaml</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AnimatedGifChildForm.resx">
+    <EmbeddedResource Include="ChildForms\AnimatedGifChildForm.resx">
       <DependentUpon>AnimatedGifChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\AnimatedGifExport.resx">
+      <DependentUpon>AnimatedGifExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -104,7 +113,7 @@
     <EmbeddedResource Include="Studio.resx">
       <DependentUpon>Studio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VideoChildForm.resx">
+    <EmbeddedResource Include="ChildForms\VideoChildForm.resx">
       <DependentUpon>VideoChildForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -158,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
+    <None Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gifbrary\Gifbrary.csproj">
@@ -166,14 +176,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxWMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="WMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>

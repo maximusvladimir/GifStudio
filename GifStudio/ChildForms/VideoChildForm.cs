@@ -22,9 +22,23 @@ namespace GifStudio
             scrubAnayliser.Interval = 150;
             scrubAnayliser.Tick += scrubAnayliser_Tick;
             scrubAnayliser.Start();
+
+            trackBar1.MouseMove += trackBar1_MouseMove;
         }
 
-        void scrubAnayliser_Tick(object sender, EventArgs e)
+        public string FilePath
+        {
+            get;
+            set;
+        }
+
+        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                trackBar1_Scroll(null, null);
+        }
+
+        private void scrubAnayliser_Tick(object sender, EventArgs e)
         {
             long pos = VideoControl.Player.MediaPosition;
             long dur = VideoControl.Player.MediaDuration;
@@ -64,6 +78,7 @@ namespace GifStudio
 
         public void SetVideo(string filePath)
         {
+            FilePath = filePath;
             VideoControl.Player.Source = new Uri(filePath);
             VideoControl.Player.Play();
         }
@@ -73,6 +88,36 @@ namespace GifStudio
             get
             {
                 return (VideoFeedback)elementHost1.Child;
+            }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            long dur = VideoControl.Player.MediaDuration;
+            VideoControl.Player.MediaPosition = ((trackBar1.Value * dur) / 100);
+            VideoControl.Player.Play();
+        }
+
+        private void checkLoop_CheckedChanged(object sender, EventArgs e)
+        {
+            VideoControl.Player.Loop = checkLoop.Checked;
+            if (checkLoop.Checked && !VideoControl.Player.IsPlaying)
+            {
+                VideoControl.Player.Play();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (VideoControl.Player.IsPlaying)
+            {
+                button1.Text = "Play";
+                VideoControl.Player.Pause();
+            }
+            else
+            {
+                button1.Text = "Pause";
+                VideoControl.Player.Play();
             }
         }
     }

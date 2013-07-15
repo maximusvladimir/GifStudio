@@ -132,5 +132,16 @@ namespace GifStudio
         {
 
         }
+
+        private void toAnimatedGIFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form f = ActiveMdiChild;
+            if (f != null && f is VideoChildForm)
+            {
+                VideoChildForm vcf = (VideoChildForm)f;
+                AnimatedGifExport export = new AnimatedGifExport(vcf.FilePath,vcf.VideoControl.Player.NaturalVideoWidth,vcf.VideoControl.Player.NaturalVideoHeight);
+                export.ShowDialog();
+            }
+        }
     }
 }
