@@ -93,7 +93,7 @@ namespace Gifbrary.Common
             e.SetQuality(21 - ((Quality * 20) / 100));
             e.SetDelay(1000 / FPS);
             e.SetRepeat(Loop);
-            //e.SetSize(Width, Height);
+            e.SetSize(Width, Height);
             SetupEncoder();
             if (kill)
                 return;
