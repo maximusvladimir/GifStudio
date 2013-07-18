@@ -204,9 +204,20 @@ namespace GifStudio
             int l = 0;
             if (!checkBoxLoop.Checked)
                 l = 1;
-
+            try
+            {
+                IWidth = int.Parse(textBoxCropW.Text);
+                IHeight = int.Parse(textBoxCropH.Text);
+            }
+            catch (Exception)
+            {
+            }
+            if (checkBoxCrop.Checked && IWidth <= 0 || IHeight <= 0)
+            {
+                MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             progressBar1.Style = ProgressBarStyle.Blocks;
-            using (con = new WMVtoGIF(DestinationFilePath,SourceFilePath,IWidth,IHeight,ts,tl,l,FPS, Quality))
+            using (con = new WMVtoGIF(DestinationFilePath,SourceFilePath,IWidth,IHeight,ts,tl,l,FPS, Quality,!checkBoxCrop.Checked))
             {
                 con.SetupEncoder();
                 con.ConvertAsync();

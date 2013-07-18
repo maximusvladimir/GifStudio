@@ -197,9 +197,9 @@
             this.checkBoxCrop.AutoSize = true;
             this.checkBoxCrop.Location = new System.Drawing.Point(9, 133);
             this.checkBoxCrop.Name = "checkBoxCrop";
-            this.checkBoxCrop.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxCrop.Size = new System.Drawing.Size(61, 17);
             this.checkBoxCrop.TabIndex = 13;
-            this.checkBoxCrop.Text = "Crop:";
+            this.checkBoxCrop.Text = "Resize:";
             this.checkBoxCrop.UseVisualStyleBackColor = true;
             this.checkBoxCrop.CheckedChanged += new System.EventHandler(this.checkBoxCrop_CheckedChanged);
             // 
@@ -294,6 +294,7 @@
             // checkBoxTrim
             // 
             this.checkBoxTrim.AutoSize = true;
+            this.checkBoxTrim.Enabled = false;
             this.checkBoxTrim.Location = new System.Drawing.Point(9, 57);
             this.checkBoxTrim.Name = "checkBoxTrim";
             this.checkBoxTrim.Size = new System.Drawing.Size(49, 17);

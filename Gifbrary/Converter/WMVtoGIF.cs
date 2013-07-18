@@ -14,8 +14,8 @@ namespace Gifbrary.Converter
 {
     public class WMVtoGIF : Conversion, IDisposable
     {
-        public WMVtoGIF(string output, string input, int width, int height, long start, long end, int loop, int fps, int quality)
-            : base(output,input,width,height,start,end,loop,fps,quality)
+        public WMVtoGIF(string output, string input, int width, int height, long start, long end, int loop, int fps, int quality,bool or)
+            : base(output,input,width,height,start,end,loop,fps,quality,or)
         {
 
         }
@@ -33,7 +33,13 @@ namespace Gifbrary.Converter
         public override Image GetFrame(int i)
         {
             long tick = (i * VideoStreamLength.Ticks) / GetTotalFrames();
-            return GetImage(new TimeSpan(tick));
+            Image img = GetImage(new TimeSpan(tick));
+            if (!OriginalSize)
+            {
+                return new Bitmap(img, Width, Height);
+            }
+            return img;
+            //return GetImage(new TimeSpan(tick));
             //return GetImage(TimeSpan.Zero);
         }
 

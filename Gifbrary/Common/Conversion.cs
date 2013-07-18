@@ -13,7 +13,7 @@ namespace Gifbrary.Common
         private Thread thread;
         private bool kill = false;
         public event EventHandler ProgressChanged;
-        public Conversion(string output, string input, int width, int height, long start, long end, int loop, int fps, int quality)
+        public Conversion(string output, string input, int width, int height, long start, long end, int loop, int fps, int quality, bool original)
         {
             Output = output;
             Input = input;
@@ -25,6 +25,13 @@ namespace Gifbrary.Common
             FPS = fps;
             Quality = quality;
             IsDone = false;
+            OriginalSize = original;
+        }
+
+        public bool OriginalSize
+        {
+            get;
+            set;
         }
 
         public string Output
@@ -100,7 +107,7 @@ namespace Gifbrary.Common
             e.SetQuality(21 - ((Quality * 20) / 100));
             e.SetDelay(1000 / FPS);
             e.SetRepeat(Loop);
-            e.SetSize(Width, Height);
+            //e.SetSize(Width, Height);
             SetupEncoder();
             if (kill)
                 return;
