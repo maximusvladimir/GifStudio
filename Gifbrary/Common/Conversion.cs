@@ -1,15 +1,19 @@
 ﻿using Gif.Components;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Gifbrary.Writor
+namespace Gifbrary.Common
 {
-    public class WMVToGif
+    public abstract class Conversion
     {
-        public WMVToGif(string output, string input, int width, int height, long start, long end, bool loop, int fps, int quality)
+        private Thread thread;
+        private bool kill = false;
+        public event EventHandler ProgressChanged;
+        public Conversion(string output, string input, int width, int height, long start, long end, int loop, int fps, int quality)
         {
             Output = output;
             Input = input;
@@ -70,30 +74,56 @@ namespace Gifbrary.Writor
             set;
         }
 
-        public bool Loop
+        public int Loop
         {
             get;
             set;
         }
 
+        public abstract void SetupEncoder();
+
+        public abstract int GetTotalFrames();
+
+        public abstract Image GetFrame(int i);
+
         public void Convert()
         {
             AnimatedGifEncoder e = new AnimatedGifEncoder();
             e.Start(Output);
-            e.SetQuality(modq);
-            e.SetDelay(1000 / fps);
-            e.SetRepeat(0);
-            e.SetSize(w, h);
-            for (int i = 0; i < 7; i++)
+            e.SetQuality(21 - ((Quality * 20) / 100));
+            e.SetDelay(1000 / FPS);
+            e.SetRepeat(Loop);
+            //e.SetSize(Width, Height);
+            SetupEncoder();
+            if (kill)
+                return;
+            for (int i = 0; i < GetTotalFrames(); i++)
             {
-                e.AddFrame(null);
+                if (kill)
+                    return;
+                e.AddFrame(GetFrame(i));
+                if (ProgressChanged != null)
+                {
+                    ProgressChanged((i * 100) / GetTotalFrames(), EventArgs.Empty);
+                }
             }
             e.Finish();
         }
 
+        private int Progress
+        {
+            set;
+            get;
+        }
+
+        public void Kill()
+        {
+            kill = true;
+        }
+
         public void ConvertAsync()
         {
-            Thread thread = new Thread(new ThreadStart(Convert));
+            thread = new Thread(new ThreadStart(Convert));
             thread.Start();
             thread.Priority = ThreadPriority.Highest;
         }

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,10 +50,10 @@
     <Compile Include="Common\GifDecoder.cs" />
     <Compile Include="Common\LZWEncoder.cs" />
     <Compile Include="Common\NeuQuant.cs" />
+    <Compile Include="Converter\WMVtoGIF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reader\Read.cs" />
-    <Compile Include="Writor\WMVToGif.cs" />
-    <Compile Include="Writor\Write.cs" />
+    <Compile Include="Common\Conversion.cs" />
+    <Compile Include="Read.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

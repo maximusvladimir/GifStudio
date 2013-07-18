@@ -14,10 +14,21 @@ namespace GifStudio
     public partial class Studio : Form
     {
         private int childFormNumber = 0;
-
+        private Timer ticker;
+        private AnimatedGifExport export;
         public Studio()
         {
             InitializeComponent();
+            ticker = new Timer();
+            ticker.Enabled = true;
+            ticker.Interval = 100;
+            ticker.Tick += ticker_Tick;
+            ticker.Stop();
+        }
+
+        private void ticker_Tick(object sender, EventArgs e)
+        {
+            Tick();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -26,6 +37,17 @@ namespace GifStudio
             childForm.MdiParent = this;
             childForm.Text = "Window " + childFormNumber++;
             childForm.Show();
+        }
+
+        private void Tick()
+        {
+            if (export != null && export.c_pr > 1)
+            {
+                FileInfo inf = new FileInfo(export.DestinationFilePath);
+                inf.Refresh();
+                long s = (inf.Length * 100) / export.c_pr;
+                Status.Text = export.c_pr + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
+            }
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -139,8 +161,23 @@ namespace GifStudio
             if (f != null && f is VideoChildForm)
             {
                 VideoChildForm vcf = (VideoChildForm)f;
-                AnimatedGifExport export = new AnimatedGifExport(vcf.FilePath,vcf.VideoControl.Player.NaturalVideoWidth,vcf.VideoControl.Player.NaturalVideoHeight);
-                export.ShowDialog();
+                export = new AnimatedGifExport(vcf.FilePath,vcf.VideoControl.Player.NaturalVideoWidth,vcf.VideoControl.Player.NaturalVideoHeight);
+                ticker.Start();
+                export.FormClosed += export_FormClosed;
+                export.ShowDialog(this);
+            }
+        }
+
+        void export_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ticker.Stop();
+        }
+
+        public ToolStripLabel Status
+        {
+            get
+            {
+                return toolStripStatusLabel;
             }
         }
     }

@@ -33,6 +33,8 @@
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonColorPicker = new System.Windows.Forms.Button();
+            this.checkBoxTransparency = new System.Windows.Forms.CheckBox();
             this.checkBoxLoop = new System.Windows.Forms.CheckBox();
             this.helpBoxCrop = new System.Windows.Forms.PictureBox();
             this.textBoxCropH = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.checkBoxTransparency = new System.Windows.Forms.CheckBox();
-            this.buttonColorPicker = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxFPS)).BeginInit();
@@ -120,6 +120,29 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // buttonColorPicker
+            // 
+            this.buttonColorPicker.BackColor = System.Drawing.Color.Fuchsia;
+            this.buttonColorPicker.Enabled = false;
+            this.buttonColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonColorPicker.Location = new System.Drawing.Point(113, 206);
+            this.buttonColorPicker.Name = "buttonColorPicker";
+            this.buttonColorPicker.Size = new System.Drawing.Size(30, 23);
+            this.buttonColorPicker.TabIndex = 20;
+            this.buttonColorPicker.UseVisualStyleBackColor = false;
+            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPicker_Click);
+            // 
+            // checkBoxTransparency
+            // 
+            this.checkBoxTransparency.AutoSize = true;
+            this.checkBoxTransparency.Location = new System.Drawing.Point(9, 210);
+            this.checkBoxTransparency.Name = "checkBoxTransparency";
+            this.checkBoxTransparency.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxTransparency.TabIndex = 19;
+            this.checkBoxTransparency.Text = "Transparency?";
+            this.checkBoxTransparency.UseVisualStyleBackColor = true;
+            this.checkBoxTransparency.CheckedChanged += new System.EventHandler(this.checkBoxTransparency_CheckedChanged);
             // 
             // checkBoxLoop
             // 
@@ -340,29 +363,6 @@
             this.progressBar1.TabIndex = 6;
             this.progressBar1.Value = 50;
             // 
-            // checkBoxTransparency
-            // 
-            this.checkBoxTransparency.AutoSize = true;
-            this.checkBoxTransparency.Location = new System.Drawing.Point(9, 210);
-            this.checkBoxTransparency.Name = "checkBoxTransparency";
-            this.checkBoxTransparency.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxTransparency.TabIndex = 19;
-            this.checkBoxTransparency.Text = "Transparency?";
-            this.checkBoxTransparency.UseVisualStyleBackColor = true;
-            this.checkBoxTransparency.CheckedChanged += new System.EventHandler(this.checkBoxTransparency_CheckedChanged);
-            // 
-            // buttonColorPicker
-            // 
-            this.buttonColorPicker.BackColor = System.Drawing.Color.Fuchsia;
-            this.buttonColorPicker.Enabled = false;
-            this.buttonColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColorPicker.Location = new System.Drawing.Point(113, 206);
-            this.buttonColorPicker.Name = "buttonColorPicker";
-            this.buttonColorPicker.Size = new System.Drawing.Size(30, 23);
-            this.buttonColorPicker.TabIndex = 20;
-            this.buttonColorPicker.UseVisualStyleBackColor = false;
-            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPicker_Click);
-            // 
             // AnimatedGifExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,7 +377,10 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(602, 371);
+            this.MinimumSize = new System.Drawing.Size(602, 371);
             this.Name = "AnimatedGifExport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Save as Animated Gif";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

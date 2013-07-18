@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gifbrary.Common;
+using Gifbrary.Converter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +26,7 @@ namespace GifStudio
 
             ChromaKey = Color.Fuchsia;
             Quality = 50;
+            FPS = 30;
         }
 
         public int IWidth
@@ -101,7 +104,7 @@ namespace GifStudio
 
         private void helpBoxQuality_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Sets the quality of the GIF to be produced.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, "Sets the quality of the GIF to be produced.\nThe higher quality the image is, the longer it will take to produce and the larger the file will be.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void helpBoxTrim_Click(object sender, EventArgs e)
@@ -111,7 +114,7 @@ namespace GifStudio
 
         private void helpBoxFPS_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Sets the number of images to be displayed in one second.\n30 is the default.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, "Sets the number of images to be displayed in one second.\n30 is the default.\n\nHaving a higher FPS will result in the file being larger.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -183,7 +186,44 @@ namespace GifStudio
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            long ts = 0;
+            long tl = 0;
+            try
+            {
+                ts = long.Parse(trimStart.Text);
+                tl = long.Parse(trimLength.Text);
+            }
+            catch (Exception)
+            {}
+            int l = 0;
+            if (!checkBoxLoop.Checked)
+                l = 1;
 
+            progressBar1.Style = ProgressBarStyle.Blocks;
+            using (WMVtoGIF con = new WMVtoGIF(DestinationFilePath,SourceFilePath,IWidth,IHeight,ts,tl,l,FPS, Quality))
+            {
+                con.SetupEncoder();
+                con.ConvertAsync();
+                con.ProgressChanged += con_ProgressChanged;
+            }
+        }
+
+        private void UpdateProgressSafe()
+        {
+            this.progressBar1.Value = c_pr;
+        }
+        private delegate void UpdateProgressDelegate();
+        public int c_pr = 0;
+        void con_ProgressChanged(object sender, EventArgs e)
+        {
+            c_pr = (int)sender;
+            try
+            {
+                progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)
