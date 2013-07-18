@@ -24,6 +24,7 @@ namespace Gifbrary.Common
             Loop = loop;
             FPS = fps;
             Quality = quality;
+            IsDone = false;
         }
 
         public string Output
@@ -80,6 +81,12 @@ namespace Gifbrary.Common
             set;
         }
 
+        public bool IsDone
+        {
+            get;
+            private set;
+        }
+
         public abstract void SetupEncoder();
 
         public abstract int GetTotalFrames();
@@ -108,6 +115,7 @@ namespace Gifbrary.Common
                 }
             }
             e.Finish();
+            IsDone = true;
         }
 
         private int Progress

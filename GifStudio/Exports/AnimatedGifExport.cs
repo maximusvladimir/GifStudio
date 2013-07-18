@@ -158,6 +158,12 @@ namespace GifStudio
             }
         }
 
+        public WMVtoGIF con
+        {
+            get;
+            set;
+        }
+
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -200,7 +206,7 @@ namespace GifStudio
                 l = 1;
 
             progressBar1.Style = ProgressBarStyle.Blocks;
-            using (WMVtoGIF con = new WMVtoGIF(DestinationFilePath,SourceFilePath,IWidth,IHeight,ts,tl,l,FPS, Quality))
+            using (con = new WMVtoGIF(DestinationFilePath,SourceFilePath,IWidth,IHeight,ts,tl,l,FPS, Quality))
             {
                 con.SetupEncoder();
                 con.ConvertAsync();

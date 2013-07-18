@@ -54,6 +54,14 @@ namespace GifStudio
                 {
                 }
             }
+            if (export != null && export.Visible)
+            {
+                if (export.con != null && export.con.IsDone)
+                {
+                    export.Hide();
+                    export = null;
+                }
+            }
         }
 
         private void OpenFile(object sender, EventArgs e)
