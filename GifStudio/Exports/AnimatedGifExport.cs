@@ -1,6 +1,7 @@
 ﻿using Gifbrary.Common;
 using Gifbrary.Converter;
 using Gifbrary.Reader;
+using GifStudio.Exports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace GifStudio
 {
-    public partial class AnimatedGifExport : Form
+    public partial class AnimatedGifExport : ExportWindow
     {
         public AnimatedGifExport(string file, int w, int h)
         {
@@ -29,12 +30,6 @@ namespace GifStudio
             ChromaKey = Color.Fuchsia;
             ExportData.Quality = 50;
             ExportData.FPS = 30;
-        }
-
-        public Exportable ExportData
-        {
-            get;
-            set;
         }
 
         void textBoxPath_TextChanged(object sender, EventArgs e)
@@ -140,12 +135,6 @@ namespace GifStudio
             }
         }
 
-        public Conversion con
-        {
-            get;
-            set;
-        }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -199,23 +188,24 @@ namespace GifStudio
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
-            using (con = Read.CreateConversion(ExportData,l))
+            using (Converter = Read.CreateConversion(ExportData,l))
             {
-                con.SetupEncoder();
-                con.ConvertAsync();
-                con.ProgressChanged += con_ProgressChanged;
+                Converter.SetupEncoder();
+                Converter.ConvertAsync();
+                Converter.ProgressChanged += con_ProgressChanged;
             }
         }
 
         private void UpdateProgressSafe()
         {
-            this.progressBar1.Value = (int)(c_pr * 404);
+            this.progressBar1.Value = (int)(CountProgress * 404);
         }
+
         private delegate void UpdateProgressDelegate();
-        public float c_pr = 0;
+
         void con_ProgressChanged(object sender, EventArgs e)
         {
-            c_pr = (((int)sender)/404.0f);
+            CountProgress = (((int)sender)/404.0f);
             try
             {
                 progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));

@@ -33,6 +33,8 @@
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.helpBoxCrop = new System.Windows.Forms.PictureBox();
             this.textBoxCropH = new System.Windows.Forms.TextBox();
             this.labelCrop = new System.Windows.Forms.Label();
@@ -90,6 +92,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.helpBoxCrop);
             this.groupBox1.Controls.Add(this.textBoxCropH);
             this.groupBox1.Controls.Add(this.labelCrop);
@@ -110,10 +114,36 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(562, 193);
+            this.groupBox1.Size = new System.Drawing.Size(562, 235);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "PNG (W3C Portable Network Graphics)",
+            "JPEG (Joint Photographic Experts Group)",
+            "BMP (Bitmap)",
+            "TIFF (Tagged Image File Format)",
+            "WMF (Windows metafile)",
+            "EXIF (Exchangeable Image File)",
+            "GIF (Graphics Interchange Format) (Non-animated)"});
+            this.comboBox1.Location = new System.Drawing.Point(55, 186);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(302, 21);
+            this.comboBox1.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 189);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "File type:";
             // 
             // helpBoxCrop
             // 
@@ -295,7 +325,7 @@
             // buttonSave
             // 
             this.buttonSave.Enabled = false;
-            this.buttonSave.Location = new System.Drawing.Point(499, 239);
+            this.buttonSave.Location = new System.Drawing.Point(499, 281);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
@@ -305,7 +335,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(418, 239);
+            this.buttonCancel.Location = new System.Drawing.Point(418, 281);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -316,7 +346,7 @@
             // progressBar1
             // 
             this.progressBar1.Enabled = false;
-            this.progressBar1.Location = new System.Drawing.Point(8, 239);
+            this.progressBar1.Location = new System.Drawing.Point(8, 281);
             this.progressBar1.Maximum = 404;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(404, 23);
@@ -328,7 +358,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 270);
+            this.ClientSize = new System.Drawing.Size(586, 316);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
@@ -338,8 +368,8 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(602, 308);
-            this.MinimumSize = new System.Drawing.Size(602, 308);
+            this.MaximumSize = new System.Drawing.Size(602, 354);
+            this.MinimumSize = new System.Drawing.Size(602, 354);
             this.Name = "FrameExport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Save frames";
@@ -382,5 +412,7 @@
         private System.Windows.Forms.TextBox textBoxCropW;
         private System.Windows.Forms.CheckBox checkBoxCrop;
         private System.Windows.Forms.PictureBox helpBoxCrop;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label4;
     }
 }

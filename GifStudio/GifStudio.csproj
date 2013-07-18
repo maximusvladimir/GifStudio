@@ -36,6 +36,25 @@
   <PropertyGroup>
     <ApplicationIcon>1373919121_115777.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005">
       <HintPath>..\..\..\Users\max\Downloads\DirectShowLibV2-1\lib\DirectShowLib-2005.dll</HintPath>
@@ -78,6 +97,12 @@
     <Compile Include="Exports\AnimatedGifExport.Designer.cs">
       <DependentUpon>AnimatedGifExport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Exports\ExportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Exports\ExportWindow.Designer.cs">
+      <DependentUpon>ExportWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exports\FrameExport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Exports\AnimatedGifExport.resx">
       <DependentUpon>AnimatedGifExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\ExportWindow.resx">
+      <DependentUpon>ExportWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Exports\FrameExport.resx">
       <DependentUpon>FrameExport.cs</DependentUpon>

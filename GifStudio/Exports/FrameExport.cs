@@ -1,6 +1,7 @@
 ﻿using Gifbrary.Common;
 using Gifbrary.Converter;
 using Gifbrary.Reader;
+using GifStudio.Exports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace GifStudio
 {
-    public partial class FrameExport : Form
+    public partial class FrameExport : ExportWindow
     {
         public FrameExport(string file, int w, int h)
         {
@@ -28,12 +29,6 @@ namespace GifStudio
 
             ExportData.Quality = 50;
             ExportData.FPS = 30;
-        }
-
-        public Exportable ExportData
-        {
-            get;
-            set;
         }
 
         void textBoxPath_TextChanged(object sender, EventArgs e)
@@ -68,7 +63,7 @@ namespace GifStudio
 
         private void helpBoxQuality_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Sets the quality of the GIF to be produced.\nThe higher quality the image is, the longer it will take to produce and the larger the file will be.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, "Sets the quality of the images to be produced.\nThe higher quality the image is, the longer it will take to produce and the larger the file will be.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void helpBoxTrim_Click(object sender, EventArgs e)
@@ -122,12 +117,6 @@ namespace GifStudio
             }
         }
 
-        public Conversion con
-        {
-            get;
-            set;
-        }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -178,23 +167,22 @@ namespace GifStudio
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
-            using (con = Read.CreateConversion(ExportData,0))
+            using (Converter = Read.CreateConversion(ExportData,0))
             {
-                con.SetupEncoder();
-                con.ConvertAsync();
-                con.ProgressChanged += con_ProgressChanged;
+                Converter.SetupEncoder();
+                Converter.ConvertAsync();
+                Converter.ProgressChanged += con_ProgressChanged;
             }
         }
 
         private void UpdateProgressSafe()
         {
-            this.progressBar1.Value = c_pr;
+            this.progressBar1.Value = (int)(CountProgress * 404);
         }
         private delegate void UpdateProgressDelegate();
-        public int c_pr = 0;
         void con_ProgressChanged(object sender, EventArgs e)
         {
-            c_pr = (int)sender;
+            CountProgress = (int)sender;
             try
             {
                 progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));

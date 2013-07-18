@@ -1,5 +1,6 @@
 ﻿using Gifbrary.Common;
 using Gifbrary.Reader;
+using GifStudio.Exports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace GifStudio
     {
         private int childFormNumber = 0;
         private Timer ticker;
-        private AnimatedGifExport export;
+        private ExportWindow export;
         public Studio()
         {
             InitializeComponent();
@@ -41,14 +42,14 @@ namespace GifStudio
 
         private void Tick()
         {
-            if (export != null && export.c_pr > 0.04f && ((int)export.c_pr*100) % 4 == 0)
+            if (export != null && export.CountProgress > 0.08f && ((int)export.CountProgress*100) % 4 == 0)
             {
                 try
                 {
                     FileInfo inf = new FileInfo(export.ExportData.DestinationFilePath);
                     inf.Refresh();
-                    long s = (long)(inf.Length / export.c_pr);
-                    Status.Text = (100*export.c_pr) + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
+                    long s = (long)(inf.Length / export.CountProgress);
+                    Status.Text = (100*export.CountProgress) + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
                 }
                 catch (Exception)
                 {
@@ -56,9 +57,10 @@ namespace GifStudio
             }
             if (export != null && export.Visible)
             {
-                if (export.con != null && export.con.IsDone)
+                if (export.Converter != null && export.Converter.IsDone)
                 {
                     export.Hide();
+                    Status.Text = "Finished converting " + Path.GetFileName(export.ExportData.SourceFilePath) + ".";
                     export = null;
                 }
             }
