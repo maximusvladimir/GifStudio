@@ -41,14 +41,14 @@ namespace GifStudio
 
         private void Tick()
         {
-            if (export != null && export.c_pr > 1 && export.c_pr % 4 == 0)
+            if (export != null && export.c_pr > 0.04f && ((int)export.c_pr*100) % 4 == 0)
             {
                 try
                 {
-                    FileInfo inf = new FileInfo(export.DestinationFilePath);
+                    FileInfo inf = new FileInfo(export.ExportData.DestinationFilePath);
                     inf.Refresh();
-                    long s = (inf.Length * 100) / export.c_pr;
-                    Status.Text = export.c_pr + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
+                    long s = (long)(inf.Length / export.c_pr);
+                    Status.Text = (100*export.c_pr) + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
                 }
                 catch (Exception)
                 {

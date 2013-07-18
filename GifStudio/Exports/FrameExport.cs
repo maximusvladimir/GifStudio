@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace GifStudio
 {
-    public partial class AnimatedGifExport : Form
+    public partial class FrameExport : Form
     {
-        public AnimatedGifExport(string file, int w, int h)
+        public FrameExport(string file, int w, int h)
         {
             ExportData = new Exportable();
             ExportData.SourceFilePath = file;
@@ -26,7 +26,6 @@ namespace GifStudio
             textBoxCropH.Text = h + "";
             textBoxCropW.Text = w + "";
 
-            ChromaKey = Color.Fuchsia;
             ExportData.Quality = 50;
             ExportData.FPS = 30;
         }
@@ -48,29 +47,12 @@ namespace GifStudio
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
-            SaveFileDialog save = new SaveFileDialog();
-            save.AutoUpgradeEnabled = true;
-            save.AddExtension = true;
-            save.CheckPathExists = true;
-            save.CheckFileExists = false;
-            save.Filter = "Animated GIF file (*.gif)|*.gif";
-            save.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            save.OverwritePrompt = true;
-            save.RestoreDirectory = true;
-            save.Title = "Find save destination.";
+            FolderBrowserDialog save = new FolderBrowserDialog();
+            save.Description = "Select a directory to export the frames to.";
+            save.ShowNewFolderButton = true;
             save.ShowDialog();
 
-            try
-            {
-                if (File.Exists(save.FileName))
-                {
-                    File.Delete(save.FileName);
-                }
-            }
-            catch (Exception)
-            { }
-
-            ExportData.DestinationFilePath = save.FileName;
+            ExportData.DestinationFilePath = save.SelectedPath;
             textBoxPath.Text = ExportData.DestinationFilePath;
             if (ExportData.DestinationFilePath != null && !string.IsNullOrEmpty(ExportData.DestinationFilePath))
                 buttonSave.Enabled = true;
@@ -178,14 +160,11 @@ namespace GifStudio
             long tl = 0;
             try
             {
-                ts = long.Parse(trimStart.Text);
-                tl = long.Parse(trimLength.Text);
+                ExportData.TrimStart = long.Parse(trimStart.Text);
+                ExportData.TrimLength = long.Parse(trimLength.Text);
             }
             catch (Exception)
             {}
-            int l = 0;
-            if (!checkBoxLoop.Checked)
-                l = 1;
             try
             {
                 ExportData.Width = int.Parse(textBoxCropW.Text);
@@ -199,7 +178,7 @@ namespace GifStudio
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
-            using (con = Read.CreateConversion(ExportData,l))
+            using (con = Read.CreateConversion(ExportData,0))
             {
                 con.SetupEncoder();
                 con.ConvertAsync();
@@ -209,13 +188,13 @@ namespace GifStudio
 
         private void UpdateProgressSafe()
         {
-            this.progressBar1.Value = (int)(c_pr * 404);
+            this.progressBar1.Value = c_pr;
         }
         private delegate void UpdateProgressDelegate();
-        public float c_pr = 0;
+        public int c_pr = 0;
         void con_ProgressChanged(object sender, EventArgs e)
         {
-            c_pr = (((int)sender)/404.0f);
+            c_pr = (int)sender;
             try
             {
                 progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));
@@ -223,35 +202,6 @@ namespace GifStudio
             catch (Exception)
             {
             }
-        }
-
-        private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxTransparency.Checked)
-                buttonColorPicker.Enabled = true;
-            else
-                buttonColorPicker.Enabled = false;
-        }
-
-        public Color ChromaKey
-        {
-            get;
-            set;
-        }
-
-        private void buttonColorPicker_Click(object sender, EventArgs e)
-        {
-            ColorDialog cd = new ColorDialog();
-            cd.AllowFullOpen = true;
-            cd.AnyColor = true;
-            cd.Color = buttonColorPicker.BackColor;
-            cd.FullOpen = true;
-            cd.ShowDialog();
-
-            if (cd.Color != null)
-                buttonColorPicker.BackColor = cd.Color;
-
-            ChromaKey = buttonColorPicker.BackColor;
         }
     }
 }

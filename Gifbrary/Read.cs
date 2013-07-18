@@ -1,4 +1,5 @@
 ﻿using Gifbrary.Common;
+using Gifbrary.Converter;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,16 @@ namespace Gifbrary.Reader
                 return Formats.AVI;
             else
                 return Formats.None;
+        }
+
+        public static Conversion CreateConversion(Exportable data, int loop)
+        {
+            //if (GetFormat(data.DestinationFilePath) == Formats.GIF && GetFormat(data.SourceFilePath) == Formats.WMV)
+            {
+                return new WMVtoGIF(data, loop);
+            }
+
+            //return null;
         }
     }
 }

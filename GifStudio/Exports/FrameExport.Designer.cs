@@ -1,6 +1,6 @@
 ﻿namespace GifStudio
 {
-    partial class AnimatedGifExport
+    partial class FrameExport
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimatedGifExport));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrameExport));
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonColorPicker = new System.Windows.Forms.Button();
-            this.checkBoxTransparency = new System.Windows.Forms.CheckBox();
-            this.checkBoxLoop = new System.Windows.Forms.CheckBox();
             this.helpBoxCrop = new System.Windows.Forms.PictureBox();
             this.textBoxCropH = new System.Windows.Forms.TextBox();
             this.labelCrop = new System.Windows.Forms.Label();
@@ -70,15 +67,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Save destination:";
+            this.label1.Text = "Folder destination:";
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(107, 14);
+            this.textBoxPath.Location = new System.Drawing.Point(111, 14);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(386, 20);
+            this.textBoxPath.Size = new System.Drawing.Size(382, 20);
             this.textBoxPath.TabIndex = 1;
             // 
             // buttonBrowse
@@ -93,9 +90,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonColorPicker);
-            this.groupBox1.Controls.Add(this.checkBoxTransparency);
-            this.groupBox1.Controls.Add(this.checkBoxLoop);
             this.groupBox1.Controls.Add(this.helpBoxCrop);
             this.groupBox1.Controls.Add(this.textBoxCropH);
             this.groupBox1.Controls.Add(this.labelCrop);
@@ -116,45 +110,10 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(562, 252);
+            this.groupBox1.Size = new System.Drawing.Size(562, 193);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
-            // 
-            // buttonColorPicker
-            // 
-            this.buttonColorPicker.BackColor = System.Drawing.Color.Fuchsia;
-            this.buttonColorPicker.Enabled = false;
-            this.buttonColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColorPicker.Location = new System.Drawing.Point(113, 206);
-            this.buttonColorPicker.Name = "buttonColorPicker";
-            this.buttonColorPicker.Size = new System.Drawing.Size(30, 23);
-            this.buttonColorPicker.TabIndex = 20;
-            this.buttonColorPicker.UseVisualStyleBackColor = false;
-            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPicker_Click);
-            // 
-            // checkBoxTransparency
-            // 
-            this.checkBoxTransparency.AutoSize = true;
-            this.checkBoxTransparency.Location = new System.Drawing.Point(9, 210);
-            this.checkBoxTransparency.Name = "checkBoxTransparency";
-            this.checkBoxTransparency.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxTransparency.TabIndex = 19;
-            this.checkBoxTransparency.Text = "Transparency?";
-            this.checkBoxTransparency.UseVisualStyleBackColor = true;
-            this.checkBoxTransparency.CheckedChanged += new System.EventHandler(this.checkBoxTransparency_CheckedChanged);
-            // 
-            // checkBoxLoop
-            // 
-            this.checkBoxLoop.AutoSize = true;
-            this.checkBoxLoop.Checked = true;
-            this.checkBoxLoop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLoop.Location = new System.Drawing.Point(9, 182);
-            this.checkBoxLoop.Name = "checkBoxLoop";
-            this.checkBoxLoop.Size = new System.Drawing.Size(98, 17);
-            this.checkBoxLoop.TabIndex = 18;
-            this.checkBoxLoop.Text = "Loop animation";
-            this.checkBoxLoop.UseVisualStyleBackColor = true;
             // 
             // helpBoxCrop
             // 
@@ -336,7 +295,7 @@
             // buttonSave
             // 
             this.buttonSave.Enabled = false;
-            this.buttonSave.Location = new System.Drawing.Point(499, 298);
+            this.buttonSave.Location = new System.Drawing.Point(499, 239);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
@@ -346,7 +305,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(418, 298);
+            this.buttonCancel.Location = new System.Drawing.Point(418, 239);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -357,7 +316,7 @@
             // progressBar1
             // 
             this.progressBar1.Enabled = false;
-            this.progressBar1.Location = new System.Drawing.Point(8, 298);
+            this.progressBar1.Location = new System.Drawing.Point(8, 239);
             this.progressBar1.Maximum = 404;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(404, 23);
@@ -365,11 +324,11 @@
             this.progressBar1.TabIndex = 6;
             this.progressBar1.Value = 50;
             // 
-            // AnimatedGifExport
+            // FrameExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 333);
+            this.ClientSize = new System.Drawing.Size(586, 270);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
@@ -379,11 +338,11 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(602, 371);
-            this.MinimumSize = new System.Drawing.Size(602, 371);
-            this.Name = "AnimatedGifExport";
+            this.MaximumSize = new System.Drawing.Size(602, 308);
+            this.MinimumSize = new System.Drawing.Size(602, 308);
+            this.Name = "FrameExport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Save as Animated Gif";
+            this.Text = "Save frames";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).EndInit();
@@ -423,8 +382,5 @@
         private System.Windows.Forms.TextBox textBoxCropW;
         private System.Windows.Forms.CheckBox checkBoxCrop;
         private System.Windows.Forms.PictureBox helpBoxCrop;
-        private System.Windows.Forms.CheckBox checkBoxLoop;
-        private System.Windows.Forms.Button buttonColorPicker;
-        private System.Windows.Forms.CheckBox checkBoxTransparency;
     }
 }
