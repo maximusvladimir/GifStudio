@@ -20,7 +20,15 @@ namespace Gifbrary.Common
             get;
             set;
         }
-
+        private static ImageCodecInfo FindEncoder(ImageFormat format)
+        {
+            foreach (ImageCodecInfo imageCodecInfo in ImageCodecInfo.GetImageEncoders())
+            {
+                if (imageCodecInfo.FormatID.Equals(format.Guid))
+                    return imageCodecInfo;
+            }
+            return (ImageCodecInfo)null;
+        }
         public override void Convert()
         {
             System.Threading.Thread.Sleep(2750);
@@ -38,6 +46,9 @@ namespace Gifbrary.Common
             int sleeptime = (int)(Math.Sqrt((ExportData.Width * ExportData.Height))/8);
             var fc = new ImageFormatConverter();
             var strf = fc.ConvertToString(Format).ToLower();
+            EncoderParameters pars = new EncoderParameters(1);
+            pars.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (byte)ExportData.Quality);
+            ImageCodecInfo encoder = FindEncoder(Format) ?? FindEncoder(ImageFormat.Png);
             for (int c = 0; c < GetTotalFrames(); c++)
             {
                 if (kill)
@@ -57,7 +68,7 @@ namespace Gifbrary.Common
                     else
                         file = Path.Combine(file, c + ExportData.NamingConvetion + "." + strf);
                 }
-                GetFrame(c).Save(file, Format);
+                GetFrame(c).Save(file, encoder, pars);
                 System.Threading.Thread.Sleep(sleeptime);
                 OnProgressChanged(c);
             }

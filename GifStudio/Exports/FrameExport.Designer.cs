@@ -33,6 +33,10 @@
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.helpBoxExample = new System.Windows.Forms.PictureBox();
+            this.helpBoxFileType = new System.Windows.Forms.PictureBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -61,15 +65,15 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.helpBoxExample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.helpBoxFileType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxFPS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxTrim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,6 +104,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.helpBoxExample);
+            this.groupBox1.Controls.Add(this.helpBoxFileType);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
@@ -133,6 +139,53 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // helpBoxExample
+            // 
+            this.helpBoxExample.Image = global::GifStudio.Properties.Resources.help;
+            this.helpBoxExample.Location = new System.Drawing.Point(526, 245);
+            this.helpBoxExample.Name = "helpBoxExample";
+            this.helpBoxExample.Size = new System.Drawing.Size(16, 16);
+            this.helpBoxExample.TabIndex = 28;
+            this.helpBoxExample.TabStop = false;
+            this.helpBoxExample.Click += new System.EventHandler(this.helpBoxExample_Click);
+            // 
+            // helpBoxFileType
+            // 
+            this.helpBoxFileType.Image = global::GifStudio.Properties.Resources.help;
+            this.helpBoxFileType.Location = new System.Drawing.Point(526, 189);
+            this.helpBoxFileType.Name = "helpBoxFileType";
+            this.helpBoxFileType.Size = new System.Drawing.Size(16, 16);
+            this.helpBoxFileType.TabIndex = 27;
+            this.helpBoxFileType.TabStop = false;
+            this.helpBoxFileType.Click += new System.EventHandler(this.helpBoxFileType_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(136, 241);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
+            this.numericUpDown1.TabIndex = 26;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 243);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(124, 13);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Number of leading zeros:";
             // 
             // label6
             // 
@@ -418,33 +471,6 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 6;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 243);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(124, 13);
-            this.label7.TabIndex = 25;
-            this.label7.Text = "Number of leading zeros:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(136, 241);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
-            this.numericUpDown1.TabIndex = 26;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
             // FrameExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,12 +492,14 @@
             this.Text = "Save frames";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.helpBoxExample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.helpBoxFileType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxCrop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxFPS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxTrim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.helpBoxQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,5 +541,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox helpBoxExample;
+        private System.Windows.Forms.PictureBox helpBoxFileType;
     }
 }

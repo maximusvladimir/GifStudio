@@ -288,5 +288,20 @@ namespace GifStudio
         {
             UpdateConventions();
         }
+
+        private void helpBoxFileType_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this,"The file type is the type of image that you wish to save. Different image formats have different weaknesses and advantages."+
+             "\nFor example, the BMP format is known for being consuming significant amounts of space, with little color loss. The GIF format is know "+
+             "for the little space it uses, but the fact that it only supports 256 colors.\n\nIf you don't know which you should pick, it is recommended"+
+             " to pick the PNG format.", "Help", MessageBoxButtons.OK,
+            MessageBoxIcon.Information);
+        }
+
+        private void helpBoxExample_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this,"When you export an image sequence you have the option here to select how you wish the files to be named.\nIt is "+
+                "recommended that you use several leading digits, and a file name.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
