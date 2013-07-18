@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace GifStudio
@@ -22,13 +24,18 @@ namespace GifStudio
             ExportData.SourceFilePath = file;
             InitializeComponent();
             textBoxPath.TextChanged += textBoxPath_TextChanged;
-            Width = w;
-            Height = h;
             textBoxCropH.Text = h + "";
             textBoxCropW.Text = w + "";
 
             ExportData.Quality = 50;
             ExportData.FPS = 30;
+            comboBox1.SelectedIndex = 0;
+            ExportData.NamingConventionPrefix = true;
+            ExportData.NamingConventionZeros = 3;
+            ExportData.NamingConvetion = "img";
+            textBoxNameConvention.Text = "img";
+
+            Format = ImageFormat.Png;
         }
 
         void textBoxPath_TextChanged(object sender, EventArgs e)
@@ -166,15 +173,40 @@ namespace GifStudio
             {
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            UpdateConventions();
+            if (!isAlphaNumeric(ExportData.NamingConvetion))
+            {
+                MessageBox.Show("The naming convention MUST only use characters A-Z, a-z, or 0-9.", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                if (Directory.Exists(ExportData.DestinationFilePath) && Directory.GetFiles(ExportData.DestinationFilePath).Length > 0)
+                {
+                    DialogResult res = MessageBox.Show("Notice: There are already some files in the folder " +
+                        ExportData.DestinationFilePath + ". You are most likely about to put a whole lot of files in that folder. Continue?", "Warning",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    if (res == System.Windows.Forms.DialogResult.Cancel)
+                        return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
             progressBar1.Style = ProgressBarStyle.Blocks;
-            using (Converter = Read.CreateConversion(ExportData,0))
+            using (Converter = Read.CreateConversion(ExportData,Format))
             {
                 Converter.SetupEncoder();
                 Converter.ConvertAsync();
                 Converter.ProgressChanged += con_ProgressChanged;
             }
         }
-
+        public static Boolean isAlphaNumeric(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[a-zA-Z0-9\s]*$");
+            return rg.IsMatch(strToCheck);
+        }
         private void UpdateProgressSafe()
         {
             this.progressBar1.Value = (int)(CountProgress * 404);
@@ -182,7 +214,7 @@ namespace GifStudio
         private delegate void UpdateProgressDelegate();
         void con_ProgressChanged(object sender, EventArgs e)
         {
-            CountProgress = (int)sender;
+            CountProgress = (float)sender;
             try
             {
                 progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));
@@ -190,6 +222,71 @@ namespace GifStudio
             catch (Exception)
             {
             }
+        }
+
+        private void textBoxNameConvention_TextChanged(object sender, EventArgs e)
+        {
+            UpdateConventions();
+        }
+
+        public ImageFormat Format
+        {
+            get;
+            set;
+        }
+
+        private void UpdateConventions()
+        {
+            var fc = new ImageFormatConverter();
+            var strf = fc.ConvertToString(Format).ToLower();
+            ExportData.NamingConvetion = textBoxNameConvention.Text;
+            ExportData.NamingConventionPrefix = radioButton1.Checked;
+            ExportData.NamingConventionZeros = (int)numericUpDown1.Value;
+            if (ExportData.NamingConventionZeros != 0)
+            {
+                if (!radioButton1.Checked)
+                    label6.Text = "Example: " + 1.ToString("D" + ExportData.NamingConventionZeros) + ExportData.NamingConvetion + "." + strf;
+                else
+                    label6.Text = "Example: " + ExportData.NamingConvetion + 1.ToString("D" + ExportData.NamingConventionZeros) + "." + strf;
+            }
+            else
+            {
+                if (!radioButton1.Checked)
+                    label6.Text = "Example: " + 1 + ExportData.NamingConvetion + "." + strf;
+                else
+                    label6.Text = "Example: " + ExportData.NamingConvetion + 1 + "." + strf;
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+                Format = ImageFormat.Png;
+            else if (comboBox1.SelectedIndex == 1)
+                Format = ImageFormat.Jpeg;
+            else if (comboBox1.SelectedIndex == 2)
+                Format = ImageFormat.Bmp;
+            else if (comboBox1.SelectedIndex == 3)
+                Format = ImageFormat.Tiff;
+            else if (comboBox1.SelectedIndex == 4)
+                Format = ImageFormat.Wmf;
+            else if (comboBox1.SelectedIndex == 5)
+                Format = ImageFormat.Exif;
+            else if (comboBox1.SelectedIndex == 6)
+                Format = ImageFormat.Gif;
+            else
+                Format = ImageFormat.Png;
+            UpdateConventions();
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateConventions();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateConventions();
         }
     }
 }

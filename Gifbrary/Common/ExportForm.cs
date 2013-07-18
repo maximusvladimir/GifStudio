@@ -30,6 +30,24 @@ namespace Gifbrary.Common
             set;
         }
 
+        public string NamingConvetion
+        {
+            get;
+            set;
+        }
+
+        public bool NamingConventionPrefix
+        {
+            get;
+            set;
+        }
+
+        public int NamingConventionZeros
+        {
+            get;
+            set;
+        }
+
         public int FPS
         {
             get;

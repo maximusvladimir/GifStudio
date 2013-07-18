@@ -44,15 +44,23 @@ namespace GifStudio
         {
             if (export != null && export.CountProgress > 0.08f && ((int)export.CountProgress*100) % 4 == 0)
             {
-                try
+                if (!(export is FrameExport))
                 {
-                    FileInfo inf = new FileInfo(export.ExportData.DestinationFilePath);
-                    inf.Refresh();
-                    long s = (long)(inf.Length / export.CountProgress);
-                    Status.Text = (100*export.CountProgress) + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
+                    try
+                    {
+                        FileInfo inf = new FileInfo(export.ExportData.DestinationFilePath);
+                        inf.Refresh();
+                        long s = (long)(inf.Length * export.CountProgress);
+                        Status.Text = (100 * export.CountProgress) + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
+                    }
+                    catch (Exception)
+                    {
+                    }
+
                 }
-                catch (Exception)
+                else
                 {
+                    Status.Text = (100 * export.CountProgress) + "% complete.";
                 }
             }
             if (export != null && export.Visible)
@@ -194,6 +202,19 @@ namespace GifStudio
             get
             {
                 return toolStripStatusLabel;
+            }
+        }
+
+        private void dumpFramesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form f = ActiveMdiChild;
+            if (f != null && f is VideoChildForm)
+            {
+                VideoChildForm vcf = (VideoChildForm)f;
+                export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
+                ticker.Start();
+                export.FormClosed += export_FormClosed;
+                export.ShowDialog(this);
             }
         }
     }

@@ -22,18 +22,18 @@ namespace Gifbrary.Common
         }
         #region Locals
         private IMediaDet m_mediaDet;
-        private int m_audioBitsPerSample;
-        private int m_audioChannels;
-        private int m_audioSamplesPerSecond;
-        private double m_audioStreamLength;
+        private int m_audioBitsPerSample=0;
+        private int m_audioChannels=0;
+        private int m_audioSamplesPerSecond=0;
+        private double m_audioStreamLength=0;
         private Guid m_audioSubType;
         private Bitmap m_bitmap;
         private string m_filename;
         private string m_fourCC;
-        private int m_streamCount;
-        private int m_videoBitsPerPixel;
+        private int m_streamCount = 0;
+        private int m_videoBitsPerPixel=0;
         private Size m_videoResolution;
-        private double m_videoStreamLength;
+        private double m_videoStreamLength=0;
         private Guid m_videoSubType;
         #endregion
 
@@ -201,9 +201,11 @@ namespace Gifbrary.Common
 
                 LoadMedia();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                FreeResources();
+                //FreeResources();
+                //throw ex;
+                //Debug.WriteLine(ex.Message);
                 throw new Exception("Failed to load " + filename);
             }
         }

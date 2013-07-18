@@ -24,11 +24,17 @@ namespace Gifbrary.Reader
 
         public static Conversion CreateConversion(Exportable data, int loop)
         {
-            //if (GetFormat(data.DestinationFilePath) == Formats.GIF && GetFormat(data.SourceFilePath) == Formats.WMV)
+            if (GetFormat(data.DestinationFilePath) == Formats.GIF && GetFormat(data.SourceFilePath) == Formats.WMV)
             {
                 return new WMVtoGIF(data, loop);
             }
+            return null;
+        }
 
+        public static Conversion CreateConversion(Exportable data, System.Drawing.Imaging.ImageFormat format)
+        {
+            //if (GetFormat(data.SourceFilePath) == Formats.WMV)
+                return new WMVtoFrames(data, format);
             //return null;
         }
     }

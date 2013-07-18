@@ -67,10 +67,12 @@
     <Compile Include="Common\AnimatedGifEncoder.cs" />
     <Compile Include="Common\ExportForm.cs" />
     <Compile Include="Common\Formats.cs" />
+    <Compile Include="Common\FrameDumpConversion.cs" />
     <Compile Include="Common\GifDecoder.cs" />
     <Compile Include="Common\LZWEncoder.cs" />
     <Compile Include="Common\NeuQuant.cs" />
     <Compile Include="Common\VideoFramePullerConversion.cs" />
+    <Compile Include="Converter\WMVtoFrames.cs" />
     <Compile Include="Converter\WMVtoGIF.cs" />
     <Compile Include="Common\GifConversion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

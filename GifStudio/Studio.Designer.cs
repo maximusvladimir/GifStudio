@@ -65,6 +65,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.dumpFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -188,7 +189,8 @@
             this.convertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.videoToolStripMenuItem,
             this.toolStripSeparator6,
-            this.toAnimatedGIFToolStripMenuItem});
+            this.toAnimatedGIFToolStripMenuItem,
+            this.dumpFramesToolStripMenuItem});
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
             this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.convertToolStripMenuItem.Text = "&Convert";
@@ -361,6 +363,14 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Ready";
             // 
+            // dumpFramesToolStripMenuItem
+            // 
+            this.dumpFramesToolStripMenuItem.Image = global::GifStudio.Properties.Resources.photos;
+            this.dumpFramesToolStripMenuItem.Name = "dumpFramesToolStripMenuItem";
+            this.dumpFramesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.dumpFramesToolStripMenuItem.Text = "Dump frames";
+            this.dumpFramesToolStripMenuItem.Click += new System.EventHandler(this.dumpFramesToolStripMenuItem_Click);
+            // 
             // Studio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -422,6 +432,7 @@
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aVIToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wMVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpFramesToolStripMenuItem;
     }
 }
 

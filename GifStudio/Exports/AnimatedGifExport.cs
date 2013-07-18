@@ -22,8 +22,6 @@ namespace GifStudio
             ExportData.SourceFilePath = file;
             InitializeComponent();
             textBoxPath.TextChanged += textBoxPath_TextChanged;
-            Width = w;
-            Height = h;
             textBoxCropH.Text = h + "";
             textBoxCropW.Text = w + "";
 
@@ -205,7 +203,7 @@ namespace GifStudio
 
         void con_ProgressChanged(object sender, EventArgs e)
         {
-            CountProgress = (((int)sender)/404.0f);
+            CountProgress = (float)sender;
             try
             {
                 progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));

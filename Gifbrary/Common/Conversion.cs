@@ -23,7 +23,7 @@ namespace Gifbrary.Common
         {
             if (ProgressChanged != null)
             {
-                ProgressChanged((i * 404) / GetTotalFrames(), EventArgs.Empty);
+                ProgressChanged(((float)i) / ((float)GetTotalFrames()), EventArgs.Empty);
             }
         }
 
