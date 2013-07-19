@@ -203,15 +203,24 @@ namespace Gifbrary.Common
             }
             catch (Exception ex)
             {
-                //FreeResources();
-                //throw ex;
-                //Debug.WriteLine(ex.Message);
-                throw new Exception("Failed to load " + filename);
+                System.Threading.Thread.Sleep(1000);
+                try
+                {
+                    LoadMedia();
+                }
+                catch (Exception ex2)
+                {
+                    App.HandleError(IntPtr.Zero, "Unable to load the selected media. Please try again in a few seconds, or try another file.\n\nIf this message persists, try running on another computer.", ex2, 2);
+                    return;
+                }
+                //throw new Exception("Failed to load " + filename);
             }
         }
 
         private void LoadMedia()
         {
+            int r = 0;
+            int f = 5 / r;
             /*Create the COM object and query the IMediaDet interface */
             m_mediaDet = new MediaDet() as IMediaDet;
 
