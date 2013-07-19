@@ -217,5 +217,10 @@ namespace GifStudio
                 export.ShowDialog(this);
             }
         }
+
+        private void toAnimatedPNGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

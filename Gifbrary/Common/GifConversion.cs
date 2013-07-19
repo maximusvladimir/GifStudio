@@ -33,6 +33,8 @@ namespace Gifbrary.Common
             e.SetQuality(21 - ((ExportData.Quality * 20) / 100));
             e.SetDelay(1000 / ExportData.FPS);
             e.SetRepeat(Loop);
+            if (ExportData.ChromaKey != null)
+                e.SetTransparent((Color)ExportData.ChromaKey);
             //e.SetSize(Width, Height);
             SetupEncoder();
             if (kill)

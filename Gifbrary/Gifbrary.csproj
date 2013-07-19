@@ -52,7 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005">
-      <HintPath>..\..\..\Users\max\Downloads\DirectShowLibV2-1\lib\DirectShowLib-2005.dll</HintPath>
+      <HintPath>bin\x86\Debug\DirectShowLib-2005.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,6 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APNG\APNG.cs" />
+    <Compile Include="APNG\Chunks\acTLChunk.cs" />
+    <Compile Include="APNG\Chunks\Chunk.cs" />
+    <Compile Include="APNG\Chunks\fcTLChunk.cs" />
+    <Compile Include="APNG\Chunks\fdATChunk.cs" />
+    <Compile Include="APNG\Chunks\IDATChunk.cs" />
+    <Compile Include="APNG\Chunks\IENDChunk.cs" />
+    <Compile Include="APNG\Chunks\IHDRChunk.cs" />
+    <Compile Include="APNG\CrcHelper.cs" />
+    <Compile Include="APNG\Frame.cs" />
+    <Compile Include="APNG\Helper.cs" />
+    <Compile Include="APNG\StreamExtensions.cs" />
     <Compile Include="Common\AnimatedGifEncoder.cs" />
     <Compile Include="Common\ExportForm.cs" />
     <Compile Include="Common\Formats.cs" />

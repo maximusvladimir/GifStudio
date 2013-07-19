@@ -217,10 +217,12 @@ namespace Gifbrary.Common
 
             if (m_mediaDet == null)
                 throw new NullReferenceException("Could not create an instance of MediaDet COM");
-
+            System.Threading.Thread.Sleep(1000);
             int hr = m_mediaDet.put_Filename(m_filename);
             DsError.ThrowExceptionForHR(hr);
 
+
+            System.Threading.Thread.Sleep(1000);
             /* We find out how many streams exist in the
              * media file.  These can be audio, video, etc */
             hr = m_mediaDet.get_OutputStreams(out m_streamCount);

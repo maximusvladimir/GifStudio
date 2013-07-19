@@ -57,12 +57,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005">
-      <HintPath>..\..\..\Users\max\Downloads\DirectShowLibV2-1\lib\DirectShowLib-2005.dll</HintPath>
+      <HintPath>bin\x86\Debug\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib">
+      <HintPath>bin\x86\Debug\Interop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ShaderEffectLibrary">
-      <HintPath>..\..\..\Users\max\Downloads\WPFMediaKit\ShaderEffectLibrary.dll</HintPath>
+      <HintPath>bin\x86\Debug\ShaderEffectLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,7 +85,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="WPFMediaKit">
-      <HintPath>..\..\..\Users\max\Downloads\WPFMediaKit\WPFMediaKit.dll</HintPath>
+      <HintPath>bin\x86\Debug\WPFMediaKit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

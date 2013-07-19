@@ -186,6 +186,10 @@ namespace GifStudio
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
+            if (checkBoxTransparency.Checked)
+                ExportData.ChromaKey = ChromaKey;
+            else
+                ExportData.ChromaKey = null;
             using (Converter = Read.CreateConversion(ExportData,l))
             {
                 Converter.SetupEncoder();
@@ -215,10 +219,7 @@ namespace GifStudio
 
         private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxTransparency.Checked)
-                buttonColorPicker.Enabled = true;
-            else
-                buttonColorPicker.Enabled = false;
+            buttonColorPicker.Enabled = checkBoxTransparency.Checked;
         }
 
         public Color ChromaKey

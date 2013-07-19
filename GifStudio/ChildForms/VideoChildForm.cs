@@ -43,14 +43,16 @@ namespace GifStudio
             long pos = VideoControl.Player.MediaPosition;
             long dur = VideoControl.Player.MediaDuration;
             TimeSpan span = new TimeSpan(pos);
-            timeElapsed.Text = span.Minutes + ":" + span.Seconds;
+            timeElapsed.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") + 
+                ":" + span.Seconds.ToString("D2");
 
             span = new TimeSpan(dur);
-            timeDuration.Text = span.Minutes + ":" + span.Seconds;
+            timeDuration.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") +
+                ":" + span.Seconds.ToString("D2");
 
             if (dur != 0 && pos != 0)
             {
-                trackBar1.Value = (int)(pos * 100 / dur);
+                trackBar1.Value = (int)(pos * 500 / dur);
             }
         }
 
@@ -94,8 +96,9 @@ namespace GifStudio
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             long dur = VideoControl.Player.MediaDuration;
-            VideoControl.Player.MediaPosition = ((trackBar1.Value * dur) / 100);
+            VideoControl.Player.MediaPosition = ((trackBar1.Value * dur) / 500);
             VideoControl.Player.Play();
+            button1.Text = "Play";
         }
 
         private void checkLoop_CheckedChanged(object sender, EventArgs e)
