@@ -29,7 +29,7 @@ namespace Gifbrary
             dialog.HyperlinkClick += new EventHandler<TaskDialogHyperlinkClickedEventArgs>(dialog_HyperlinkClick);
             if (opCode % 2 != 0 && ex != null)
             {
-                dialog.FooterCheckBoxText = "Can we send an error report about this message?";
+                dialog.FooterCheckBoxText = "Send error report so I can improve the program?";
                 dialog.FooterCheckBoxChecked = true;
             }
             //dialog.FooterLabel = "If you continue to recieve this message, please contact me at http://maximusvladimir.wordpress.com/ .";
