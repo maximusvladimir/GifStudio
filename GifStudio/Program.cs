@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Gifbrary;
 
 namespace GifStudio
 {
@@ -12,9 +13,29 @@ namespace GifStudio
         [STAThread]
         static void Main()
         {
+            int randy = 0;
+            //unsafe
+            {
+                IntPtr ptr = System.Runtime.InteropServices.Marshal.AllocHGlobal(128);
+                randy = (int)ptr;
+                System.Runtime.InteropServices.Marshal.FreeHGlobal(ptr);
+            }
+            System.Diagnostics.Debug.WriteLine(randy);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.Run(new Studio());
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.IsTerminating)
+            {
+                Exception ex = new Exception();
+                if (e.ExceptionObject != null && e.ExceptionObject is Exception)
+                    ex = (Exception)e.ExceptionObject;
+                App.HandleError(IntPtr.Zero, "Sorry! The program has crashed and I couldn't save it. :(", ex,9);
+            }
         }
     }
 }

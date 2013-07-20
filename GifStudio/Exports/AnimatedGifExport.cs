@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Gifbrary;
 
 namespace GifStudio
 {
@@ -79,6 +80,9 @@ namespace GifStudio
 
         private void helpBoxQuality_Click(object sender, EventArgs e)
         {
+            App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE_DETAILS,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC);
             MessageBox.Show(this, "Sets the quality of the GIF to be produced.\nThe higher quality the image is, the longer it will take to produce and the larger the file will be.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -140,7 +144,9 @@ namespace GifStudio
 
         private void helpBoxCrop_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Should the size of the GIF be increased or decreased from the original video size?", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE_DETAILS,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC);
         }
 
         private void checkBoxCrop_CheckedChanged(object sender, EventArgs e)

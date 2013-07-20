@@ -20,8 +20,8 @@ namespace GifStudio
         public Studio()
         {
             InitializeComponent();
-            Gifbrary.App.HandleError(this.Handle, "Studio test crash #1", new Exception(), 4);
-            Gifbrary.App.HandleError(this.Handle, "Studio test crash #2", new Exception(), 5);
+            //Gifbrary.App.HandleError(this.Handle, "Studio test crash #1", new Exception(), 4);
+            //Gifbrary.App.HandleError(this.Handle, "Studio test crash #2", new Exception(), 5);
             ticker = new Timer();
             ticker.Enabled = true;
             ticker.Interval = 100;

@@ -42,7 +42,13 @@ namespace Gifbrary
 
         private static void SendErrorReport(string message, string stack, string rootMessage)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private static void dialog_HyperlinkClick(object sender, TaskDialogHyperlinkClickedEventArgs e)
@@ -50,8 +56,22 @@ namespace Gifbrary
             Process.Start(e.LinkText);
         }
 
-        public static void HandleHelp(string rootMSG)
+        public static void HandleHelp(IntPtr handler, string rootMSG, string moreDetails, string helpTopic)
         {
+            TaskDialog dialog = new TaskDialog();
+            dialog.Caption = "Help";
+            dialog.DetailsExpanded = false;
+            dialog.InstructionText = helpTopic;
+            if (moreDetails != null)
+                dialog.DetailsExpandedText = moreDetails;
+            dialog.HyperlinksEnabled = true;
+            dialog.Text = rootMSG;
+            if (handler != IntPtr.Zero)
+                dialog.OwnerWindowHandle = handler;
+            dialog.Icon = TaskDialogStandardIcon.Information;
+            dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+            dialog.StartupLocation = TaskDialogStartupLocation.CenterScreen;
+            dialog.Show();
         }
     }
 }
