@@ -189,12 +189,13 @@ namespace GifStudio
                     if (res == System.Windows.Forms.DialogResult.Cancel)
                         return;
                 }
-
             }
             catch (Exception ex)
             {
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
+            buttonSave.Text = "Exporting";
+            buttonSave.Enabled = false;
             using (Converter = Read.CreateConversion(ExportData,Format))
             {
                 Converter.SetupEncoder();

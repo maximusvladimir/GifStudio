@@ -80,20 +80,26 @@ namespace GifStudio
 
         private void helpBoxQuality_Click(object sender, EventArgs e)
         {
-            App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE,
-            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE_DETAILS,
-            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC);
-            MessageBox.Show(this, "Sets the quality of the GIF to be produced.\nThe higher quality the image is, the longer it will take to produce and the larger the file will be.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_QUALITY,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_QUALITY_DETAILS,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_QUALITY_TOPIC);
+            //MessageBox.Show(this, "Sets the quality of the GIF to be produced.\nThe higher quality the image is, the longer it will take to produce and the larger the file will be.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void helpBoxTrim_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Changes the length and where the video starts.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_TRIM,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_TRIM_DETAILS,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_TRIM_TOPIC);
+            //MessageBox.Show(this, "Changes the length and where the video starts.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void helpBoxFPS_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Sets the number of images to be displayed in one second.\n30 is the default.\n\nHaving a higher FPS will result in the file being larger.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_FPS,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_FPS_DETAILS,
+            global::GifStudio.Properties.Resources.STR_EXP_ANI_GIF_HELP_FPS_TOPIC);
+            //MessageBox.Show(this, "Sets the number of images to be displayed in one second.\n30 is the default.\n\nHaving a higher FPS will result in the file being larger.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -192,6 +198,8 @@ namespace GifStudio
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
+            buttonSave.Text = "Exporting";
+            buttonSave.Enabled = false;
             if (checkBoxTransparency.Checked)
                 ExportData.ChromaKey = ChromaKey;
             else

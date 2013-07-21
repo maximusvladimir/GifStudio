@@ -152,6 +152,33 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the number of frames to display in one second of GIF playback..
+        /// </summary>
+        internal static string STR_EXP_ANI_GIF_HELP_FPS {
+            get {
+                return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_FPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The FPS, or frames per second, is the total number of frames that will be shows to the eye in 1 second. A high FPS looks better to the naked eye, however it will cause the file size to be larger..
+        /// </summary>
+        internal static string STR_EXP_ANI_GIF_HELP_FPS_DETAILS {
+            get {
+                return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_FPS_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjusting playback speed.
+        /// </summary>
+        internal static string STR_EXP_ANI_GIF_HELP_FPS_TOPIC {
+            get {
+                return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_FPS_TOPIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A higher quality setting will allow a greater number of colors to be placed in the image..
         /// </summary>
         internal static string STR_EXP_ANI_GIF_HELP_QUALITY {
@@ -170,7 +197,7 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Help - Output quality.
+        ///   Looks up a localized string similar to Output quality.
         /// </summary>
         internal static string STR_EXP_ANI_GIF_HELP_QUALITY_TOPIC {
             get {
@@ -197,11 +224,38 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Help - Resizing the output image.
+        ///   Looks up a localized string similar to Resizing the output image.
         /// </summary>
         internal static string STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC {
             get {
                 return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trim a video so you can extract the part that you want, and not the whole thing..
+        /// </summary>
+        internal static string STR_EXP_ANI_GIF_HELP_TRIM {
+            get {
+                return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_TRIM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can select a starting time (which follows the format hours:minutes:seconds), and a length time, or how long it should last for the trim..
+        /// </summary>
+        internal static string STR_EXP_ANI_GIF_HELP_TRIM_DETAILS {
+            get {
+                return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_TRIM_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjusting the video length and start time.
+        /// </summary>
+        internal static string STR_EXP_ANI_GIF_HELP_TRIM_TOPIC {
+            get {
+                return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_TRIM_TOPIC", resourceCulture);
             }
         }
     }

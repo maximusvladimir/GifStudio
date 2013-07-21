@@ -164,7 +164,7 @@
     <value>If you would like to make your image appear to be more photorealistic, increase the quality, if you need the image to render faster, chose a lower quality setting, if you understand that the image may dither more.</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY_TOPIC" xml:space="preserve">
-    <value>Help - Output quality</value>
+    <value>Output quality</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE" xml:space="preserve">
     <value>Resizing an image will stretch the size of an image to make it bigger or smaller from its original size.</value>
@@ -173,6 +173,24 @@
     <value>When resizing, it is important to keep the width and height in proportion so the image does not appear to be distorted.\n\nThe large the size, the longer it will take to render the image.</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC" xml:space="preserve">
-    <value>Help - Resizing the output image</value>
+    <value>Resizing the output image</value>
+  </data>
+  <data name="STR_EXP_ANI_GIF_HELP_FPS" xml:space="preserve">
+    <value>Sets the number of frames to display in one second of GIF playback.</value>
+  </data>
+  <data name="STR_EXP_ANI_GIF_HELP_FPS_DETAILS" xml:space="preserve">
+    <value>The FPS, or frames per second, is the total number of frames that will be shows to the eye in 1 second. A high FPS looks better to the naked eye, however it will cause the file size to be larger.</value>
+  </data>
+  <data name="STR_EXP_ANI_GIF_HELP_FPS_TOPIC" xml:space="preserve">
+    <value>Adjusting playback speed</value>
+  </data>
+  <data name="STR_EXP_ANI_GIF_HELP_TRIM" xml:space="preserve">
+    <value>Trim a video so you can extract the part that you want, and not the whole thing.</value>
+  </data>
+  <data name="STR_EXP_ANI_GIF_HELP_TRIM_DETAILS" xml:space="preserve">
+    <value>You can select a starting time (which follows the format hours:minutes:seconds), and a length time, or how long it should last for the trim.</value>
+  </data>
+  <data name="STR_EXP_ANI_GIF_HELP_TRIM_TOPIC" xml:space="preserve">
+    <value>Adjusting the video length and start time</value>
   </data>
 </root>

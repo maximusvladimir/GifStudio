@@ -336,9 +336,9 @@
             // buttonSave
             // 
             this.buttonSave.Enabled = false;
-            this.buttonSave.Location = new System.Drawing.Point(499, 298);
+            this.buttonSave.Location = new System.Drawing.Point(479, 298);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.Size = new System.Drawing.Size(95, 23);
             this.buttonSave.TabIndex = 4;
             this.buttonSave.Text = "Export";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -346,7 +346,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(418, 298);
+            this.buttonCancel.Location = new System.Drawing.Point(395, 298);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -360,7 +360,7 @@
             this.progressBar1.Location = new System.Drawing.Point(8, 298);
             this.progressBar1.Maximum = 404;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(404, 23);
+            this.progressBar1.Size = new System.Drawing.Size(381, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 6;
             this.progressBar1.Value = 50;
@@ -369,7 +369,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 333);
+            this.ClientSize = new System.Drawing.Size(594, 343);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
