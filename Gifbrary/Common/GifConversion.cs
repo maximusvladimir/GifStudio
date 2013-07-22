@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using SharpApng;
 
 namespace Gifbrary.Common
 {
@@ -28,6 +29,7 @@ namespace Gifbrary.Common
 
         public override void Convert()
         {
+            SharpApng.Apng ping = new Apng();
             AnimatedGifEncoder e = new AnimatedGifEncoder();
             e.Start(ExportData.DestinationFilePath);
             e.SetQuality(21 - ((ExportData.Quality * 20) / 100));
@@ -43,9 +45,12 @@ namespace Gifbrary.Common
             {
                 if (kill)
                     return;
-                e.AddFrame(GetFrame(i));
+                Image b = GetFrame(i);
+                e.AddFrame(b);
+                ping.AddFrame((Bitmap)b, 100, 100);
                 OnProgressChanged(i);
             }
+            ping.WriteApng(ExportData.DestinationFilePath.Replace(".gif",".apng"),true,true);
             e.Finish();
             IsDone = true;
         }

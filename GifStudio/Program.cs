@@ -25,6 +25,8 @@ namespace GifStudio
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.Run(new Studio());
+
+            SharpApng.Apng.Shutdown();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -36,6 +38,7 @@ namespace GifStudio
                     ex = (Exception)e.ExceptionObject;
                 App.HandleError(IntPtr.Zero, "Sorry! The program has crashed and I couldn't save it. :(", ex,9);
             }
+            SharpApng.Apng.Shutdown();
         }
     }
 }

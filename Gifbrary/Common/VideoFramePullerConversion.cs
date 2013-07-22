@@ -219,8 +219,6 @@ namespace Gifbrary.Common
 
         private void LoadMedia()
         {
-            int r = 0;
-            int f = 5 / r;
             /*Create the COM object and query the IMediaDet interface */
             m_mediaDet = new MediaDet() as IMediaDet;
 

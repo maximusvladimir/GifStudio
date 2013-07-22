@@ -27,6 +27,13 @@ namespace GifStudio
             ticker.Interval = 100;
             ticker.Tick += ticker_Tick;
             ticker.Stop();
+
+            FormClosed += new FormClosedEventHandler(Studio_FormClosed);
+        }
+
+        void Studio_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SharpApng.Apng.Shutdown();
         }
 
         private void ticker_Tick(object sender, EventArgs e)

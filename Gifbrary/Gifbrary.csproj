@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;APNG32</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -79,6 +79,7 @@
     <Compile Include="APNG\CrcHelper.cs" />
     <Compile Include="APNG\Frame.cs" />
     <Compile Include="APNG\Helper.cs" />
+    <Compile Include="APNG\SharpAPng.cs" />
     <Compile Include="APNG\StreamExtensions.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Common\AnimatedGifEncoder.cs" />
