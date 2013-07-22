@@ -41,13 +41,13 @@ namespace GifStudio
             Tick();
         }
 
-        private void ShowNewForm(object sender, EventArgs e)
+        /*private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
             childForm.MdiParent = this;
             childForm.Text = "Window " + childFormNumber++;
             childForm.Show();
-        }
+        }*/
 
         private void Tick()
         {

@@ -172,7 +172,7 @@ namespace Gif.Components
 				WritePixels(); // encode and write pixel data
 				firstFrame = false;
 			} 
-			catch (IOException e) 
+			catch (IOException) 
 			{
 				ok = false;
 			}
@@ -199,7 +199,7 @@ namespace Gif.Components
 					fs.Close();
 				}
 			} 
-			catch (IOException e) 
+			catch (IOException) 
 			{
 				ok = false;
 			}
@@ -281,9 +281,9 @@ namespace Gif.Components
 			fs = os;
 			try 
 			{
-				WriteString("GIF89a"); // header
+				WriteString("GIF89a");
 			} 
-			catch (IOException e) 
+			catch (IOException) 
 			{
 				ok = false;
 			}
@@ -306,7 +306,7 @@ namespace Gif.Components
 				ok = Start(fs);
 				closeStream = true;
 			} 
-			catch (IOException e) 
+			catch (IOException) 
 			{
 				ok = false;
 			}

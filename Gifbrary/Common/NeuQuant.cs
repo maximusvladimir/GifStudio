@@ -388,10 +388,7 @@ namespace Gif.Components
 		   ----------------------------------------------------------------------------------- */
 		public void Unbiasnet() 
 		{
-
-			int i, j;
-
-			for (i = 0; i < netsize; i++) 
+			for (int i = 0; i < netsize; i++) 
 			{
 				network[i][0] >>= netbiasshift;
 				network[i][1] >>= netbiasshift;
@@ -430,7 +427,7 @@ namespace Gif.Components
 						p[1] -= (a * (p[1] - g)) / alpharadbias;
 						p[2] -= (a * (p[2] - r)) / alpharadbias;
 					} 
-					catch (Exception e) 
+					catch (Exception) 
 					{
 					} // prevents 1.3 miscompilation
 				}
@@ -443,7 +440,7 @@ namespace Gif.Components
 						p[1] -= (a * (p[1] - g)) / alpharadbias;
 						p[2] -= (a * (p[2] - r)) / alpharadbias;
 					} 
-					catch (Exception e) 
+					catch (Exception) 
 					{
 					}
 				}

@@ -46,7 +46,7 @@ namespace Gifbrary
             {
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

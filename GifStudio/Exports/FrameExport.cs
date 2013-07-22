@@ -152,8 +152,6 @@ namespace GifStudio
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            long ts = 0;
-            long tl = 0;
             try
             {
                 ExportData.TrimStart = long.Parse(trimStart.Text);
@@ -190,7 +188,7 @@ namespace GifStudio
                         return;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             progressBar1.Style = ProgressBarStyle.Blocks;

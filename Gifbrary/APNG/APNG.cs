@@ -44,7 +44,7 @@ namespace LibAPNG
                 {
                     case "IHDR":
                         throw new Exception("Only single IHDR is allowed.");
-                        break;
+                        //break;
 
                     case "acTL":
                         if (IsSimplePNG)
