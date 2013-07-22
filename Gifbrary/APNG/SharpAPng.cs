@@ -32,7 +32,29 @@ namespace SharpApng
             this.m_den = den;
             DISKPOS = t;
             System.Diagnostics.Debug.WriteLine(t);
-            bmp.Save(t, ImageFormat.Png);
+            try
+            {
+                bmp.Save(t, ImageFormat.Png);
+            }
+            catch (Exception)
+            {
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    bmp.Save(t, ImageFormat.Png);
+                }
+                catch (Exception)
+                {
+                    System.Threading.Thread.Sleep(600);
+                    try
+                    {
+                        bmp.Save(t, ImageFormat.Png);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
             //this.m_bmp = bmp;
         }
 

@@ -47,7 +47,7 @@ namespace Gifbrary.Common
                     return;
                 Image b = GetFrame(i);
                 e.AddFrame(b);
-                ping.AddFrame((Bitmap)b, 100, 100);
+                ping.AddFrame((Bitmap)b, 10, 10);
                 OnProgressChanged(i);
             }
             ping.WriteApng(ExportData.DestinationFilePath.Replace(".gif",".apng"),true,true);
