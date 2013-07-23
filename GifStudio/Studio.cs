@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using GifStudio.ChildForms;
 
 namespace GifStudio
 {
@@ -234,7 +235,9 @@ namespace GifStudio
 
         private void flashVideoDownloaderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FLVChildForm vidForm = new FLVChildForm();
+            vidForm.MdiParent = this;
+            vidForm.Show();
         }
     }
 }

@@ -31,14 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FLVChildForm));
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.boxURL = new System.Windows.Forms.TextBox();
+            this.buttonBrowse = new System.Windows.Forms.Button();
+            this.buttonPaste = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,43 +61,46 @@
             this.checkBox1.Location = new System.Drawing.Point(18, 19);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(163, 17);
-            this.checkBox1.TabIndex = 1;
+            this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Download first element found";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // boxURL
             // 
-            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.textBox1.Location = new System.Drawing.Point(88, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(225, 20);
-            this.textBox1.TabIndex = 2;
+            this.boxURL.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.boxURL.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.boxURL.Location = new System.Drawing.Point(88, 6);
+            this.boxURL.Name = "boxURL";
+            this.boxURL.Size = new System.Drawing.Size(225, 20);
+            this.boxURL.TabIndex = 1;
             // 
-            // button1
+            // buttonBrowse
             // 
-            this.button1.Location = new System.Drawing.Point(319, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Open Browser";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Location = new System.Drawing.Point(319, 4);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(113, 23);
+            this.buttonBrowse.TabIndex = 2;
+            this.buttonBrowse.Text = "Open Browser";
+            this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
-            // button2
+            // buttonPaste
             // 
-            this.button2.Location = new System.Drawing.Point(438, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Paste Clipboard";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonPaste.Location = new System.Drawing.Point(438, 4);
+            this.buttonPaste.Name = "buttonPaste";
+            this.buttonPaste.Size = new System.Drawing.Size(112, 23);
+            this.buttonPaste.TabIndex = 3;
+            this.buttonPaste.Text = "Paste Clipboard";
+            this.buttonPaste.UseVisualStyleBackColor = true;
+            this.buttonPaste.Click += new System.EventHandler(this.buttonPaste_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 32);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(531, 173);
+            this.groupBox1.Size = new System.Drawing.Size(531, 98);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
@@ -136,6 +140,14 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 9;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 13);
+            this.label3.TabIndex = 5;
+            // 
             // FLVChildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,9 +158,9 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.buttonPaste);
+            this.Controls.Add(this.buttonBrowse);
+            this.Controls.Add(this.boxURL);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FLVChildForm";
@@ -164,13 +176,14 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox boxURL;
+        private System.Windows.Forms.Button buttonBrowse;
+        private System.Windows.Forms.Button buttonPaste;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label3;
     }
 }
