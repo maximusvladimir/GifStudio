@@ -93,6 +93,12 @@
     <Compile Include="ChildForms\AnimatedGifChildForm.Designer.cs">
       <DependentUpon>AnimatedGifChildForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildForms\FLVChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\FLVChildForm.Designer.cs">
+      <DependentUpon>FLVChildForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exports\AnimatedGifExport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </Compile>
     <EmbeddedResource Include="ChildForms\AnimatedGifChildForm.resx">
       <DependentUpon>AnimatedGifChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\FLVChildForm.resx">
+      <DependentUpon>FLVChildForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Exports\AnimatedGifExport.resx">
       <DependentUpon>AnimatedGifExport.cs</DependentUpon>

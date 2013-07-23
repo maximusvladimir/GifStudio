@@ -83,6 +83,7 @@
     <Compile Include="APNG\StreamExtensions.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Common\AnimatedGifEncoder.cs" />
+    <Compile Include="Common\APngConversion.cs" />
     <Compile Include="Common\ExportForm.cs" />
     <Compile Include="Common\Formats.cs" />
     <Compile Include="Common\FrameDumpConversion.cs" />
