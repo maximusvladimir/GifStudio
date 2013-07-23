@@ -646,7 +646,7 @@ namespace Gif.Components
 					int r = ((int) c[j++]) & 0xff;
 					int g = ((int) c[j++]) & 0xff;
 					int b = ((int) c[j++]) & 0xff;
-					tab[i++] = (int) (0xff000000 | (r << 16) | (g << 8) | b);
+					tab[i++] = (int) (0xff000000 | ((ulong)(long)(r << 16)) | ((ulong)(long)(g << 8)) | ((uint)b));
 				}
 			}
 			return tab;
