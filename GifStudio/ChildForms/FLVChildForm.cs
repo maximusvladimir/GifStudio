@@ -79,7 +79,7 @@ namespace GifStudio.ChildForms
                 createFail = true;
             }
 
-            if (_url.StartsWith("ftp:") || _url.StartsWith("udp:") || createFail)
+            if (_url.StartsWith("ftp:") || _url.StartsWith("udp:") || createFail || _url.StartsWith("file:"))
                 App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_INVALIDURL,
                     null, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_INVALIDURL_TOPIC);
 
