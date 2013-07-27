@@ -53,6 +53,7 @@ namespace Gifbrary.Common
             //ping.WriteApng(ExportData.DestinationFilePath.Replace(".gif",".apng"),true,true);
             e.Finish();
             IsDone = true;
+            OnConversionFinished();
         }
     }
 }

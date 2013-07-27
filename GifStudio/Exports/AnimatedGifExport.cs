@@ -209,7 +209,15 @@ namespace GifStudio
                 Converter.SetupEncoder();
                 Converter.ConvertAsync();
                 Converter.ProgressChanged += con_ProgressChanged;
+                Converter.ConversionFinished += new EventHandler(Converter_ConversionFinished);
             }
+        }
+
+        void Converter_ConversionFinished(object sender, EventArgs e)
+        {
+            ((Studio)MdiParent).StatusText =
+                "Finished converting " + Path.GetFileName(ExportData.SourceFilePath) + ".";
+            Close();
         }
 
         private void UpdateProgressSafe()
@@ -229,6 +237,7 @@ namespace GifStudio
             catch (Exception)
             {
             }
+            ((Studio)MdiParent).StatusText = (100 * CountProgress) + "% complete.";
         }
 
         private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)

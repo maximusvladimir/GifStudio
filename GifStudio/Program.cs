@@ -36,9 +36,21 @@ namespace GifStudio
                 Exception ex = new Exception();
                 if (e.ExceptionObject != null && e.ExceptionObject is Exception)
                     ex = (Exception)e.ExceptionObject;
-                App.HandleError(IntPtr.Zero, "Sorry! The program has crashed and I couldn't save it. :(", ex,9);
+                App.HandleError(IntPtr.Zero, "Sorry! The program has crashed and I couldn't save it. :(", ex, 9);
             }
-            SharpApng.Apng.Shutdown();
+            else
+            {
+                Exception ex = new Exception();
+                if (e.ExceptionObject != null && e.ExceptionObject is Exception)
+                    ex = (Exception)e.ExceptionObject;
+                App.HandleError(IntPtr.Zero, "Something went terribly wrong. :(", ex, 8);
+            }
+            Shutdown();
+        }
+
+        public static void Shutdown()
+        {
+            App.Shutdown();
         }
     }
 }

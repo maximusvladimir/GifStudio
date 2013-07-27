@@ -15,31 +15,20 @@ namespace GifStudio
 {
     public partial class Studio : Form
     {
-        private int childFormNumber = 0;
-        private Timer ticker;
         private ExportWindow export;
         public Studio()
         {
             InitializeComponent();
             //Gifbrary.App.HandleError(this.Handle, "Studio test crash #1", new Exception(), 4);
             //Gifbrary.App.HandleError(this.Handle, "Studio test crash #2", new Exception(), 5);
-            ticker = new Timer();
-            ticker.Enabled = true;
-            ticker.Interval = 100;
-            ticker.Tick += ticker_Tick;
-            ticker.Stop();
 
+            StatusText = null;
             FormClosed += new FormClosedEventHandler(Studio_FormClosed);
         }
 
         void Studio_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SharpApng.Apng.Shutdown();
-        }
-
-        private void ticker_Tick(object sender, EventArgs e)
-        {
-            Tick();
+            Program.Shutdown();
         }
 
         /*private void ShowNewForm(object sender, EventArgs e)
@@ -50,36 +39,30 @@ namespace GifStudio
             childForm.Show();
         }*/
 
-        private void Tick()
+        private delegate void StatusLabelInvoke(string status);
+        private string _statustext = "";
+        public string StatusText
         {
-            if (export != null && export.CountProgress > 0.08f && ((int)export.CountProgress*100) % 4 == 0)
+            get
             {
-                if (!(export is FrameExport))
+                return _statustext;
+            }
+            set
+            {
+                _statustext = value;
+                if (string.IsNullOrEmpty(_statustext))
+                    _statustext = "Ready.";
+                if (InvokeRequired)
                 {
-                    try
+                    StatusLabelInvoke l = delegate(string s)
                     {
-                        FileInfo inf = new FileInfo(export.ExportData.DestinationFilePath);
-                        inf.Refresh();
-                        long s = (long)(inf.Length * export.CountProgress);
-                        Status.Text = (100 * export.CountProgress) + "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
-                    }
-                    catch (Exception)
-                    {
-                    }
-
+                        Status.Text = _statustext;
+                    };
+                    Invoke(l, _statustext);
                 }
                 else
                 {
-                    Status.Text = (100 * export.CountProgress) + "% complete.";
-                }
-            }
-            if (export != null && export.Visible)
-            {
-                if (export.Converter != null && export.Converter.IsDone)
-                {
-                    export.Hide();
-                    Status.Text = "Finished converting " + Path.GetFileName(export.ExportData.SourceFilePath) + ".";
-                    export = null;
+                    Status.Text = _statustext;
                 }
             }
         }
@@ -196,15 +179,8 @@ namespace GifStudio
             {
                 VideoChildForm vcf = (VideoChildForm)f;
                 export = new AnimatedGifExport(vcf.FilePath,vcf.VideoControl.Player.NaturalVideoWidth,vcf.VideoControl.Player.NaturalVideoHeight);
-                ticker.Start();
-                export.FormClosed += export_FormClosed;
                 export.ShowDialog(this);
             }
-        }
-
-        void export_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            ticker.Stop();
         }
 
         public ToolStripLabel Status
@@ -222,8 +198,6 @@ namespace GifStudio
             {
                 VideoChildForm vcf = (VideoChildForm)f;
                 export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
-                ticker.Start();
-                export.FormClosed += export_FormClosed;
                 export.ShowDialog(this);
             }
         }

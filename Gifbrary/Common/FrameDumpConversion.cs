@@ -73,6 +73,7 @@ namespace Gifbrary.Common
                 OnProgressChanged(c);
             }
             IsDone = true;
+            OnConversionFinished();
         }
     }
 }

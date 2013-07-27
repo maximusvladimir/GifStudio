@@ -199,8 +199,16 @@ namespace GifStudio
                 Converter.SetupEncoder();
                 Converter.ConvertAsync();
                 Converter.ProgressChanged += con_ProgressChanged;
+                Converter.ConversionFinished += new EventHandler(Converter_ConversionFinished);
             }
         }
+
+        private void Converter_ConversionFinished(object sender, EventArgs e)
+        {
+            ((Studio)MdiParent).StatusText = "Sucessfully finished exporting frames to " + ExportData.DestinationFilePath + ".";
+            Close();
+        }
+
         public static Boolean isAlphaNumeric(string strToCheck)
         {
             Regex rg = new Regex(@"^[a-zA-Z0-9\s]*$");
@@ -217,6 +225,17 @@ namespace GifStudio
             try
             {
                 progressBar1.Invoke(new UpdateProgressDelegate(UpdateProgressSafe));
+            }
+            catch (Exception)
+            {
+            }
+            try
+            {
+                FileInfo inf = new FileInfo(ExportData.DestinationFilePath);
+                inf.Refresh();
+                long s = (long)(inf.Length * CountProgress);
+                ((Studio)MdiParent).StatusText = (100 * CountProgress) +
+                    "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
             }
             catch (Exception)
             {

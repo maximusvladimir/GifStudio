@@ -201,7 +201,7 @@ namespace Gifbrary.Common
 
                 LoadMedia();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 System.Threading.Thread.Sleep(1000);
                 try

@@ -13,10 +13,19 @@ namespace Gifbrary.Common
         private Thread thread;
         protected bool kill = false;
         public event EventHandler ProgressChanged;
+        public event EventHandler ConversionFinished;
         public Conversion(Exportable ext)
         {
             ExportData = ext;
             IsDone = false;
+        }
+
+        public void OnConversionFinished()
+        {
+            if (ConversionFinished != null)
+            {
+                ConversionFinished(this, EventArgs.Empty);
+            }
         }
 
         public void OnProgressChanged(int i)

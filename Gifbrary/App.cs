@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
+using Gifbrary.Utilities;
 
 namespace Gifbrary
 {
@@ -73,6 +74,29 @@ namespace Gifbrary
             dialog.StandardButtons = TaskDialogStandardButtons.Ok;
             dialog.StartupLocation = TaskDialogStartupLocation.CenterScreen;
             dialog.Show();
+        }
+
+        public static void Shutdown()
+        {
+            if (VideoDownloader.AppTemp != null)
+            {
+                try
+                {
+                    System.IO.Directory.Delete(VideoDownloader.AppTemp);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            SharpApng.Apng.Shutdown();
+
+            try
+            {
+                System.Diagnostics.Process.GetCurrentProcess().Close();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

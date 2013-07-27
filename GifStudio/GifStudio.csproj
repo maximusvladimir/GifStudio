@@ -60,12 +60,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005">
-      <HintPath>bin\x86\Debug\DirectShowLib-2005.dll</HintPath>
+      <HintPath>Libraries\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib">
+      <HintPath>Libraries\Interop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ShaderEffectLibrary">
-      <HintPath>bin\x86\Debug\ShaderEffectLibrary.dll</HintPath>
+      <HintPath>Libraries\ShaderEffectLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,7 +87,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="WPFMediaKit">
-      <HintPath>bin\x86\Debug\WPFMediaKit.dll</HintPath>
+      <HintPath>Libraries\WPFMediaKit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -225,17 +229,6 @@
       <Project>{347c01c8-9ccd-4d46-9d92-f856ee20550e}</Project>
       <Name>Gifbrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="WMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="VideoFeedback.xaml">

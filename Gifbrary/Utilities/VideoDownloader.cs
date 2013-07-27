@@ -47,10 +47,10 @@ namespace Gifbrary.Utilities
             set;
         }
 
-        private static string AppTemp
+        public static string AppTemp
         {
             get;
-            set;
+            private set;
         }
 
         public string URL
