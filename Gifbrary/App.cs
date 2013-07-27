@@ -60,7 +60,8 @@ namespace Gifbrary
         {
             TaskDialog dialog = new TaskDialog();
             dialog.Caption = "Help";
-            dialog.DetailsExpanded = true;
+            if (moreDetails != null)
+                dialog.DetailsExpanded = true;
             dialog.InstructionText = helpTopic;
             if (moreDetails != null)
                 dialog.DetailsExpandedText = "\n\n"+moreDetails;

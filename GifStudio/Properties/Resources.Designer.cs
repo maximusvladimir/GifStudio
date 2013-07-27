@@ -258,5 +258,23 @@ namespace GifStudio.Properties {
                 return ResourceManager.GetString("STR_EXP_ANI_GIF_HELP_TRIM_TOPIC", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently, the FLV downloader only supports downloading videos from http:// or https://. The URL should look something like &quot;http://www.google.com/video&quot;, or &quot;https://www.google.com/video&quot;, or &quot;www.google.com/video&quot;, or &quot;http://google.com/video&quot;, etc... (No quotes though)..
+        /// </summary>
+        internal static string STR_EXP_FLV_DWL_ALERT_INVALIDURL {
+            get {
+                return ResourceManager.GetString("STR_EXP_FLV_DWL_ALERT_INVALIDURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid URL.
+        /// </summary>
+        internal static string STR_EXP_FLV_DWL_ALERT_INVALIDURL_TOPIC {
+            get {
+                return ResourceManager.GetString("STR_EXP_FLV_DWL_ALERT_INVALIDURL_TOPIC", resourceCulture);
+            }
+        }
     }
 }

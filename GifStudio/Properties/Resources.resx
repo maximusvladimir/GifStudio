@@ -193,4 +193,10 @@
   <data name="STR_EXP_ANI_GIF_HELP_TRIM_TOPIC" xml:space="preserve">
     <value>Adjusting the video length and start time</value>
   </data>
+  <data name="STR_EXP_FLV_DWL_ALERT_INVALIDURL" xml:space="preserve">
+    <value>Currently, the FLV downloader only supports downloading videos from http:// or https://. The URL should look something like "http://www.google.com/video", or "https://www.google.com/video", or "www.google.com/video", or "http://google.com/video", etc... (No quotes though).</value>
+  </data>
+  <data name="STR_EXP_FLV_DWL_ALERT_INVALIDURL_TOPIC" xml:space="preserve">
+    <value>Invalid URL</value>
+  </data>
 </root>
