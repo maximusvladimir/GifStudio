@@ -205,7 +205,7 @@ namespace GifStudio
 
         private void Converter_ConversionFinished(object sender, EventArgs e)
         {
-            ((Studio)MdiParent).StatusText = "Sucessfully finished exporting frames to " + ExportData.DestinationFilePath + ".";
+            ((Studio)Parent).StatusText = "Sucessfully finished exporting frames to " + ExportData.DestinationFilePath + ".";
             Close();
         }
 
@@ -234,7 +234,7 @@ namespace GifStudio
                 FileInfo inf = new FileInfo(ExportData.DestinationFilePath);
                 inf.Refresh();
                 long s = (long)(inf.Length * CountProgress);
-                ((Studio)MdiParent).StatusText = (100 * CountProgress) +
+                ((Studio)Parent).StatusText = (100 * CountProgress) +
                     "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.";
             }
             catch (Exception)

@@ -1,0 +1,1 @@
+ILMerge.exe /target:winexe /out:studio.exe studio32.exe DirectShowLib-2005.dll Gifbrary.dll Interop.WMPLib.dll Microsoft.WindowsAPICodePack.dll ShaderEffectLibrary.dll System.Windows.Interactivity.dll WPFMediaKit.dll

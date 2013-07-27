@@ -215,7 +215,7 @@ namespace GifStudio
 
         void Converter_ConversionFinished(object sender, EventArgs e)
         {
-            ((Studio)MdiParent).StatusText =
+            ((Studio)Parent).StatusText =
                 "Finished converting " + Path.GetFileName(ExportData.SourceFilePath) + ".";
             Close();
         }
@@ -237,7 +237,7 @@ namespace GifStudio
             catch (Exception)
             {
             }
-            ((Studio)MdiParent).StatusText = (100 * CountProgress) + "% complete.";
+            ((Studio)Parent).StatusText = (100 * CountProgress) + "% complete.";
         }
 
         private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)
