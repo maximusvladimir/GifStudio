@@ -76,6 +76,11 @@ namespace Gifbrary
             dialog.Show();
         }
 
+        public static void Init()
+        {
+            VideoCodecLib.Converter.Init();
+        }
+
         public static void Shutdown()
         {
             if (VideoDownloader.AppTemp != null)
@@ -97,6 +102,7 @@ namespace Gifbrary
             catch (Exception)
             {
             }
+            VideoCodecLib.Converter.Shutdown();
         }
     }
 }
