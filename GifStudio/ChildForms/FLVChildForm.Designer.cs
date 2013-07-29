@@ -35,22 +35,22 @@
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.buttonPaste = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.prxyLabelAddress = new System.Windows.Forms.Label();
-            this.checkBoxUseProxy = new System.Windows.Forms.CheckBox();
+            this.prxyNumericPort = new System.Windows.Forms.NumericUpDown();
+            this.prxyLabelPort = new System.Windows.Forms.Label();
             this.prxyTextBoxAddress = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkBoxUseProxy = new System.Windows.Forms.CheckBox();
+            this.prxyLabelAddress = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prxyNumericPort)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -117,6 +117,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Best avaliable",
+            "High",
+            "Medium",
+            "Low"});
+            this.comboBox1.Location = new System.Drawing.Point(104, 43);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 43);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Download quality:";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -163,8 +186,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.prxyNumericPort);
+            this.groupBox2.Controls.Add(this.prxyLabelPort);
             this.groupBox2.Controls.Add(this.prxyTextBoxAddress);
             this.groupBox2.Controls.Add(this.checkBoxUseProxy);
             this.groupBox2.Controls.Add(this.prxyLabelAddress);
@@ -175,14 +198,42 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Proxy";
             // 
-            // prxyLabelAddress
+            // prxyNumericPort
             // 
-            this.prxyLabelAddress.AutoSize = true;
-            this.prxyLabelAddress.Location = new System.Drawing.Point(31, 38);
-            this.prxyLabelAddress.Name = "prxyLabelAddress";
-            this.prxyLabelAddress.Size = new System.Drawing.Size(48, 13);
-            this.prxyLabelAddress.TabIndex = 0;
-            this.prxyLabelAddress.Text = "Address:";
+            this.prxyNumericPort.Enabled = false;
+            this.prxyNumericPort.Location = new System.Drawing.Point(85, 61);
+            this.prxyNumericPort.Maximum = new decimal(new int[] {
+            35000,
+            0,
+            0,
+            0});
+            this.prxyNumericPort.Name = "prxyNumericPort";
+            this.prxyNumericPort.Size = new System.Drawing.Size(182, 20);
+            this.prxyNumericPort.TabIndex = 4;
+            this.prxyNumericPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.prxyNumericPort.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            // 
+            // prxyLabelPort
+            // 
+            this.prxyLabelPort.AutoSize = true;
+            this.prxyLabelPort.Enabled = false;
+            this.prxyLabelPort.Location = new System.Drawing.Point(31, 61);
+            this.prxyLabelPort.Name = "prxyLabelPort";
+            this.prxyLabelPort.Size = new System.Drawing.Size(29, 13);
+            this.prxyLabelPort.TabIndex = 3;
+            this.prxyLabelPort.Text = "Port:";
+            // 
+            // prxyTextBoxAddress
+            // 
+            this.prxyTextBoxAddress.Enabled = false;
+            this.prxyTextBoxAddress.Location = new System.Drawing.Point(85, 35);
+            this.prxyTextBoxAddress.Name = "prxyTextBoxAddress";
+            this.prxyTextBoxAddress.Size = new System.Drawing.Size(181, 20);
+            this.prxyTextBoxAddress.TabIndex = 2;
             // 
             // checkBoxUseProxy
             // 
@@ -193,63 +244,17 @@
             this.checkBoxUseProxy.TabIndex = 1;
             this.checkBoxUseProxy.Text = "&Use proxy";
             this.checkBoxUseProxy.UseVisualStyleBackColor = true;
+            this.checkBoxUseProxy.CheckedChanged += new System.EventHandler(this.checkBoxUseProxy_CheckedChanged);
             // 
-            // prxyTextBoxAddress
+            // prxyLabelAddress
             // 
-            this.prxyTextBoxAddress.Location = new System.Drawing.Point(85, 35);
-            this.prxyTextBoxAddress.Name = "prxyTextBoxAddress";
-            this.prxyTextBoxAddress.Size = new System.Drawing.Size(181, 20);
-            this.prxyTextBoxAddress.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Port:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(85, 61);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            35000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(182, 20);
-            this.numericUpDown1.TabIndex = 4;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            80,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Download quality:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Best avaliable",
-            "High",
-            "Medium",
-            "Low"});
-            this.comboBox1.Location = new System.Drawing.Point(104, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
+            this.prxyLabelAddress.AutoSize = true;
+            this.prxyLabelAddress.Enabled = false;
+            this.prxyLabelAddress.Location = new System.Drawing.Point(31, 38);
+            this.prxyLabelAddress.Name = "prxyLabelAddress";
+            this.prxyLabelAddress.Size = new System.Drawing.Size(48, 13);
+            this.prxyLabelAddress.TabIndex = 0;
+            this.prxyLabelAddress.Text = "Address:";
             // 
             // FLVChildForm
             // 
@@ -273,7 +278,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prxyNumericPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,8 +298,8 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown prxyNumericPort;
+        private System.Windows.Forms.Label prxyLabelPort;
         private System.Windows.Forms.TextBox prxyTextBoxAddress;
         private System.Windows.Forms.CheckBox checkBoxUseProxy;
         private System.Windows.Forms.Label prxyLabelAddress;

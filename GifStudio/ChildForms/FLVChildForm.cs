@@ -130,5 +130,23 @@ namespace GifStudio.ChildForms
             vidForm.Show();
             vidForm.SetVideo(_downloader.VideoPath);
         }
+
+        private void checkBoxUseProxy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxUseProxy.Checked)
+            {
+                prxyLabelAddress.Enabled = true;
+                prxyTextBoxAddress.Enabled = true;
+                prxyNumericPort.Enabled = true;
+                prxyLabelPort.Enabled = true;
+            }
+            else
+            {
+                prxyLabelAddress.Enabled = false;
+                prxyTextBoxAddress.Enabled = false;
+                prxyNumericPort.Enabled = false;
+                prxyLabelPort.Enabled = false;
+            }
+        }
     }
 }
