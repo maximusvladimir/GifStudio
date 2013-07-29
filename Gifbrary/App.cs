@@ -78,7 +78,7 @@ namespace Gifbrary
 
         public static void Init()
         {
-            VideoCodecLib.Converter.Init();
+            //VideoCodecLib.Converter.Init();
         }
 
         public static void Shutdown()
@@ -102,7 +102,7 @@ namespace Gifbrary
             catch (Exception)
             {
             }
-            VideoCodecLib.Converter.Shutdown();
+            //VideoCodecLib.Converter.Shutdown();
         }
     }
 }

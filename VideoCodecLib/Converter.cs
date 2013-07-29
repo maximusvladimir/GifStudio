@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,10 +11,10 @@ namespace VideoCodecLib
     public class Converter
     {
         private static string ffmpeg_path = "";
-        public static event EventHandler ProgressMonitor;
+        private static bool init = false;
         public static void Init()
         {
-            byte[] bytecode = global::VideoCodecLib.Properties.Resources.ffmpeg;
+            init = true;
             string path = "";
             try
             {
@@ -27,23 +28,39 @@ namespace VideoCodecLib
             {
             }
             ffmpeg_path = Path.Combine(Path.Combine(Path.GetTempPath(), "\\GifStudio\\"), "ffmpeg.exe");
-            File.WriteAllBytes(ffmpeg_path, bytecode);
-        }
-
-        public static void Shutdown()
-        {
-            try
+            if (!File.Exists(ffmpeg_path))
             {
-                File.Delete(ffmpeg_path);
-            }
-            catch (Exception)
-            {
+                WebClient client = new WebClient();
+                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+                string ffmpeglink = "http://k002.kiwi6.com/hotlink/2a665gwnh2/ffmpeg.exe";
+                client.DownloadFile(ffmpeglink, ffmpeg_path);
             }
         }
 
-        public static ResultCode Convert(string input, string output)
+        public event EventHandler ProgressMonitor;
+        public Converter(string input, string output)
         {
-            string fileargs = "-i" + " " + input + "  " + output;
+            if (!init)
+                Init();
+            Input = input;
+            Output = output;
+        }
+
+        public string Input
+        {
+            get;
+            set;
+        }
+
+        public string Output
+        {
+            get;
+            set;
+        }
+
+        public ResultCode Convert()
+        {
+            string fileargs = "-i" + " " + Input + "  " + Output;
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = ffmpeg_path;
             p.StartInfo.Arguments = fileargs;
@@ -57,7 +74,7 @@ namespace VideoCodecLib
             return ResultCode.SUCCESS;
         }
 
-        private static void p_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
+        private void p_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
         {
             
         }
