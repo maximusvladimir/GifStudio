@@ -55,6 +55,37 @@ namespace Gifbrary.Utilities
             set;
         }
 
+        public void ProcessQuality()
+        {
+            bool _Wide = true;
+            switch (TagQuality)
+            {
+                case 5: SetQuality("flv", new Size(320, (_Wide ? 180 : 240))); break;
+                case 6: SetQuality("flv", new Size(480, (_Wide ? 270 : 360))); break;
+                case 17: SetQuality("3gp", new Size(176, (_Wide ? 99 : 144))); break;
+                case 18: SetQuality("mp4", new Size(640, (_Wide ? 360 : 480))); break;
+                case 22: SetQuality("mp4", new Size(1280, (_Wide ? 720 : 960))); break;
+                case 34: SetQuality("flv", new Size(640, (_Wide ? 360 : 480))); break;
+                case 35: SetQuality("flv", new Size(854, (_Wide ? 480 : 640))); break;
+                case 36: SetQuality("3gp", new Size(320, (_Wide ? 180 : 240))); break;
+                case 37: SetQuality("mp4", new Size(1920, (_Wide ? 1080 : 1440))); break;
+                case 38: SetQuality("mp4", new Size(2048, (_Wide ? 1152 : 1536))); break;
+                case 43: SetQuality("webm", new Size(640, (_Wide ? 360 : 480))); break;
+                case 44: SetQuality("webm", new Size(854, (_Wide ? 480 : 640))); break;
+                case 45: SetQuality("webm", new Size(1280, (_Wide ? 720 : 960))); break;
+                case 46: SetQuality("webm", new Size(1920, (_Wide ? 1080 : 1440))); break;
+                case 82: SetQuality("3D mp4", new Size(480, (_Wide ? 270 : 360))); break;
+                case 83: SetQuality("3D mp4", new Size(640, (_Wide ? 360 : 480))); break;
+                case 84: SetQuality("3D mp4", new Size(1280, (_Wide ? 720 : 960))); break;
+                case 85: SetQuality("3D mp4", new Size(1920, (_Wide ? 1080 : 1440))); break;
+                case 100: SetQuality("3D webm", new Size(640, (_Wide ? 360 : 480))); break;
+                case 101: SetQuality("3D webm", new Size(640, (_Wide ? 360 : 480))); break;
+                case 102: SetQuality("3D webm", new Size(1280, (_Wide ? 720 : 960))); break;
+                case 120: SetQuality("live flv", new Size(1280, (_Wide ? 720 : 960))); break;
+                default: SetQuality("itag-" + TagQuality, new Size(0, 0)); break;
+            }
+        }
+
         public void SetQuality(string Extention, Size Dimension)
         {
             this.Extention = Extention;
@@ -98,16 +129,7 @@ namespace Gifbrary.Utilities
                     q.VideoUrl = URL;
                     q.VideoTitle = Title;
                     q.DownloadUrl = s2[a]; //+ "&title=" + t3;
-                    System.Diagnostics.Debug.WriteLine(q.DownloadUrl);
-                    try
-                    {
-                        q.Length = long.Parse(Regex.Match(web, "\"length_seconds\":(.+?),", RegexOptions.Singleline).Groups[1].ToString());
-                    }
-                    catch (Exception)
-                    { }
                     bool IsWide = IsWideScreen(web);
-                    //if (getQuality(q, IsWide))
-                    //string itag = Regex.Match(q.DownloadUrl, @"itag=([1-9]?[0-9]?[0-9])", RegexOptions.Singleline).Groups[1].ToString();
                     string itag = GetTxtBtwn(q.DownloadUrl, "itag=", "&", 0);
                     int iTagValue = 0;
                     if (itag != "")
@@ -116,6 +138,7 @@ namespace Gifbrary.Utilities
                             iTagValue = 0;
                     }
                     q.TagQuality = iTagValue;
+                    q.ProcessQuality();
                     yvq.Add(q);
                 }
                 int qua = 0;
@@ -128,7 +151,6 @@ namespace Gifbrary.Utilities
                         qua = qual.TagQuality;
                     }
                 }
-                System.Diagnostics.Debug.WriteLine(qua+qq.DownloadUrl);
                 VideoURL = qq.DownloadUrl;
                 Ready = true;
             }
@@ -146,6 +168,46 @@ namespace Gifbrary.Utilities
                 _browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(_browser_DocumentCompleted);
                 _browser.Navigate(URL);
             }
+        }
+
+        public static string[] GetQualityStrings(string url)
+        {
+            if (url.IndexOf("youtube.com") > -1)
+            {
+                string web = DownloadWebPage(url);
+                List<string> s2 = ExtractUrls(web);
+                List<string> tye = new List<string>();
+                List<YouTubeVideoQuality> yvq = new List<YouTubeVideoQuality>();
+                for (int a = 0; a < s2.Count; a++)
+                {
+                    YouTubeVideoQuality q = new YouTubeVideoQuality();
+                    q.VideoUrl = url;
+                    q.DownloadUrl = s2[a]; //+ "&title=" + t3;
+                    try
+                    {
+                        q.Length = long.Parse(Regex.Match(web, "\"length_seconds\":(.+?),", RegexOptions.Singleline).Groups[1].ToString());
+                    }
+                    catch (Exception)
+                    { }
+                    bool IsWide = IsWideScreen(web);
+                    GetSize(q);
+                    string itag = GetTxtBtwn(q.DownloadUrl, "itag=", "&", 0);
+                    int iTagValue = 0;
+                    if (itag != "")
+                    {
+                        if (int.TryParse(itag, out iTagValue) == false)
+                            iTagValue = 0;
+                    }
+                    q.TagQuality = iTagValue;
+                    q.ProcessQuality();
+                    string stye = q.Extention + " (" + q.Dimension.Width + "x" + q.Dimension.Height + ")";
+                    if (q.VideoSize > 0)
+                        stye += " (About " + (q.VideoSize / 1024 / 1024) + " mb)";
+                    tye.Add(stye);
+                }
+                return tye.ToArray();
+            }
+            return null;
         }
 
         public static Boolean IsWideScreen(string html)
@@ -166,7 +228,7 @@ namespace Gifbrary.Utilities
             return str14;
         }
 
-        private static bool getSize(YouTubeVideoQuality q)
+        private static bool GetSize(YouTubeVideoQuality q)
         {
             try
             {
@@ -181,51 +243,11 @@ namespace Gifbrary.Utilities
                 }
                 else return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return false;
             }
-        }
-
-        private static bool getQuality(YouTubeVideoQuality q, Boolean _Wide)
-        {
-            int iTagValue;
-            string itag = Regex.Match(q.DownloadUrl, @"itag=([1-9]?[0-9]?[0-9])", RegexOptions.Singleline).Groups[1].ToString();
-            if (itag != "")
-            {
-                if (int.TryParse(itag, out iTagValue) == false)
-                    iTagValue = 0;
-
-                switch (iTagValue)
-                {
-                    case 5: q.SetQuality("flv", new Size(320, (_Wide ? 180 : 240))); break;
-                    case 6: q.SetQuality("flv", new Size(480, (_Wide ? 270 : 360))); break;
-                    case 17: q.SetQuality("3gp", new Size(176, (_Wide ? 99 : 144))); break;
-                    case 18: q.SetQuality("mp4", new Size(640, (_Wide ? 360 : 480))); break;
-                    case 22: q.SetQuality("mp4", new Size(1280, (_Wide ? 720 : 960))); break;
-                    case 34: q.SetQuality("flv", new Size(640, (_Wide ? 360 : 480))); break;
-                    case 35: q.SetQuality("flv", new Size(854, (_Wide ? 480 : 640))); break;
-                    case 36: q.SetQuality("3gp", new Size(320, (_Wide ? 180 : 240))); break;
-                    case 37: q.SetQuality("mp4", new Size(1920, (_Wide ? 1080 : 1440))); break;
-                    case 38: q.SetQuality("mp4", new Size(2048, (_Wide ? 1152 : 1536))); break;
-                    case 43: q.SetQuality("webm", new Size(640, (_Wide ? 360 : 480))); break;
-                    case 44: q.SetQuality("webm", new Size(854, (_Wide ? 480 : 640))); break;
-                    case 45: q.SetQuality("webm", new Size(1280, (_Wide ? 720 : 960))); break;
-                    case 46: q.SetQuality("webm", new Size(1920, (_Wide ? 1080 : 1440))); break;
-                    case 82: q.SetQuality("3D.mp4", new Size(480, (_Wide ? 270 : 360))); break;
-                    case 83: q.SetQuality("3D.mp4", new Size(640, (_Wide ? 360 : 480))); break;
-                    case 84: q.SetQuality("3D.mp4", new Size(1280, (_Wide ? 720 : 960))); break;
-                    case 85: q.SetQuality("3D.mp4", new Size(1920, (_Wide ? 1080 : 1440))); break;
-                    case 100: q.SetQuality("3D.webm", new Size(640, (_Wide ? 360 : 480))); break;
-                    case 101: q.SetQuality("3D.webm", new Size(640, (_Wide ? 360 : 480))); break;
-                    case 102: q.SetQuality("3D.webm", new Size(1280, (_Wide ? 720 : 960))); break;
-                    case 120: q.SetQuality("live.flv", new Size(1280, (_Wide ? 720 : 960))); break;
-                    default: q.SetQuality("itag-" + itag, new Size(0, 0)); break;
-                }
-                q.TagQuality = iTagValue;
-                return true;
-            }
-            return false;
         }
 
         public static string DownloadWebPage(string Url)
@@ -294,7 +316,7 @@ namespace Gifbrary.Utilities
             }
         }
 
-        private List<string> ExtractUrls(string html)
+        private static List<string> ExtractUrls(string html)
         {
             List<string> urls = new List<string>();
             string DataBlockStart = "\"url_encoded_fmt_stream_map\":\\s+\"(.+?)&";  // Marks start of Javascript Data Block

@@ -83,6 +83,7 @@
             this.boxURL.Name = "boxURL";
             this.boxURL.Size = new System.Drawing.Size(225, 20);
             this.boxURL.TabIndex = 1;
+            this.boxURL.TextChanged += new System.EventHandler(this.boxURL_TextChanged);
             // 
             // buttonBrowse
             // 
@@ -120,15 +121,16 @@
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Best avaliable",
             "High",
             "Medium",
             "Low"});
-            this.comboBox1.Location = new System.Drawing.Point(104, 43);
+            this.comboBox1.Location = new System.Drawing.Point(9, 62);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(244, 21);
             this.comboBox1.TabIndex = 7;
             // 
             // label5
@@ -136,9 +138,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 43);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.Size = new System.Drawing.Size(151, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Download quality:";
+            this.label5.Text = "Download quality (If avaliable):";
             // 
             // label3
             // 

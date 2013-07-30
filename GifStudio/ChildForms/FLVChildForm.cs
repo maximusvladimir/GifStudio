@@ -18,6 +18,7 @@ namespace GifStudio.ChildForms
         public FLVChildForm()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -146,6 +147,47 @@ namespace GifStudio.ChildForms
                 prxyTextBoxAddress.Enabled = false;
                 prxyNumericPort.Enabled = false;
                 prxyLabelPort.Enabled = false;
+            }
+        }
+
+        private void boxURL_TextChanged(object sender, EventArgs e)
+        {
+            string _url = boxURL.Text;
+            if (string.IsNullOrEmpty(_url))
+                return;
+
+            bool createFail = false;
+
+            try
+            {
+                Uri ur = new Uri(_url);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            if (_url.StartsWith("ftp:") || _url.StartsWith("udp:") || createFail || _url.StartsWith("file:"))
+                return;
+
+            if (!_url.EndsWith(".mp4") && !_url.EndsWith(".wmv") && !_url.EndsWith(".flv") &&
+                !_url.EndsWith(".avi"))
+            {
+                System.Threading.Thread worker = new System.Threading.Thread(
+                    new System.Threading.ThreadStart(delegate() 
+                        {
+                            string[] st = VideoScanner.GetQualityStrings(_url);
+                            comboBox1.Invoke((Action)delegate()
+                            {
+                                comboBox1.Items.Clear();
+                                comboBox1.Items.AddRange(st);
+                                comboBox1.SelectedIndex = 0;
+                                comboBox1.Enabled = true;
+                            });
+                        }));
+                worker.Priority = System.Threading.ThreadPriority.Highest;
+                worker.Start();
+                worker.Priority = System.Threading.ThreadPriority.Highest;
             }
         }
     }
