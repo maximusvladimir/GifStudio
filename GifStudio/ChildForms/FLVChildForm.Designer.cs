@@ -279,7 +279,7 @@
             this.MaximumSize = new System.Drawing.Size(571, 271);
             this.MinimumSize = new System.Drawing.Size(571, 271);
             this.Name = "FLVChildForm";
-            this.Text = "FLVChildForm";
+            this.Text = "Video Downloader";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

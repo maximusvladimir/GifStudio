@@ -23,10 +23,10 @@ namespace Gifbrary
             else
                 dialog.DetailsExpandedText = "Root message unspecified.";
             dialog.HyperlinksEnabled = true;
-            dialog.Text = rootMSG;
+            dialog.Text = Unlk(rootMSG);
             if (handler != IntPtr.Zero)
                 dialog.OwnerWindowHandle = handler;
-            TaskDialogButton copy = new TaskDialogButton("Copy", "Copy the contents of this message to the clipboard.");
+            TaskDialogCommandLink copy = new TaskDialogCommandLink("Copy", "Copy the contents of this message to the clipboard.");
             copy.Click += delegate(object sender, EventArgs args)
             {
                 try
@@ -51,10 +51,17 @@ namespace Gifbrary
                         }
                     }
                 }
+                dialog.Close();
             };
+            TaskDialogCommandLink closeok = new TaskDialogCommandLink("Ok", "Ok");
+            closeok.Click += delegate(object sender, EventArgs args)
+            {
+                dialog.Close();
+            };
+            dialog.Controls.Add(closeok);
             dialog.Controls.Add(copy);
             dialog.Icon = TaskDialogStandardIcon.Error;
-            dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+            dialog.StandardButtons = TaskDialogStandardButtons.None;
             dialog.StartupLocation = TaskDialogStartupLocation.CenterScreen;
             dialog.HyperlinkClick += new EventHandler<TaskDialogHyperlinkClickedEventArgs>(dialog_HyperlinkClick);
             if (opCode % 2 != 0 && ex != null)
@@ -68,6 +75,17 @@ namespace Gifbrary
             {
                 SendErrorReport(ex.Message, ex.StackTrace, rootMSG);
             }
+        }
+
+        private static string Unlk(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
+            if (str.IndexOf("\\n") > -1)
+                str = str.Replace("\\n", "\n");
+
+            return str;
         }
 
         private static void SendErrorReport(string message, string stack, string rootMessage)
@@ -94,12 +112,12 @@ namespace Gifbrary
                 dialog.DetailsExpanded = false;
             dialog.InstructionText = helpTopic;
             if (moreDetails != null)
-                dialog.DetailsExpandedText = "\n\n" + moreDetails;
+                dialog.DetailsExpandedText = "\n\n" + Unlk(moreDetails);
             dialog.HyperlinksEnabled = true;
-            dialog.Text = rootMSG;
+            dialog.Text = Unlk(rootMSG);
             if (handler != IntPtr.Zero)
                 dialog.OwnerWindowHandle = handler;
-            TaskDialogButton copy = new TaskDialogButton("Copy", "Copy the contents of this message to the clipboard.");
+            TaskDialogCommandLink copy = new TaskDialogCommandLink("Copy", "Copy the contents of this message to the clipboard.");
             copy.Click += delegate(object sender, EventArgs args)
             {
                 try
@@ -122,10 +140,17 @@ namespace Gifbrary
                         { }
                     }
                 }
+                dialog.Close();
             };
+            TaskDialogCommandLink closeok = new TaskDialogCommandLink("Ok", "Ok");
+            closeok.Click += delegate(object sender, EventArgs args)
+            {
+                dialog.Close();
+            };
+            dialog.Controls.Add(closeok);
             dialog.Controls.Add(copy);
             dialog.Icon = TaskDialogStandardIcon.Shield;
-            dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+            dialog.StandardButtons = TaskDialogStandardButtons.None;
             dialog.StartupLocation = TaskDialogStartupLocation.CenterScreen;
             dialog.Show();
         }

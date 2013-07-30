@@ -91,10 +91,24 @@ namespace GifStudio.ChildForms
 
             string nu = null;
             string title = null;
+            string ext = null;
             if (!_url.EndsWith(".mp4") && !_url.EndsWith(".wmv") && !_url.EndsWith(".flv") &&
                 !_url.EndsWith(".avi"))
             {
-                scanner = new VideoScanner(_url);
+                try
+                {
+                    scanner = new VideoScanner(_url);
+               }
+                catch (Exception ex)
+                {
+                    if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
+                    {
+                        App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
+                        return;
+                    }
+                    else
+                        throw;
+                }
                 if (scanner.NoVideo)
                 {
                     App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_NOVIDEO,
@@ -102,9 +116,20 @@ namespace GifStudio.ChildForms
                         global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_NOVIDEO_TOPIC);
                     return;
                 }
-                nu = scanner.VideoURL;
+                if (quality != null && quality.Length > 0 && comboBox1.SelectedIndex < quality.Length)
+                {
+                    nu = quality[comboBox1.SelectedIndex].DownloadUrl;
+                    string y = quality[comboBox1.SelectedIndex].Extention;
+                    y = y.ToLower();
+                    if (y.IndexOf("3d") > -1)
+                        y = y.Replace("3d", "");
+                    if (y.IndexOf(" ") > -1)
+                        y = y.Replace(" ", "");
+                    ext = y;
+                }
+                else
+                    nu = scanner.VideoURL;
                 title = scanner.Title;
-
             }
             else
             {
@@ -124,11 +149,31 @@ namespace GifStudio.ChildForms
             progressBar1.Style = ProgressBarStyle.Blocks;
             button3.Enabled = false;
 
-            _downloader = new VideoDownloader(nu, title);
+            _downloader = new VideoDownloader(nu, title, ext);
             _downloader.Scanner = scanner;
             _downloader.DownloadComplete += new EventHandler(_downloader_DownloadComplete);
             _downloader.ProgressChanged += new EventHandler(_downloader_ProgressChanged);
-            _downloader.Download();
+            try
+            {
+                _downloader.Download();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
+                {
+                    App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
+                    progressBar1.Style = ProgressBarStyle.Continuous;
+                    button3.Enabled = true;
+                    return;
+                }
+                else if (ex.Message.IndexOf("404") > -1)
+                {
+                    App.HandleError(IntPtr.Zero, "Unknown address. Check your spelling and try again.", ex, 20);
+                    progressBar1.Style = ProgressBarStyle.Continuous;
+                    button3.Enabled = true;
+                    return;
+                }
+            }
         }
 
         private void _downloader_ProgressChanged(object sender, EventArgs e)
@@ -136,7 +181,7 @@ namespace GifStudio.ChildForms
             progressBar1.Value = (int)((progressBar1.Maximum/2) * _downloader.Progress);
             try
             {
-                ((Studio)MdiParent).StatusText = "Downloading video " + (_downloader.Progress * 50) + " %";
+                Studio.SetStatus(this,"Downloading video " + (_downloader.Progress * 50) + " %");
             }
             catch (Exception)
             {
@@ -169,7 +214,7 @@ namespace GifStudio.ChildForms
                 prxyLabelPort.Enabled = false;
             }
         }
-
+        private YouTubeVideoQuality[] quality;
         private void boxURL_TextChanged(object sender, EventArgs e)
         {
             string _url = boxURL.Text;
@@ -197,18 +242,48 @@ namespace GifStudio.ChildForms
                 System.Threading.Thread worker = new System.Threading.Thread(
                     new System.Threading.ThreadStart(delegate() 
                         {
-                            string[] st = VideoScanner.GetQualityStrings(_url);
-                            comboBox1.Invoke((Action)delegate()
+                            string[] st = null;
+                            try
                             {
-                                if (st != null && st.Length > 0)
+                                if (_url.IndexOf("youtube.com") > -1 || _url.IndexOf("youtu.be") > -1)
                                 {
-                                    comboBox1.Items.Clear();
-                                    comboBox1.Items.AddRange(st);
-                                    comboBox1.SelectedIndex = 0;
-                                    comboBox1.Enabled = true;
+                                    Studio.SetStatus(this, "Detecting quality settings. Please wait a second.");
+                                    st = VideoScanner.GetQualityStrings(_url, ref quality);
+                                    Studio.SetStatus(this, "Ready.");
                                 }
-                                button3.Enabled = true;
-                            });
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
+                                {
+                                    App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
+                                    Invoke((Action)delegate()
+                                    {
+                                        progressBar1.Style = ProgressBarStyle.Continuous;
+                                        button3.Enabled = true;
+                                    });
+                                    return;
+                                }
+                                else if (ex.Message.IndexOf("404") > -1)
+                                    return;
+                                else
+                                    throw;
+                            }
+                            try
+                            {
+                                Invoke((Action)delegate()
+                                {
+                                    if (st != null && st.Length > 0)
+                                    {
+                                        comboBox1.Items.Clear();
+                                        comboBox1.Items.AddRange(st);
+                                        comboBox1.SelectedIndex = 0;
+                                        comboBox1.Enabled = true;
+                                    }
+                                    button3.Enabled = true;
+                                });
+                            }
+                            catch (Exception) { }
                         }));
                 worker.Priority = System.Threading.ThreadPriority.Highest;
                 worker.Start();
@@ -219,6 +294,13 @@ namespace GifStudio.ChildForms
         private void button4_Click(object sender, EventArgs e)
         {
             Close();
+            try
+            {
+                Studio.SetStatus(this,"Ready.");
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

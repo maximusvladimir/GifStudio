@@ -11,12 +11,14 @@ namespace Gifbrary.Utilities
     {
         public event EventHandler ProgressChanged;
         public event EventHandler DownloadComplete;
-        public VideoDownloader(string url, string title)
+        public VideoDownloader(string url, string title, string ext)
         {
             URL = url;
             Progress = 0.0f;
             Title = title;
-            Extension = ".wmv";
+            if (!string.IsNullOrEmpty(ext))
+                Extension = "." + ext;
+            else
             try
             {
                 Uri yuri = new Uri(URL);
@@ -24,7 +26,10 @@ namespace Gifbrary.Utilities
             }
             catch (Exception)
             {
+                Extension = ".wmv";
             }
+            if (string.IsNullOrEmpty(Extension))
+                Extension = ".wmv";
 
             if (AppTemp == null)
             {

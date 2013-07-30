@@ -170,7 +170,7 @@
     <value>Resizing an image will stretch the size of an image to make it bigger or smaller from its original size.</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE_DETAILS" xml:space="preserve">
-    <value>When resizing, it is important to keep the width and height in proportion so the image does not appear to be distorted.\n\nThe large the size, the longer it will take to render the image.</value>
+    <value>When resizing, it is important to keep the width and height in proportion so the image does not appear to be distorted.\nThe large the size, the longer it will take to render the image.</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC" xml:space="preserve">
     <value>Resizing the output image</value>
@@ -194,16 +194,19 @@
     <value>Adjusting the video length and start time</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_INVALIDURL" xml:space="preserve">
-    <value>Currently, the FLV downloader only supports downloading videos from http:// or https://. The URL should look something like "http://www.google.com/video", or "https://www.google.com/video", or "www.google.com/video", or "http://google.com/video", etc... (No quotes though).</value>
+    <value>Currently, the FLV downloader only supports downloading videos from http:// or https://.\nThe URL should look something like "http://www.google.com/video", or "https://www.google.com/video", or "www.google.com/video", or "http://google.com/video", etc... (No quotes though).</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_INVALIDURL_TOPIC" xml:space="preserve">
     <value>Invalid URL</value>
+  </data>
+  <data name="STR_EXP_ERROR_NO_INTERNET" xml:space="preserve">
+    <value>Unable to contact server. Your internet connection may be down.</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO" xml:space="preserve">
     <value>No video could be found at the given url.</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO_DETAILS" xml:space="preserve">
-    <value>The video downloader may not be able to detect all videos. Some videos are streamed to the player, and those cannot be downloaded with this simple downloader. Other videos are loaded via JavaScript, and those cannot be detected with this downloader.</value>
+    <value>The video downloader may not be able to detect all videos. Some videos are streamed to the player, and those cannot be downloaded with this simple downloader.\nOther videos are loaded via JavaScript, and those cannot be detected with this downloader.</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO_TOPIC" xml:space="preserve">
     <value>No video</value>

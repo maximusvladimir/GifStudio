@@ -104,7 +104,7 @@ namespace Gifbrary.Utilities
             URL = urltoscan;
             Ready = false;
             Title = "Unknown" + ((int)(new Random().NextDouble() * 10000));
-            if (URL.IndexOf("youtube.com") > -1)
+            if (URL.IndexOf("youtube.com") > -1 || URL.IndexOf("youtu.be") > -1)
             {
                 string web = DownloadWebPage(URL);
                 List<string> s2 = ExtractUrls(web);
@@ -336,44 +336,46 @@ namespace Gifbrary.Utilities
             return response;
         }
 
-        public static string[] GetQualityStrings(string url)
+        public static string[] GetQualityStrings(string url, ref YouTubeVideoQuality[] quals)
         {
-            if (url.IndexOf("youtube.com") > -1)
+            quals = null;
+            string web = "";
+            web = DownloadWebPage(url);
+            List<string> s2 = ExtractUrls(web);
+            List<string> tye = new List<string>();
+            List<YouTubeVideoQuality> yvq = new List<YouTubeVideoQuality>();
+            for (int a = 0; a < s2.Count; a++)
             {
-                string web = DownloadWebPage(url);
-                List<string> s2 = ExtractUrls(web);
-                List<string> tye = new List<string>();
-                List<YouTubeVideoQuality> yvq = new List<YouTubeVideoQuality>();
-                for (int a = 0; a < s2.Count; a++)
+                YouTubeVideoQuality q = new YouTubeVideoQuality();
+                q.VideoUrl = url;
+                q.DownloadUrl = s2[a]; //+ "&title=" + t3;
+                try
                 {
-                    YouTubeVideoQuality q = new YouTubeVideoQuality();
-                    q.VideoUrl = url;
-                    q.DownloadUrl = s2[a]; //+ "&title=" + t3;
-                    try
-                    {
-                        q.Length = long.Parse(Regex.Match(web, "\"length_seconds\":(.+?),", RegexOptions.Singleline).Groups[1].ToString());
-                    }
-                    catch (Exception)
-                    { }
-                    bool IsWide = IsWideScreen(web);
-                    GetSize(q);
-                    string itag = GetTxtBtwn(q.DownloadUrl, "itag=", "&", 0);
-                    int iTagValue = 0;
-                    if (itag != "")
-                    {
-                        if (int.TryParse(itag, out iTagValue) == false)
-                            iTagValue = 0;
-                    }
-                    q.TagQuality = iTagValue;
-                    q.ProcessQuality();
-                    string stye = q.Extention + " (" + q.Dimension.Width + "x" + q.Dimension.Height + ")";
-                    if (q.VideoSize > 0)
-                        stye += " (About " + (q.VideoSize / 1024 / 1024) + " mb)";
-                    tye.Add(stye);
+                    q.Length = long.Parse(Regex.Match(web, "\"length_seconds\":(.+?),", RegexOptions.Singleline).Groups[1].ToString());
                 }
-                return tye.ToArray();
+                catch (Exception)
+                { }
+                bool IsWide = IsWideScreen(web);
+                GetSize(q);
+                string itag = GetTxtBtwn(q.DownloadUrl, "itag=", "&", 0);
+                int iTagValue = 0;
+                if (itag != "")
+                {
+                    if (int.TryParse(itag, out iTagValue) == false)
+                        iTagValue = 0;
+                }
+                q.TagQuality = iTagValue;
+                q.ProcessQuality();
+                if (q.Extention.IndexOf("tag") > -1)
+                    continue;
+                string stye = q.Extention + " (" + q.Dimension.Width + "x" + q.Dimension.Height + ")";
+                if (q.VideoSize > 0)
+                    stye += " (About " + (q.VideoSize / 1024 / 1024) + " mb)";
+                tye.Add(stye);
+                yvq.Add(q);
             }
-            return null;
+            quals = yvq.ToArray();
+            return tye.ToArray();
         }
 
         public static Boolean IsWideScreen(string html)
@@ -475,9 +477,9 @@ namespace Gifbrary.Utilities
 
                 return PageContent;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+               throw;
             }
         }
 

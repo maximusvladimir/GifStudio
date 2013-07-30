@@ -254,7 +254,7 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When resizing, it is important to keep the width and height in proportion so the image does not appear to be distorted.\n\nThe large the size, the longer it will take to render the image..
+        ///   Looks up a localized string similar to When resizing, it is important to keep the width and height in proportion so the image does not appear to be distorted.\nThe large the size, the longer it will take to render the image..
         /// </summary>
         internal static string STR_EXP_ANI_GIF_HELP_RESIZE_DETAILS {
             get {
@@ -299,7 +299,16 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currently, the FLV downloader only supports downloading videos from http:// or https://. The URL should look something like &quot;http://www.google.com/video&quot;, or &quot;https://www.google.com/video&quot;, or &quot;www.google.com/video&quot;, or &quot;http://google.com/video&quot;, etc... (No quotes though)..
+        ///   Looks up a localized string similar to Unable to contact server. Your internet connection may be down..
+        /// </summary>
+        internal static string STR_EXP_ERROR_NO_INTERNET {
+            get {
+                return ResourceManager.GetString("STR_EXP_ERROR_NO_INTERNET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently, the FLV downloader only supports downloading videos from http:// or https://.\nThe URL should look something like &quot;http://www.google.com/video&quot;, or &quot;https://www.google.com/video&quot;, or &quot;www.google.com/video&quot;, or &quot;http://google.com/video&quot;, etc... (No quotes though)..
         /// </summary>
         internal static string STR_EXP_FLV_DWL_ALERT_INVALIDURL {
             get {
@@ -326,7 +335,7 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The video downloader may not be able to detect all videos. Some videos are streamed to the player, and those cannot be downloaded with this simple downloader. Other videos are loaded via JavaScript, and those cannot be detected with this downloader..
+        ///   Looks up a localized string similar to The video downloader may not be able to detect all videos. Some videos are streamed to the player, and those cannot be downloaded with this simple downloader.\nOther videos are loaded via JavaScript, and those cannot be detected with this downloader..
         /// </summary>
         internal static string STR_EXP_FLV_DWL_ALERT_NOVIDEO_DETAILS {
             get {

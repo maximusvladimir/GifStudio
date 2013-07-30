@@ -15,6 +15,20 @@ namespace GifStudio
 {
     public partial class Studio : Form
     {
+
+        public static void SetStatus(Form self, string status)
+        {
+            try
+            {
+                if (self.MdiParent != null)
+                    ((Studio)self.MdiParent).StatusText = status;
+                else if (self.Parent != null)
+                    ((Studio)self.Parent).StatusText = status;
+            }
+            catch (Exception)
+            {
+            }
+        }
         private ExportWindow export;
         public Studio()
         {
