@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -7,7 +8,6 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace Gifbrary.Utilities
 {
@@ -97,9 +97,8 @@ namespace Gifbrary.Utilities
             this.VideoSize = size;
         }
     }
-    public class VideoScanner : IDisposable
+    public class VideoScanner
     {
-        private WebBrowser _browser;
         public VideoScanner(string urltoscan)
         {
             URL = urltoscan;
@@ -241,17 +240,58 @@ namespace Gifbrary.Utilities
             }
             else
             {
-                try
+                List<string> vids = new List<string>();
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(DownloadWebPage(URL));
+                string t = null;
+                if (doc.DocumentNode.ChildNodes["title"] != null)
+                    t = doc.DocumentNode.ChildNodes["title"].InnerText;
+                if (t != null)
                 {
-                    _browser = new WebBrowser();
+                    string y = "";
+                    for (int c = 0; c < t.Length; c++)
+                    {
+                        if (char.IsLetterOrDigit(t[c]) || char.IsWhiteSpace(t[c]))
+                            y += t[c];
+                    }
+                    if (!string.IsNullOrEmpty(y))
+                        Title = y;
                 }
-                catch (Exception ex)
+
+
+                HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("video");
+                //if (coll != null)
+                for (int c = 0; c < coll.Count; c++)
                 {
-                    App.HandleError(IntPtr.Zero,
-                        "Internet Explorer must be installed and runnable through COM to use the Video Downloader. Sorry.", ex, 23);
+                    string source = coll[c].GetAttributeValue("src", null);
+                    if (source == null)
+                    {
+                        HtmlNodeCollection scoll = coll[c].SelectNodes("source");
+                        for (int d = 0; d < scoll.Count; d++)
+                        {
+                            string s34 = scoll[c].GetAttributeValue("src", null);
+                            if (s34 != null)
+                            {
+                                source = s34;
+                                break;
+                            }
+                        }
+                    }
+
+                    try
+                    {
+                        Uri yuri = new Uri(source);
+                    }
+                    catch (Exception)
+                    {
+                        Uri fg;
+                        Uri.TryCreate(new Uri(URL), source, out fg);
+                        source = fg.ToString();
+                    }
+                    VideoURL = source;
                 }
-                _browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(_browser_DocumentCompleted);
-                _browser.Navigate(URL);
+                
+                Ready = true;
             }
         }
 
@@ -406,7 +446,7 @@ namespace Gifbrary.Utilities
             {
                 HttpWebRequest WebRequestObject = (HttpWebRequest)HttpWebRequest.Create(Url);
                 WebRequestObject.Proxy = InitialProxy();
-                WebRequestObject.UserAgent = ".NET Framework/2.0";
+                WebRequestObject.UserAgent = App.UserAgent;
                 WebResponse Response = WebRequestObject.GetResponse();
                 Stream WebStream = Response.GetResponseStream();
                 StreamReader Reader = new StreamReader(WebStream);
@@ -491,39 +531,6 @@ namespace Gifbrary.Utilities
             return input.Substring(index1, index2 - index1);
         }
 
-        private void _browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            List<string> vids = new List<string>();
-
-            string t = _browser.Document.Title;
-            if (t != null)
-            {
-                string y = "";
-                for (int c = 0; c < t.Length; c++)
-                {
-                    if (char.IsLetterOrDigit(t[c]) || char.IsWhiteSpace(t[c]))
-                        y += t[c];
-                }
-                if (!string.IsNullOrEmpty(y))
-                    Title = y;
-            }
-
-            HtmlElementCollection collection = _browser.Document.GetElementsByTagName("object");
-            for (int c = 0; c < collection.Count; c++)
-            {
-                HtmlElement el = collection[c];
-                
-            }
-
-            collection = _browser.Document.GetElementsByTagName("video");
-            for (int c = 0; c < collection.Count; c++)
-            {
-                HtmlElement el = collection[c];
-
-            }
-            Ready = true;
-        }
-
         public string Title
         {
             get;
@@ -552,14 +559,6 @@ namespace Gifbrary.Utilities
         {
             get;
             set;
-        }
-        
-        public void Dispose()
-        {
-            if (_browser != null)
-            {
-                _browser.Dispose();
-            }
         }
     }
 }
