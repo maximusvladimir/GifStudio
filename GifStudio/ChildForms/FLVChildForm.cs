@@ -114,6 +114,9 @@ namespace GifStudio.ChildForms
             }
             _url = null;
 
+            progressBar1.Style = ProgressBarStyle.Blocks;
+            button3.Enabled = false;
+
             _downloader = new VideoDownloader(nu, title);
             _downloader.Scanner = scanner;
             _downloader.DownloadComplete += new EventHandler(_downloader_DownloadComplete);
@@ -123,7 +126,14 @@ namespace GifStudio.ChildForms
 
         private void _downloader_ProgressChanged(object sender, EventArgs e)
         {
-            progressBar1.Value = (int)(progressBar1.Maximum * _downloader.Progress);
+            progressBar1.Value = (int)((progressBar1.Maximum/2) * _downloader.Progress);
+            try
+            {
+                ((Studio)MdiParent).StatusText = "Downloading video " + (_downloader.Progress * 50) + " %";
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void _downloader_DownloadComplete(object sender, EventArgs e)

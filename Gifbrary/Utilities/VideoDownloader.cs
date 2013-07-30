@@ -39,7 +39,7 @@ namespace Gifbrary.Utilities
                     { }
                 }
             }
-            System.Diagnostics.Debug.WriteLine(AppTemp);
+            //System.Diagnostics.Debug.WriteLine(AppTemp);
         }
 
         public VideoScanner Scanner
