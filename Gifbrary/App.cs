@@ -12,6 +12,7 @@ namespace Gifbrary
 {
     public class App
     {
+        public static List<string> cleanup = new List<string>();
         public static void HandleError(IntPtr handler, string rootMSG, Exception ex, int opCode)
         {
             TaskDialog dialog = new TaskDialog();
@@ -166,12 +167,24 @@ namespace Gifbrary
             {
                 try
                 {
-                   // System.IO.Directory.Delete(VideoDownloader.AppTemp);
+                    System.IO.Directory.Delete(VideoDownloader.AppTemp);
                 }
                 catch (Exception)
                 {
                 }
             }
+
+            for (int c = 0; c < cleanup.Count; c++)
+            {
+                try
+                {
+                    File.Delete(cleanup[c]);
+                }
+                catch (Exception)
+                {
+                }
+            }
+
             SharpApng.Apng.Shutdown();
 
             try

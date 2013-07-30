@@ -217,12 +217,20 @@ namespace GifStudio
         {
             Studio.SetStatus(this,
                 "Finished converting " + Path.GetFileName(ExportData.SourceFilePath) + ".");
-            Close();
+            try
+            {
+                Invoke((Action)delegate()
+                {
+                    Close();
+                });
+            }
+            catch (Exception)
+            { }
         }
 
         private void UpdateProgressSafe()
         {
-            this.progressBar1.Value = (int)(CountProgress * 404);
+            this.progressBar1.Value = (int)(CountProgress * progressBar1.Maximum);
         }
 
         private delegate void UpdateProgressDelegate();

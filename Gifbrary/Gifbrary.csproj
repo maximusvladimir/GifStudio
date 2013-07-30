@@ -58,6 +58,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>Libraries\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
+    <Reference Include="SharpCompress.3.5">
+      <HintPath>Libraries\SharpCompress.3.5.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -85,6 +88,7 @@
     <Compile Include="Common\AnimatedGifEncoder.cs" />
     <Compile Include="Common\APngConversion.cs" />
     <Compile Include="Common\ExportForm.cs" />
+    <Compile Include="Common\FFmpeg.cs" />
     <Compile Include="Common\Formats.cs" />
     <Compile Include="Common\FrameDumpConversion.cs" />
     <Compile Include="Common\GifDecoder.cs" />
@@ -132,17 +136,33 @@
     <Compile Include="HtmlAgilityPack\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Conversion.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Read.cs" />
     <Compile Include="Utilities\VideoDownloader.cs" />
     <Compile Include="Utilities\VideoScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
+    <None Include="Resources\ffmpeg.7z" />
+    <None Include="Resources\mpeg.zip" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="apng.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\ffmpeg-master.tar.gz" />
+    <None Include="Resources\FFmpeg-master.zip" />
+    <None Include="Resources\ffmpeg.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

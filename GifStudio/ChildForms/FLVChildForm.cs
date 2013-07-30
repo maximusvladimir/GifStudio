@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using Gifbrary.Utilities;
 using Gifbrary;
+using Gifbrary.Common;
 
 namespace GifStudio.ChildForms
 {
@@ -190,11 +191,16 @@ namespace GifStudio.ChildForms
 
         private void _downloader_DownloadComplete(object sender, EventArgs e)
         {
-            VideoChildForm vidForm = new VideoChildForm();
+            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".wmv");
+            App.cleanup.Add(temp);
+            App.cleanup.Add(_downloader.VideoPath);
+            FFmpeg mpeg = new FFmpeg(_downloader.VideoPath,temp);
+            mpeg.ConvertAsync();
+            /*VideoChildForm vidForm = new VideoChildForm();
             vidForm.MdiParent = MdiParent;
-            vidForm.Text = System.IO.Path.GetFileName(_downloader.VideoPath);
+            vidForm.Text = System.IO.Path.GetFileName(temp);
             vidForm.Show();
-            vidForm.SetVideo(_downloader.VideoPath);
+            vidForm.SetVideo(_downloader.VideoPath);*/
         }
 
         private void checkBoxUseProxy_CheckedChanged(object sender, EventArgs e)

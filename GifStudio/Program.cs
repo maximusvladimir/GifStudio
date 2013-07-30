@@ -24,6 +24,7 @@ namespace GifStudio
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            Gifbrary.Common.FFmpeg.Init();
             Application.Run(new Studio());
 
             SharpApng.Apng.Shutdown();

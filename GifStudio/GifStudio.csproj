@@ -223,6 +223,13 @@
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
     <Content Include="1375233411_49848.ico" />
+    <None Include="Resources\counter.gif" />
+    <None Include="Resources\arrow-transition-270.png" />
+    <None Include="Resources\download-cloud.png" />
+    <None Include="Resources\photo-album--minus.png" />
+    <None Include="Resources\photo-album--plus.png" />
+    <None Include="Resources\photo_delete %282%29.png" />
+    <None Include="Resources\photo_add.png" />
     <None Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
