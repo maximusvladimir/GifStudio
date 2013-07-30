@@ -83,8 +83,11 @@ namespace GifStudio.ChildForms
             }
 
             if (_url.StartsWith("ftp:") || _url.StartsWith("udp:") || createFail || _url.StartsWith("file:"))
+            {
                 App.HandleHelp(this.Handle, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_INVALIDURL,
                     null, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_INVALIDURL_TOPIC);
+                return;
+            }
 
             string nu = null;
             string title = null;
@@ -92,12 +95,16 @@ namespace GifStudio.ChildForms
                 !_url.EndsWith(".avi"))
             {
                 scanner = new VideoScanner(_url);
+                if (scanner.NoVideo)
                 {
-                    while (!scanner.Ready)
-                    { }
-                    nu = scanner.VideoURL;
-                    title = scanner.Title;
+                    App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_NOVIDEO,
+                        global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_NOVIDEO_DETAILS,
+                        global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_NOVIDEO_TOPIC);
+                    return;
                 }
+                nu = scanner.VideoURL;
+                title = scanner.Title;
+
             }
             else
             {

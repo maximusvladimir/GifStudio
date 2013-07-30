@@ -26,6 +26,33 @@ namespace Gifbrary
             dialog.Text = rootMSG;
             if (handler != IntPtr.Zero)
                 dialog.OwnerWindowHandle = handler;
+            TaskDialogButton copy = new TaskDialogButton("Copy", "Copy the contents of this message to the clipboard.");
+            copy.Click += delegate(object sender, EventArgs args)
+            {
+                try
+                {
+                    System.Windows.Forms.Clipboard.SetText(dialog.Caption + ": " + rootMSG + "\n\n" + dialog.DetailsExpandedText);
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        System.Windows.Forms.Clipboard.SetText(dialog.Caption + ": " + rootMSG + "\n\n" + dialog.DetailsExpandedText);
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        {
+                            System.Windows.Forms.Clipboard.SetText(dialog.Caption + ": " + rootMSG + "\n\n" + dialog.DetailsExpandedText);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
+                }
+            };
+            dialog.Controls.Add(copy);
             dialog.Icon = TaskDialogStandardIcon.Error;
             dialog.StandardButtons = TaskDialogStandardButtons.Ok;
             dialog.StartupLocation = TaskDialogStartupLocation.CenterScreen;
@@ -64,15 +91,40 @@ namespace Gifbrary
             TaskDialog dialog = new TaskDialog();
             dialog.Caption = "Help";
             if (moreDetails != null)
-                dialog.DetailsExpanded = true;
+                dialog.DetailsExpanded = false;
             dialog.InstructionText = helpTopic;
             if (moreDetails != null)
-                dialog.DetailsExpandedText = "\n\n"+moreDetails;
+                dialog.DetailsExpandedText = "\n\n" + moreDetails;
             dialog.HyperlinksEnabled = true;
             dialog.Text = rootMSG;
             if (handler != IntPtr.Zero)
                 dialog.OwnerWindowHandle = handler;
-            dialog.Icon = TaskDialogStandardIcon.Information;
+            TaskDialogButton copy = new TaskDialogButton("Copy", "Copy the contents of this message to the clipboard.");
+            copy.Click += delegate(object sender, EventArgs args)
+            {
+                try
+                {
+                    System.Windows.Forms.Clipboard.SetText(helpTopic+":\n"+rootMSG + "\n\n" + moreDetails);
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        System.Windows.Forms.Clipboard.SetText(helpTopic + ":\n" + rootMSG + "\n\n" + moreDetails);
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        {
+                            System.Windows.Forms.Clipboard.SetText(helpTopic + ":\n" + rootMSG + "\n\n" + moreDetails);
+                        }
+                        catch (Exception)
+                        { }
+                    }
+                }
+            };
+            dialog.Controls.Add(copy);
+            dialog.Icon = TaskDialogStandardIcon.Shield;
             dialog.StandardButtons = TaskDialogStandardButtons.Ok;
             dialog.StartupLocation = TaskDialogStartupLocation.CenterScreen;
             dialog.Show();

@@ -260,39 +260,49 @@ namespace Gifbrary.Utilities
 
 
                 HtmlNodeCollection coll = doc.DocumentNode.SelectNodes("video");
-                //if (coll != null)
-                for (int c = 0; c < coll.Count; c++)
-                {
-                    string source = coll[c].GetAttributeValue("src", null);
-                    if (source == null)
+                string source = "";
+                if (coll != null)
+                    for (int c = 0; c < coll.Count; c++)
                     {
-                        HtmlNodeCollection scoll = coll[c].SelectNodes("source");
-                        for (int d = 0; d < scoll.Count; d++)
+                        source = coll[c].GetAttributeValue("src", null);
+                        if (string.IsNullOrEmpty(source))
                         {
-                            string s34 = scoll[c].GetAttributeValue("src", null);
-                            if (s34 != null)
-                            {
-                                source = s34;
-                                break;
-                            }
+                            HtmlNodeCollection scoll = coll[c].SelectNodes("source");
+                            if (scoll != null)
+                                for (int d = 0; d < scoll.Count; d++)
+                                {
+                                    string s34 = scoll[c].GetAttributeValue("src", null);
+                                    if (!string.IsNullOrEmpty(s34))
+                                    {
+                                        source = s34;
+                                        break;
+                                    }
+                                }
                         }
                     }
-
-                    try
-                    {
-                        Uri yuri = new Uri(source);
-                    }
-                    catch (Exception)
-                    {
-                        Uri fg;
-                        Uri.TryCreate(new Uri(URL), source, out fg);
-                        source = fg.ToString();
-                    }
-                    VideoURL = source;
+                if (string.IsNullOrEmpty(source))
+                    NoVideo = true;
+                try
+                {
+                    Uri yuri = new Uri(source);
                 }
+                catch (Exception)
+                {
+                    Uri fg;
+                    Uri.TryCreate(new Uri(URL), source, out fg);
+                    source = fg.ToString();
+                }
+                System.Diagnostics.Debug.WriteLine(source);
+                VideoURL = source;
                 
                 Ready = true;
             }
+        }
+
+        public bool NoVideo
+        {
+            get;
+            set;
         }
 
         private Dictionary<int, CookieContainer> m_cookieContainer = new Dictionary<int, CookieContainer>();
@@ -467,7 +477,6 @@ namespace Gifbrary.Utilities
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
