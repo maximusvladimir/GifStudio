@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>1373919121_115777.ico</ApplicationIcon>
+    <ApplicationIcon>1375233411_49848.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -222,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
+    <Content Include="1375233411_49848.ico" />
     <None Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
