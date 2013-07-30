@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
 using Gifbrary.Utilities;
+using System.Net;
+using System.IO;
 
 namespace Gifbrary
 {
@@ -87,7 +89,7 @@ namespace Gifbrary
             {
                 try
                 {
-                    System.IO.Directory.Delete(VideoDownloader.AppTemp);
+                   // System.IO.Directory.Delete(VideoDownloader.AppTemp);
                 }
                 catch (Exception)
                 {
@@ -104,5 +106,40 @@ namespace Gifbrary
             }
             //VideoCodecLib.Converter.Shutdown();
         }
+        public static string AppDataPath
+        {
+            get
+            {
+                if (dir == null)
+                {
+                    dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"GifStudio\\");
+                    if (!Directory.Exists(dir))
+                        try
+                        {
+                            Directory.CreateDirectory(dir);
+                        }
+                        catch (Exception)
+                        { }
+                }
+                return dir;
+            }
+        }
+        private static string dir = null;
+        private static WebClient _webclie;
+        public static WebClient DefaultWebClient
+        {
+            get
+            {
+                if (_webclie == null)
+                {
+                    _webclie = new WebClient();
+                    _webclie.Headers.Add("user-agent", UserAgent);
+                }
+
+                return _webclie;
+            }
+        }
+
+        public static string UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0";
     }
 }

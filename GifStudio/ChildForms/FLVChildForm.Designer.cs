@@ -177,6 +177,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Cancel";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // progressBar1
             // 
@@ -274,6 +275,9 @@
             this.Controls.Add(this.boxURL);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(571, 271);
+            this.MinimumSize = new System.Drawing.Size(571, 271);
             this.Name = "FLVChildForm";
             this.Text = "FLVChildForm";
             this.groupBox1.ResumeLayout(false);

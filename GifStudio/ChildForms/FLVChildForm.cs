@@ -63,6 +63,8 @@ namespace GifStudio.ChildForms
                 boxURL.Text = nativeString;
         }
 
+        VideoScanner scanner;
+
         private void button3_Click(object sender, EventArgs e)
         {
             string _url = boxURL.Text;
@@ -89,7 +91,7 @@ namespace GifStudio.ChildForms
             if (!_url.EndsWith(".mp4") && !_url.EndsWith(".wmv") && !_url.EndsWith(".flv") &&
                 !_url.EndsWith(".avi"))
             {
-                using (VideoScanner scanner = new VideoScanner(_url))
+                scanner = new VideoScanner(_url);
                 {
                     while (!scanner.Ready)
                     { }
@@ -113,6 +115,7 @@ namespace GifStudio.ChildForms
             _url = null;
 
             _downloader = new VideoDownloader(nu, title);
+            _downloader.Scanner = scanner;
             _downloader.DownloadComplete += new EventHandler(_downloader_DownloadComplete);
             _downloader.ProgressChanged += new EventHandler(_downloader_ProgressChanged);
             _downloader.Download();
@@ -173,22 +176,32 @@ namespace GifStudio.ChildForms
             if (!_url.EndsWith(".mp4") && !_url.EndsWith(".wmv") && !_url.EndsWith(".flv") &&
                 !_url.EndsWith(".avi"))
             {
+                button3.Enabled = false;
                 System.Threading.Thread worker = new System.Threading.Thread(
                     new System.Threading.ThreadStart(delegate() 
                         {
                             string[] st = VideoScanner.GetQualityStrings(_url);
                             comboBox1.Invoke((Action)delegate()
                             {
-                                comboBox1.Items.Clear();
-                                comboBox1.Items.AddRange(st);
-                                comboBox1.SelectedIndex = 0;
-                                comboBox1.Enabled = true;
+                                if (st != null && st.Length > 0)
+                                {
+                                    comboBox1.Items.Clear();
+                                    comboBox1.Items.AddRange(st);
+                                    comboBox1.SelectedIndex = 0;
+                                    comboBox1.Enabled = true;
+                                }
+                                button3.Enabled = true;
                             });
                         }));
                 worker.Priority = System.Threading.ThreadPriority.Highest;
                 worker.Start();
                 worker.Priority = System.Threading.ThreadPriority.Highest;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

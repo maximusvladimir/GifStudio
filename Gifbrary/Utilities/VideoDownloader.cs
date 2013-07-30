@@ -28,7 +28,7 @@ namespace Gifbrary.Utilities
 
             if (AppTemp == null)
             {
-                AppTemp = Path.Combine(Path.GetTempPath(), "\\GifStudio\\Downloads\\");
+                AppTemp = Path.Combine(App.AppDataPath, "Downloads\\");
                 if (!Directory.Exists(AppTemp))
                 {
                     try
@@ -39,6 +39,13 @@ namespace Gifbrary.Utilities
                     { }
                 }
             }
+            System.Diagnostics.Debug.WriteLine(AppTemp);
+        }
+
+        public VideoScanner Scanner
+        {
+            get;
+            set;
         }
 
         public string Title
@@ -75,6 +82,9 @@ namespace Gifbrary.Utilities
         {
             VideoPath = Path.Combine(AppTemp, Title + Extension);
             WebClient clientStreamDownloadInstance = new WebClient();
+            clientStreamDownloadInstance.Headers.Add("user-agent",App.UserAgent);
+            if (Scanner.SpecialReferrer != null)
+                clientStreamDownloadInstance.Headers.Add("Referer",Scanner.SpecialReferrer);
             clientStreamDownloadInstance.DownloadProgressChanged += new DownloadProgressChangedEventHandler(clientStreamDownloadInstance_DownloadProgressChanged);
             clientStreamDownloadInstance.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(clientStreamDownloadInstance_DownloadFileCompleted);
             clientStreamDownloadInstance.DownloadFileAsync(new Uri(URL), VideoPath);
