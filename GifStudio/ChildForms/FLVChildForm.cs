@@ -96,20 +96,20 @@ namespace GifStudio.ChildForms
             if (!_url.EndsWith(".mp4") && !_url.EndsWith(".wmv") && !_url.EndsWith(".flv") &&
                 !_url.EndsWith(".avi"))
             {
-                try
-                {
+               // try
+              //  {
                     scanner = new VideoScanner(_url);
-               }
-                catch (Exception ex)
-                {
-                    if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
-                    {
-                        App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
-                        return;
-                    }
-                    else
-                        throw;
-                }
+              // }
+                //catch (Exception ex)
+                //{
+                //    if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
+                //    {
+                //        App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
+                //        return;
+                 //   }
+                //    else
+                //        throw;
+                //}
                 if (scanner.NoVideo)
                 {
                     App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_FLV_DWL_ALERT_NOVIDEO,
@@ -192,15 +192,33 @@ namespace GifStudio.ChildForms
         private void _downloader_DownloadComplete(object sender, EventArgs e)
         {
             string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".wmv");
-            App.cleanup.Add(temp);
-            App.cleanup.Add(_downloader.VideoPath);
+            App.CleanupQueue.Add(temp);
+            App.CleanupQueue.Add(_downloader.VideoPath);
             FFmpeg mpeg = new FFmpeg(_downloader.VideoPath,temp);
+            mpeg.ProgressChanged += mpeg_ProgressChanged;
             mpeg.ConvertAsync();
             /*VideoChildForm vidForm = new VideoChildForm();
             vidForm.MdiParent = MdiParent;
             vidForm.Text = System.IO.Path.GetFileName(temp);
             vidForm.Show();
             vidForm.SetVideo(_downloader.VideoPath);*/
+        }
+
+        private void mpeg_ProgressChanged(object sender, EventArgs e)
+        {
+            FFmpeg send = (FFmpeg)sender;
+            try
+            {
+                Invoke((Action)delegate()
+                {
+                    float vf = ((send.Progress * (progressBar1.Maximum / 2.0f)) + (progressBar1.Maximum / 2.0f));
+                    progressBar1.Value = (int)vf;
+                    Studio.SetStatus(this, "Processing video " + vf + " %");
+                });
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void checkBoxUseProxy_CheckedChanged(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using SharpCompress.Archive;
+﻿using Gifbrary.Utilities;
+using SharpCompress.Archive;
 using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace Gifbrary.Common
         }
 
         public event EventHandler ProgressChanged;
+        public event EventHandler Completed;
         public FFmpeg(string input, string output)
         {
             Input = input;
@@ -69,21 +71,95 @@ namespace Gifbrary.Common
         public void Convert()
         {
             string fileargs = "-i" + " \"" + Input + "\"  \"" + Output + "\"";
-            System.Diagnostics.Debug.WriteLine(fileargs);
             System.Diagnostics.Process p = new System.Diagnostics.Process();
+            App.CleanupQueue.Add(p);
             p.StartInfo.FileName = FFmpegPath;
             p.StartInfo.Arguments = fileargs;
             p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.ErrorDataReceived += delegate(object sender, System.Diagnostics.DataReceivedEventArgs e)
+            {
+                Parse(e.Data);
+            };
+            p.OutputDataReceived += delegate(object sender, System.Diagnostics.DataReceivedEventArgs e)
+            {
+                Parse(e.Data);
+            };
+            p.EnableRaisingEvents = true;
+            p.Start();
+            p.BeginOutputReadLine();
+            p.BeginErrorReadLine();
+            p.WaitForExit();
+            if (Completed != null)
+                Completed(this, EventArgs.Empty);
+            /*p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.RedirectStandardOutput = true;
-            p.OutputDataReceived += p_OutputDataReceived;
             p.Start();
-            p.WaitForExit();
+            string data = "";
+            while ((data = p.StandardOutput.ReadLine()) != null)
+            {
+                System.Diagnostics.Debug.WriteLine(data);
+            }
+            p.WaitForExit();*/
         }
 
-        private void p_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
+        private void Parse(string output)
         {
-            System.Diagnostics.Debug.WriteLine(e.Data);
+            if (output != null)
+            {
+                if (output.IndexOf("Duration: ") > -1)
+                {
+                    string btw = null;
+                    try
+                    {
+                        btw = VideoScanner.GetTxtBtwn(output, "Duration: ", ",", 0);
+                    }
+                    catch (Exception)
+                    { }
+                    if (btw != null)
+                    {
+                        TotalTicks = TimeSpan.Parse(btw).Ticks;
+                    }
+                }
+                else if (output.IndexOf("frame=") > -1)
+                {
+                    string btw = null;
+                    try
+                    {
+                        btw = VideoScanner.GetTxtBtwn(output, "time=", " ", 0);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    if (btw != null)
+                    {
+                        long tic = TimeSpan.Parse(btw).Ticks;
+                        if (TotalTicks != 0)
+                        {
+                            float p = ((float)tic) / ((float)TotalTicks);
+                            if (p > 1)
+                                p = 1;
+                            if (p < 0)
+                                p = 0;
+                            Progress = p;
+                            if (ProgressChanged != null)
+                            {
+                                ProgressChanged(this, EventArgs.Empty);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public long TotalTicks
+        {
+            get;
+            set;
         }
 
         public string Input

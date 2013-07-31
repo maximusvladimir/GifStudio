@@ -27,7 +27,7 @@ namespace GifStudio
             Gifbrary.Common.FFmpeg.Init();
             Application.Run(new Studio());
 
-            SharpApng.Apng.Shutdown();
+            Shutdown();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

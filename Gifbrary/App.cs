@@ -12,7 +12,7 @@ namespace Gifbrary
 {
     public class App
     {
-        public static List<string> cleanup = new List<string>();
+        public static List<object> CleanupQueue = new List<object>();
         public static void HandleError(IntPtr handler, string rootMSG, Exception ex, int opCode)
         {
             TaskDialog dialog = new TaskDialog();
@@ -163,6 +163,53 @@ namespace Gifbrary
 
         public static void Shutdown()
         {
+            List<object> post = new List<object>();
+            for (int c = 0; c < CleanupQueue.Count; c++)
+            {
+                if (CleanupQueue[c] is Process)
+                {
+                    try
+                    {
+                        ((Process)CleanupQueue[c]).Kill();
+                    }
+                    catch (Exception)
+                    { }
+                }
+                /*else if (CleanupQueue[c] is ConsoleApp)
+                {
+                    try
+                    {
+                        ((ConsoleApp)CleanupQueue[c]).Stop();
+                    }
+                    catch (Exception)
+                    { }
+                }*/
+                else
+                    post.Add(CleanupQueue[c]);
+            }
+
+            for (int c = 0; c < post.Count; c++)
+            {
+                if (post[c] is string)
+                {
+                    try
+                    {
+                        File.Delete((string)post[c]);
+                    }
+                    catch (Exception)
+                    { }
+                }
+                else if (post[c] is IDisposable)
+                {
+                    try
+                    {
+                        ((IDisposable)post[c]).Dispose();
+                    }
+                    catch (Exception)
+                    { }
+                }
+            }
+
             if (VideoDownloader.AppTemp != null)
             {
                 try
@@ -174,22 +221,11 @@ namespace Gifbrary
                 }
             }
 
-            for (int c = 0; c < cleanup.Count; c++)
-            {
-                try
-                {
-                    File.Delete(cleanup[c]);
-                }
-                catch (Exception)
-                {
-                }
-            }
-
             SharpApng.Apng.Shutdown();
 
             try
             {
-                System.Diagnostics.Process.GetCurrentProcess().Close();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
             catch (Exception)
             {

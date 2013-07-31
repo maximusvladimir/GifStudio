@@ -150,6 +150,8 @@ namespace Gifbrary.Utilities
                         qua = qual.TagQuality;
                     }
                 }
+                if (qq == null)
+                    qq = yvq[0];
                 SpecialReferrer = "http://www.ytimg.com";
                 VideoURL = qq.DownloadUrl;
                 Ready = true;
