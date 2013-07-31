@@ -14,7 +14,7 @@ using SharpApng;
 
 namespace Gifbrary.Common
 {
-    public class GifConversion : VideoFramePullerConversion
+    public class GifConversion : VideoFramePullerConversion2
     {
         public GifConversion(Exportable ext, int loop)
             :base(ext)

@@ -14,7 +14,7 @@ using SharpApng;
 
 namespace Gifbrary.Common
 {
-    public class APngConversion : VideoFramePullerConversion
+    public class APngConversion : VideoFramePullerConversion2
     {
         public APngConversion(Exportable ext, int loop)
             : base(ext)

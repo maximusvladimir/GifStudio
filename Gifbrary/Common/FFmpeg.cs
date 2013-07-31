@@ -52,6 +52,7 @@ namespace Gifbrary.Common
         {
             Input = input;
             Output = output;
+            Parameters = "";
         }
 
         public void ConvertAsync()
@@ -62,6 +63,12 @@ namespace Gifbrary.Common
             thread.Priority = ThreadPriority.Highest;
         }
 
+        public string Parameters
+        {
+            get;
+            set;
+        }
+
         public float Progress
         {
             get;
@@ -70,7 +77,7 @@ namespace Gifbrary.Common
 
         public void Convert()
         {
-            string fileargs = "-i" + " \"" + Input + "\"  \"" + Output + "\"";
+            string fileargs = "-i" + " \"" + Input + "\" " + Parameters + "  \"" + Output + "\"";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             App.CleanupQueue.Add(p);
             p.StartInfo.FileName = FFmpegPath;

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Gifbrary.Common
 {
-    public class FrameDumpConversion : VideoFramePullerConversion
+    public class FrameDumpConversion : VideoFramePullerConversion2
     {
         public FrameDumpConversion(Exportable ext, ImageFormat format) : base(ext)
         {

@@ -13,10 +13,10 @@ using System.Text;
 
 namespace Gifbrary.Common
 {
-    public class VideoFramePullerConversion : Conversion
+    public class VideoFramePullerConversion2 : Conversion
     {
 
-        public VideoFramePullerConversion(Exportable ext)
+        public VideoFramePullerConversion2(Exportable ext)
             : base(ext)
         {
         }
