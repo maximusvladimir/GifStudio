@@ -191,7 +191,7 @@ namespace GifStudio.ChildForms
 
         private void _downloader_DownloadComplete(object sender, EventArgs e)
         {
-            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".mpg");
+            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".avi");
             App.CleanupQueue.Add(temp);
             App.CleanupQueue.Add(_downloader.VideoPath);
             if (System.IO.Path.GetExtension(_downloader.VideoPath).ToLower() == ".wmv")

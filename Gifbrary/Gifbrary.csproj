@@ -55,9 +55,8 @@
     <Reference Include="DirectShowLib-2005">
       <HintPath>Libraries\DirectShowLib-2005.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.qedit">
-      <HintPath>Libraries\Interop.qedit.DLL</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="MediaFoundation">
+      <HintPath>Libraries\MediaFoundation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>Libraries\Microsoft.WindowsAPICodePack.dll</HintPath>
