@@ -55,6 +55,10 @@
     <Reference Include="DirectShowLib-2005">
       <HintPath>Libraries\DirectShowLib-2005.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.qedit">
+      <HintPath>Libraries\Interop.qedit.DLL</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>Libraries\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -95,6 +99,7 @@
     <Compile Include="Common\LZWEncoder.cs" />
     <Compile Include="Common\NeuQuant.cs" />
     <Compile Include="Common\VideoFramePullerConversion.cs" />
+    <Compile Include="Common\VideoFramePullerConversion2.cs" />
     <Compile Include="Converter\WMVtoFrames.cs" />
     <Compile Include="Converter\WMVtoGIF.cs" />
     <Compile Include="Common\GifConversion.cs" />
