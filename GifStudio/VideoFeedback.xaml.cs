@@ -24,7 +24,7 @@ namespace GifStudio
             InitializeComponent();
         }
 
-        public WPFMediaKit.DirectShow.Controls.MediaUriElement Player
+        public MediaElement Player
         {
             get
             {

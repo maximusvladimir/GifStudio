@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="-143,-34,0,0" Background="#FF000000">
-        <Controls:MediaUriElement Name="player" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <MediaElement HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="player" LoadedBehavior="Manual" UnloadedBehavior="Manual"/>
+        <!--<Controls:MediaUriElement Name="player" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+        
     </Grid>
 </UserControl>

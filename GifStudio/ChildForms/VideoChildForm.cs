@@ -16,7 +16,8 @@ namespace GifStudio
             InitializeComponent();
             DoChildResize();
             Resize += VideoChildForm_Resize;
-            VideoControl.Player.Loop = true;
+            VideoControl.Player.MediaOpened += Player_MediaOpened;
+            //VideoControl.Player.Loop = true;
             scrubAnayliser = new Timer();
             scrubAnayliser.Enabled = true;
             scrubAnayliser.Interval = 150;
@@ -24,6 +25,14 @@ namespace GifStudio
             scrubAnayliser.Start();
 
             trackBar1.MouseMove += trackBar1_MouseMove;
+        }
+
+        void Player_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
+        {
+            mediaOpened = true;
+            VideoControl.Player.Play();
+            VideoControl.Player.Play();
+            playing = true;
         }
 
         public string FilePath
@@ -37,11 +46,13 @@ namespace GifStudio
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 trackBar1_Scroll(null, null);
         }
-
+        bool mediaOpened = false;
         private void scrubAnayliser_Tick(object sender, EventArgs e)
         {
-            long pos = VideoControl.Player.MediaPosition;
-            long dur = VideoControl.Player.MediaDuration;
+            if (!mediaOpened)
+                return;
+            long dur = VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
+            long pos = VideoControl.Player.Position.Ticks;
             TimeSpan span = new TimeSpan(pos);
             timeElapsed.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") + 
                 ":" + span.Seconds.ToString("D2");
@@ -52,7 +63,7 @@ namespace GifStudio
 
             if (dur != 0 && pos != 0)
             {
-                trackBar1.Value = (int)(pos * 500 / dur);
+                trackBar1.Value = (int)(pos * trackBar1.Maximum / dur);
             }
         }
 
@@ -82,7 +93,6 @@ namespace GifStudio
         {
             FilePath = filePath;
             VideoControl.Player.Source = new Uri(filePath);
-            VideoControl.Player.Play();
         }
 
         public VideoFeedback VideoControl
@@ -95,32 +105,36 @@ namespace GifStudio
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            long dur = VideoControl.Player.MediaDuration;
-            VideoControl.Player.MediaPosition = ((trackBar1.Value * dur) / 500);
+            long dur = VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
+            VideoControl.Player.Pause();
+            VideoControl.Player.Position = new TimeSpan(((trackBar1.Value * dur) / trackBar1.Maximum));
             VideoControl.Player.Play();
             button1.Text = "Play";
+            playing = true;
         }
 
         private void checkLoop_CheckedChanged(object sender, EventArgs e)
         {
-            VideoControl.Player.Loop = checkLoop.Checked;
+            /*VideoControl.Player. = checkLoop.Checked;
             if (checkLoop.Checked && !VideoControl.Player.IsPlaying)
             {
                 VideoControl.Player.Play();
-            }
+            }*/
         }
-
+        bool playing = true;
         private void button1_Click(object sender, EventArgs e)
         {
-            if (VideoControl.Player.IsPlaying)
+            if (playing)
             {
                 button1.Text = "Play";
                 VideoControl.Player.Pause();
+                playing = false;
             }
             else
             {
                 button1.Text = "Pause";
                 VideoControl.Player.Play();
+                playing = true;
             }
         }
     }

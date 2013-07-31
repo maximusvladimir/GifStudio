@@ -191,17 +191,76 @@ namespace GifStudio.ChildForms
 
         private void _downloader_DownloadComplete(object sender, EventArgs e)
         {
-            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".wmv");
+            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".mpg");
             App.CleanupQueue.Add(temp);
             App.CleanupQueue.Add(_downloader.VideoPath);
-            FFmpeg mpeg = new FFmpeg(_downloader.VideoPath,temp);
-            mpeg.ProgressChanged += mpeg_ProgressChanged;
-            mpeg.ConvertAsync();
+            if (System.IO.Path.GetExtension(_downloader.VideoPath).ToLower() == ".wmv")
+            {
+                try
+                {
+                    System.IO.File.Copy(_downloader.VideoPath, temp, true);
+                }
+                catch (Exception)
+                {
+                }
+                VideoChildForm vidForm = new VideoChildForm();
+                vidForm.MdiParent = MdiParent;
+                vidForm.Text = System.IO.Path.GetFileName(temp);
+                vidForm.Show();
+                vidForm.SetVideo(temp);
+                try
+                {
+                    Invoke((Action)delegate()
+                    {
+                        Close();
+                    });
+                }
+                catch (Exception)
+                { }
+            }
+            else
+            {
+                FFmpeg mpeg = new FFmpeg(_downloader.VideoPath, temp);
+                mpeg.ProgressChanged += mpeg_ProgressChanged;
+                mpeg.Completed += mpeg_Completed;
+                mpeg.Parameters = "-vcodec libx264 -preset low -threads 0";
+                mpeg.ConvertAsync();
+            }
             /*VideoChildForm vidForm = new VideoChildForm();
             vidForm.MdiParent = MdiParent;
             vidForm.Text = System.IO.Path.GetFileName(temp);
             vidForm.Show();
             vidForm.SetVideo(_downloader.VideoPath);*/
+        }
+
+        private void mpeg_Completed(object sender, EventArgs e)
+        {
+            string swap = ((FFmpeg)sender).Output;
+            Invoke((Action)delegate()
+            {
+                VideoChildForm vidForm = new VideoChildForm();
+                try
+                {
+                    System.IO.File.Delete(((FFmpeg)sender).Input);
+                }
+                catch (Exception)
+                {
+                }
+                vidForm.MdiParent = MdiParent;
+                vidForm.Text = System.IO.Path.GetFileName(swap);
+                vidForm.Show();
+                vidForm.SetVideo(swap);
+            });
+
+            try
+            {
+                Invoke((Action)delegate()
+                {
+                    Close();
+                });
+            }
+            catch (Exception)
+            { }
         }
 
         private void mpeg_ProgressChanged(object sender, EventArgs e)
