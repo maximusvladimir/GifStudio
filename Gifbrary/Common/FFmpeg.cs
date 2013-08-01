@@ -117,6 +117,7 @@ namespace Gifbrary.Common
         {
             if (output != null)
             {
+                System.Diagnostics.Debug.WriteLine(output);
                 if (output.IndexOf("Duration: ") > -1)
                 {
                     string btw = null;

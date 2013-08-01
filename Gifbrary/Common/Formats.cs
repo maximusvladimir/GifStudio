@@ -9,7 +9,7 @@ namespace Gifbrary.Common
         GIF,
         AVI,
         WMV,
-        MP4,
+        MPG,
         None
     }
 }

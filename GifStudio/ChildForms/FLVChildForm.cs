@@ -191,7 +191,7 @@ namespace GifStudio.ChildForms
 
         private void _downloader_DownloadComplete(object sender, EventArgs e)
         {
-            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".avi");
+            string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".mpg");
             try
             {
                 if (System.IO.File.Exists(temp))
@@ -230,7 +230,7 @@ namespace GifStudio.ChildForms
                 FFmpeg mpeg = new FFmpeg(_downloader.VideoPath, temp);
                 mpeg.ProgressChanged += mpeg_ProgressChanged;
                 mpeg.Completed += mpeg_Completed;
-                mpeg.Parameters = "-vcodec msmpeg4v2 -threads 0";//-preset medium -vcodec libx264 
+                mpeg.Parameters = "-vcodec mpeg2video -pix_fmt yuv420p -me_method epzs -r 29.97 -g 15 -b 2500k -bt 300k -threads 0";//-preset medium -vcodec libx264 -vcodec msmpeg4v3
                 mpeg.ConvertAsync();
             }
             /*VideoChildForm vidForm = new VideoChildForm();

@@ -18,8 +18,8 @@ namespace Gifbrary.Reader
                 return Formats.WMV;
             else if (p == ".avi")
                 return Formats.AVI;
-            else if (p == ".mp4")
-                return Formats.MP4;
+            else if (p == ".mpg")
+                return Formats.MPG;
             else
                 return Formats.None;
         }
@@ -27,6 +27,10 @@ namespace Gifbrary.Reader
         public static Conversion CreateConversion(Exportable data, int loop)
         {
             if (GetFormat(data.DestinationFilePath) == Formats.GIF && GetFormat(data.SourceFilePath) == Formats.WMV)
+            {
+                return new WMVtoGIF(data, loop);
+            }
+            if (GetFormat(data.DestinationFilePath) == Formats.GIF && GetFormat(data.SourceFilePath) == Formats.MPG)
             {
                 return new WMVtoGIF(data, loop);
             }
