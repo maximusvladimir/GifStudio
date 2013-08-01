@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("GifStudio")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("GifStudio is a GIF building suite and partial video utility designed to help make your life easier.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Max K. Software Group")]
-[assembly: AssemblyProduct("GifStudio")]
+[assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Copyright © MKSG 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

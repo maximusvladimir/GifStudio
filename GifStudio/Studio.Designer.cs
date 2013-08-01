@@ -55,6 +55,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.gifCompressorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flashVideoDownloaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.screenRecorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,7 +182,7 @@
             this.toolBarToolStripMenuItem.CheckOnClick = true;
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.toolBarToolStripMenuItem.Text = "&Toolbar";
             this.toolBarToolStripMenuItem.Click += new System.EventHandler(this.ToolBarToolStripMenuItem_Click);
             // 
@@ -191,7 +192,7 @@
             this.statusBarToolStripMenuItem.CheckOnClick = true;
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.statusBarToolStripMenuItem.Text = "&Status Bar";
             this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.StatusBarToolStripMenuItem_Click);
             // 
@@ -264,7 +265,8 @@
             this.optionsToolStripMenuItem,
             this.toolStripSeparator1,
             this.gifCompressorToolStripMenuItem,
-            this.flashVideoDownloaderToolStripMenuItem});
+            this.flashVideoDownloaderToolStripMenuItem,
+            this.screenRecorderToolStripMenuItem});
             this.toolsMenu.Name = "toolsMenu";
             this.toolsMenu.Size = new System.Drawing.Size(48, 20);
             this.toolsMenu.Text = "&Tools";
@@ -294,6 +296,14 @@
             this.flashVideoDownloaderToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.flashVideoDownloaderToolStripMenuItem.Text = "Flash video downloader";
             this.flashVideoDownloaderToolStripMenuItem.Click += new System.EventHandler(this.flashVideoDownloaderToolStripMenuItem_Click);
+            // 
+            // screenRecorderToolStripMenuItem
+            // 
+            this.screenRecorderToolStripMenuItem.Image = global::GifStudio.Properties.Resources.camcorder;
+            this.screenRecorderToolStripMenuItem.Name = "screenRecorderToolStripMenuItem";
+            this.screenRecorderToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.screenRecorderToolStripMenuItem.Text = "Screen recorder";
+            this.screenRecorderToolStripMenuItem.Click += new System.EventHandler(this.screenRecorderToolStripMenuItem_Click);
             // 
             // windowsMenu
             // 
@@ -364,8 +374,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.aboutToolStripMenuItem.Text = "&About ... ...";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStrip
             // 
@@ -546,6 +557,7 @@
         private System.Windows.Forms.ToolStripMenuItem flashVideoDownloaderToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripMenuItem screenRecorderToolStripMenuItem;
     }
 }
 

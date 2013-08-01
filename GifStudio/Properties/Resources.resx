@@ -163,6 +163,9 @@
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO_DETAILS" xml:space="preserve">
     <value>The video downloader may not be able to detect all videos. Some videos are streamed to the player, and those cannot be downloaded with this simple downloader.\nOther videos are loaded via JavaScript, and those cannot be detected with this downloader.</value>
   </data>
+  <data name="logo_300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_300.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY" xml:space="preserve">
     <value>A higher quality setting will allow a greater number of colors to be placed in the image.</value>
   </data>
@@ -175,20 +178,26 @@
   <data name="disk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\disk.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application_tile_vertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_tile_vertical.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="png48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="films" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\films.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY_TOPIC" xml:space="preserve">
     <value>Output quality</value>
+  </data>
+  <data name="counter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\counter.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\report.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY_DETAILS" xml:space="preserve">
     <value>If you would like to make your image appear to be more photorealistic, increase the quality, if you need the image to render faster, chose a lower quality setting, if you understand that the image may dither more.</value>
@@ -199,17 +208,23 @@
   <data name="photo_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logo_120" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_120.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="STR_EXP_ERROR_NO_INTERNET" xml:space="preserve">
     <value>Unable to contact server. Your internet connection may be down.</value>
   </data>
   <data name="photo-album--plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo-album--plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="door_in" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\door_in.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\report.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="application_tile_vertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_tile_vertical.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO_TOPIC" xml:space="preserve">
     <value>No video</value>
@@ -220,8 +235,8 @@
   <data name="STR_EXP_ANI_GIF_HELP_FPS_TOPIC" xml:space="preserve">
     <value>Adjusting playback speed</value>
   </data>
-  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="camcorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camcorder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE" xml:space="preserve">
     <value>Resizing an image will stretch the size of an image to make it bigger or smaller from its original size.</value>
@@ -230,7 +245,7 @@
     <value>Resizing the output image</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="counter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\counter.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_96.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

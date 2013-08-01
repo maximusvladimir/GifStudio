@@ -103,6 +103,16 @@ namespace GifStudio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap camcorder {
+            get {
+                object obj = ResourceManager.GetObject("camcorder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancel {
             get {
                 object obj = ResourceManager.GetObject("cancel", resourceCulture);
@@ -173,6 +183,36 @@ namespace GifStudio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap logo_120 {
+            get {
+                object obj = ResourceManager.GetObject("logo_120", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_300 {
+            get {
+                object obj = ResourceManager.GetObject("logo_300", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_96 {
+            get {
+                object obj = ResourceManager.GetObject("logo_96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap page_white_put {
             get {
                 object obj = ResourceManager.GetObject("page_white_put", resourceCulture);
@@ -236,6 +276,16 @@ namespace GifStudio.Properties {
         internal static System.Drawing.Bitmap photos {
             get {
                 object obj = ResourceManager.GetObject("photos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png48 {
+            get {
+                object obj = ResourceManager.GetObject("png48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

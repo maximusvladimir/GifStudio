@@ -46,6 +46,36 @@ namespace Gifbrary.Common
             isInited = true;
         }
 
+        /*public static void UnloadSourceFolder(string file)
+        {
+            string dis = Path.Combine(Path.GetTempPath(), "fsakami" + (new Random().Next()) + ".tar.gz");
+            byte[] bytecode = global::Gifbrary.Properties.Resources.ffmpeg_master_tar;
+            File.WriteAllBytes(dis, bytecode);
+            bytecode = null;
+            System.Diagnostics.Debug.WriteLine(file);
+            var archive = ArchiveFactory.Open(dis);
+            foreach (var entry in archive.Entries)
+            {
+                if (!entry.IsDirectory)
+                {
+                    Console.WriteLine(entry.FilePath);
+                    entry.WriteToDirectory(file, ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+                }
+            }
+            try
+            {
+                File.Delete(dis);
+            }
+            catch (Exception)
+            {
+            }
+        }*/
+
+        public static void UnloadSource7z(string file)
+        {
+            File.WriteAllBytes(file, global::Gifbrary.Properties.Resources.ffmpeg_master_tar);
+        }
+
         public event EventHandler ProgressChanged;
         public event EventHandler Completed;
         public FFmpeg(string input, string output)

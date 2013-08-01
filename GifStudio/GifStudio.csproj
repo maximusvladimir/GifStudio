@@ -91,6 +91,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChildForms\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\AnimatedGifChildForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,12 @@
     </Compile>
     <Compile Include="ChildForms\FLVChildForm.Designer.cs">
       <DependentUpon>FLVChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildForms\ScreenRecorderChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\ScreenRecorderChildForm.Designer.cs">
+      <DependentUpon>ScreenRecorderChildForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Exports\AnimatedGifExport.cs">
       <SubType>Form</SubType>
@@ -138,11 +150,17 @@
     <Compile Include="VideoFeedback.xaml.cs">
       <DependentUpon>VideoFeedback.xaml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChildForms\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\AnimatedGifChildForm.resx">
       <DependentUpon>AnimatedGifChildForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\FLVChildForm.resx">
       <DependentUpon>FLVChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\ScreenRecorderChildForm.resx">
+      <DependentUpon>ScreenRecorderChildForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Exports\AnimatedGifExport.resx">
       <DependentUpon>AnimatedGifExport.cs</DependentUpon>
@@ -223,6 +241,11 @@
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
     <Content Include="1375233411_49848.ico" />
+    <None Include="Resources\logo_96.png" />
+    <None Include="Resources\png48.png" />
+    <None Include="Resources\logo_120.png" />
+    <None Include="Resources\logo_300.png" />
+    <None Include="Resources\camcorder.png" />
     <None Include="Resources\counter.gif" />
     <None Include="Resources\arrow-transition-270.png" />
     <None Include="Resources\download-cloud.png" />

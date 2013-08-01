@@ -227,5 +227,17 @@ namespace GifStudio
             vidForm.MdiParent = this;
             vidForm.Show();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog(this);
+        }
+
+        private void screenRecorderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScreenRecorderChildForm srcf = new ScreenRecorderChildForm();
+            srcf.Show(this);
+        }
     }
 }
