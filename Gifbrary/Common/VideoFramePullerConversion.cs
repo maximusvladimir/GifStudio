@@ -1,4 +1,5 @@
-﻿using DirectShowLib;
+﻿using AviFile;
+using DirectShowLib;
 using DirectShowLib.DES;
 using Gif.Components;
 using Gifbrary.Common;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -384,21 +386,38 @@ namespace Gifbrary.Common
 
             return m_bitmap;
         }
-
+        private int framw = -12;
+        AviManager manager;
         public override void SetupEncoder()
         {
-            LoadMedia(ExportData.SourceFilePath);
+            if (Path.GetExtension(ExportData.SourceFilePath).ToLower() == ".avi")
+            {
+                manager = new AviManager(ExportData.SourceFilePath, true);
+                framw = manager.GetVideoStream().CountFrames;
+            }
+            else
+                LoadMedia(ExportData.SourceFilePath);
         }
 
         public override int GetTotalFrames()
         {
+            if (framw != -12)
+                return framw;
             return (int)(((VideoStreamLength.Ticks / 10000) / 1000) * ExportData.FPS);
         }
 
         public override Image GetFrame(int i)
         {
-            long tick = (i * VideoStreamLength.Ticks) / GetTotalFrames();
-            Image img = GetImage(new TimeSpan(tick));
+            Image img;
+            if (manager != null)
+            {
+                img = manager.GetVideoStream().GetBitmap(i);
+            }
+            else
+            {
+                long tick = (i * VideoStreamLength.Ticks) / GetTotalFrames();
+                img = GetImage(new TimeSpan(tick));
+            }
             if (!ExportData.OriginalSize)
             {
                 return new Bitmap(img, ExportData.Width, ExportData.Height);

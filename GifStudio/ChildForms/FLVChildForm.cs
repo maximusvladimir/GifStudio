@@ -192,6 +192,13 @@ namespace GifStudio.ChildForms
         private void _downloader_DownloadComplete(object sender, EventArgs e)
         {
             string temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), System.IO.Path.GetFileNameWithoutExtension(_downloader.VideoPath)+".avi");
+            try
+            {
+                if (System.IO.File.Exists(temp))
+                    System.IO.File.Delete(temp);
+            }
+            catch (Exception)
+            { }
             App.CleanupQueue.Add(temp);
             App.CleanupQueue.Add(_downloader.VideoPath);
             if (System.IO.Path.GetExtension(_downloader.VideoPath).ToLower() == ".wmv")
@@ -223,7 +230,7 @@ namespace GifStudio.ChildForms
                 FFmpeg mpeg = new FFmpeg(_downloader.VideoPath, temp);
                 mpeg.ProgressChanged += mpeg_ProgressChanged;
                 mpeg.Completed += mpeg_Completed;
-                mpeg.Parameters = "-vcodec libx264 -preset low -threads 0";
+                mpeg.Parameters = "-vcodec msmpeg4v2 -threads 0";//-preset medium -vcodec libx264 
                 mpeg.ConvertAsync();
             }
             /*VideoChildForm vidForm = new VideoChildForm();

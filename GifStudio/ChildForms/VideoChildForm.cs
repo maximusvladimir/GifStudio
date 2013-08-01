@@ -31,7 +31,6 @@ namespace GifStudio
         {
             mediaOpened = true;
             VideoControl.Player.Play();
-            VideoControl.Player.Play();
             playing = true;
         }
 
@@ -93,6 +92,16 @@ namespace GifStudio
         {
             FilePath = filePath;
             VideoControl.Player.Source = new Uri(filePath);
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(
+                delegate()
+                {
+                    System.Threading.Thread.Sleep(1500);
+                    Invoke((Action)delegate()
+                    {
+                        VideoControl.Player.Play();
+                    });
+                }));
+            thread.Start();
         }
 
         public VideoFeedback VideoControl
@@ -105,12 +114,15 @@ namespace GifStudio
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            if (!VideoControl.Player.NaturalDuration.HasTimeSpan)
+                return;
             long dur = VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
             VideoControl.Player.Pause();
             VideoControl.Player.Position = new TimeSpan(((trackBar1.Value * dur) / trackBar1.Maximum));
             VideoControl.Player.Play();
             button1.Text = "Play";
             playing = true;
+
         }
 
         private void checkLoop_CheckedChanged(object sender, EventArgs e)

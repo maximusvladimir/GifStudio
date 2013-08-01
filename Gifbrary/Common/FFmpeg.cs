@@ -77,7 +77,7 @@ namespace Gifbrary.Common
 
         public void Convert()
         {
-            string fileargs = "-i" + " \"" + Input + "\" " + Parameters + "  \"" + Output + "\"";
+            string fileargs = "-i" + " \"" + Input + "\" " + Parameters + " \"" + Output + "\"";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             App.CleanupQueue.Add(p);
             p.StartInfo.FileName = FFmpegPath;

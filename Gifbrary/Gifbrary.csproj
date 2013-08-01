@@ -90,6 +90,13 @@
     <Compile Include="App.cs" />
     <Compile Include="Common\AnimatedGifEncoder.cs" />
     <Compile Include="Common\APngConversion.cs" />
+    <Compile Include="Common\AVIFile\AudioStream.cs" />
+    <Compile Include="Common\AVIFile\Avi.cs" />
+    <Compile Include="Common\AVIFile\AviManager.cs" />
+    <Compile Include="Common\AVIFile\AviPlayer.cs" />
+    <Compile Include="Common\AVIFile\AviStream.cs" />
+    <Compile Include="Common\AVIFile\EditableVideoStream.cs" />
+    <Compile Include="Common\AVIFile\VideoStream.cs" />
     <Compile Include="Common\ExportForm.cs" />
     <Compile Include="Common\FFmpeg.cs" />
     <Compile Include="Common\Formats.cs" />
@@ -98,7 +105,6 @@
     <Compile Include="Common\LZWEncoder.cs" />
     <Compile Include="Common\NeuQuant.cs" />
     <Compile Include="Common\VideoFramePullerConversion.cs" />
-    <Compile Include="Common\VideoFramePullerConversion2.cs" />
     <Compile Include="Converter\WMVtoFrames.cs" />
     <Compile Include="Converter\WMVtoGIF.cs" />
     <Compile Include="Common\GifConversion.cs" />
