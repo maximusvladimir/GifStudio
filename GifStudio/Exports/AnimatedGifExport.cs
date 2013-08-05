@@ -140,6 +140,8 @@ namespace GifStudio
             {
                 MessageBox.Show(this, "Must only contain integers (1-30).", "Error - Invalid input.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            ExportData.FPS = tfps;
         }
 
         private void checkBoxTrim_CheckedChanged(object sender, EventArgs e)

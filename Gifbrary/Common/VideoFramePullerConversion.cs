@@ -34,7 +34,10 @@ namespace Gifbrary.Common
             }
             System.Diagnostics.Debug.WriteLine(rtmp);
             ffmpeg = new FFmpeg(ext.SourceFilePath, Path.Combine(rtmp, "%5d.png"));
-            FPS = 30;
+            if (ext.FPS > 0)
+                FPS = ext.FPS;
+            else
+                FPS = 30;
         }
 
         int totals = 0;
