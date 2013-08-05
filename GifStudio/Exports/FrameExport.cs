@@ -244,6 +244,7 @@ namespace GifStudio
                 long s = (long)(inf.Length * CountProgress);
                 Studio.SetStatus(this,(100 * CountProgress) +
                     "% complete. Estimated final file size: " + (s / 1024 / 1024.0f) + " MB.");
+                Studio.SetProgress(this, (int)(100 * CountProgress));
             }
             catch (Exception)
             {

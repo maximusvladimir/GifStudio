@@ -30,14 +30,16 @@ namespace GifStudio
             }
         }
 
-        public static void SetProgress(Form self, string status)
+        public static void SetProgress(Form self, int val)
         {
             try
             {
                 if (self.MdiParent != null)
-                    ((Studio)self.MdiParent).StatusText = status;
+                    ((Studio)self.MdiParent).ProgressTool = val;
                 else if (self.Parent != null)
-                    ((Studio)self.Parent).StatusText = status;
+                    ((Studio)self.Parent).ProgressTool = val;
+                else
+                    Gifbrary.App.SetProgress(val);
             }
             catch (Exception)
             {
@@ -59,15 +61,14 @@ namespace GifStudio
         {
             set
             {
-                int max = 100;
-                var prog = Microsoft.WindowsAPICodePack.Taskbar.TaskbarManager.Instance;
-                prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.Normal);
-                for (int i = 0; i < max; i++)
+                Action act = (Action)delegate()
                 {
-                    prog.SetProgressValue(i, max);
-                    Thread.Sleep(100);
-                }
-                prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.NoProgress);
+                    Gifbrary.App.SetProgress(value);
+                };
+                if (InvokeRequired)
+                    Invoke(act);
+                else
+                    act();
             }
         }
 

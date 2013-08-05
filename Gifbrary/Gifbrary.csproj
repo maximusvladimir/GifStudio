@@ -61,6 +61,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>Libraries\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>Libraries\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="SharpCompress.3.5">
       <HintPath>Libraries\SharpCompress.3.5.dll</HintPath>
     </Reference>

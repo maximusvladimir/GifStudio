@@ -246,6 +246,7 @@ namespace GifStudio
             {
             }
             Studio.SetStatus(this,(100 * CountProgress) + "% complete.");
+            Studio.SetProgress(this, (int)(100 * CountProgress));
         }
 
         private void checkBoxTransparency_CheckedChanged(object sender, EventArgs e)
