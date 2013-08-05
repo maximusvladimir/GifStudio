@@ -62,7 +62,12 @@ namespace GifStudio
 
             if (dur != 0 && pos != 0)
             {
-                trackBar1.Value = (int)(pos * trackBar1.Maximum / dur);
+                int yu = (int)(pos * trackBar1.Maximum / dur);
+                if (yu < 0)
+                    yu = 0;
+                if (yu > trackBar1.Maximum)
+                    yu = trackBar1.Maximum;
+                trackBar1.Value = yu;
             }
         }
 

@@ -195,7 +195,7 @@ namespace GifStudio
                 TimeSpan ts = TimeSpan.Parse(trimStart.Text);
                 TimeSpan tl = TimeSpan.Parse(trimLength.Text);
                 TimeSpan nl = ts + tl;
-                string coref = nl.ToString();
+                string coref = tl.ToString();
                 System.Diagnostics.Debug.WriteLine(coref);
                 ExportData.TrimStart = ts.ToString();
                 ExportData.TrimLength = coref;

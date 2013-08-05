@@ -42,14 +42,18 @@ namespace Gifbrary.Common
         public override void SetupEncoder()
         {
             string tetb = "";
+            string yerr = "";
             if (!string.IsNullOrEmpty(ExportData.TrimLength) && !string.IsNullOrEmpty(ExportData.TrimStart))
             {
-                tetb = " -t " + ExportData.TrimLength;
+                tetb = "-ss "+ExportData.TrimStart;
+                yerr = " -t " + ExportData.TrimLength;
+                tetb = tetb + yerr;
             }
+            ffmpeg.PreParameters = tetb;
             if (ExportData.Height != 0 && ExportData.Width != 0)
-                ffmpeg.Parameters = "-r " + FPS + " -f image2 -s " + ExportData.Width + "x" + ExportData.Height+tetb;
+                ffmpeg.Parameters = "-r " + FPS + " -f image2 -s " + ExportData.Width + "x" + ExportData.Height;
             else
-                ffmpeg.Parameters = "-r " + FPS + " -f image2"+tetb;
+                ffmpeg.Parameters = "-r " + FPS + " -f image2";
             ffmpeg.Convert();
             try
             {

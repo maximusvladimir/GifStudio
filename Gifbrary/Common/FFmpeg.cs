@@ -17,7 +17,7 @@ namespace Gifbrary.Common
         public static void Init()
         {
             string dest = FFmpegPath;
-            
+
             if (!File.Exists(dest))
             {
                 string dis = Path.Combine(App.AppDataPath, "ffmpeg.7z");
@@ -90,6 +90,7 @@ namespace Gifbrary.Common
             Input = input;
             Output = output;
             Parameters = "";
+            PreParameters = "";
         }
 
         public void ConvertAsync()
@@ -112,11 +113,16 @@ namespace Gifbrary.Common
             set;
         }
 
+        public string PreParameters
+        {
+            get;
+            set;
+        }
 
         public void Convert()
         {
             string fileargs = "";
-            fileargs = "-i" + " \"" + Input + "\" " + Parameters + " -metadata handler_name=\"GifStudio\" \"" + Output + "\"";
+            fileargs = PreParameters + " -i" + " \"" + Input + "\" " + Parameters + " -metadata handler_name=\"GifStudio\" \"" + Output + "\"";
             System.Diagnostics.Debug.WriteLine(fileargs);
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             App.CleanupQueue.Add(p);
