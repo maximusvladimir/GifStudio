@@ -29,6 +29,21 @@ namespace GifStudio
             {
             }
         }
+
+        public static void SetProgress(Form self, string status)
+        {
+            try
+            {
+                if (self.MdiParent != null)
+                    ((Studio)self.MdiParent).StatusText = status;
+                else if (self.Parent != null)
+                    ((Studio)self.Parent).StatusText = status;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private ExportWindow export;
         public Studio()
         {
@@ -38,6 +53,22 @@ namespace GifStudio
 
             StatusText = null;
             FormClosed += new FormClosedEventHandler(Studio_FormClosed);
+        }
+
+        public int ProgressTool
+        {
+            set
+            {
+                int max = 100;
+                var prog = Microsoft.WindowsAPICodePack.Taskbar.TaskbarManager.Instance;
+                prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.Normal);
+                for (int i = 0; i < max; i++)
+                {
+                    prog.SetProgressValue(i, max);
+                    Thread.Sleep(100);
+                }
+                prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.NoProgress);
+            }
         }
 
         void Studio_FormClosed(object sender, FormClosedEventArgs e)

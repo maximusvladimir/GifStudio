@@ -105,6 +105,22 @@ namespace Gifbrary
             Process.Start(e.LinkText);
         }
 
+        public static void SetProgress(int value)
+        {
+            var prog = Microsoft.WindowsAPICodePack.Taskbar.TaskbarManager.Instance;
+            if (value == 100)
+                prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.NoProgress);
+            else
+            {
+                prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.Normal);
+                if (value > 100)
+                    value = 100;
+                if (value < 0)
+                    value = 0;
+                prog.SetProgressValue(value, 100);
+            }
+        }
+
         public static void HandleHelp(IntPtr handler, string rootMSG, string moreDetails, string helpTopic)
         {
             TaskDialog dialog = new TaskDialog();

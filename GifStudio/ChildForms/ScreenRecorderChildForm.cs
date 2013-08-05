@@ -33,13 +33,8 @@ namespace GifStudio.ChildForms
 
             logicTimer.Tick += logicTimer_Tick;
             logicTimer.Interval = 33;
-            logicTimer.Enabled = true;
-            logicTimer.Start();
 
             FormClosing += ScreenRecorderChildForm_FormClosing;
-
-            worker1.Start();
-            worker2.Start();
         }
 
         void mouser_Click(object sender, NativeMouseEventArgs e)
@@ -115,31 +110,44 @@ namespace GifStudio.ChildForms
         int enteredMouseAction = 0;
         private void TakeScreenShot()
         {
-            using (Bitmap bmpScreenshot = CaptureScreen(true))
+            using (Bitmap bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb))
             {
-                if (mouseEvents != null)
+                using (Graphics g = Graphics.FromImage(bmpScreenshot))
                 {
-                    enteredMouseAction+=2;
-                    using (Graphics g = Graphics.FromImage(bmpScreenshot))
+                    g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                    if (mouseEvents != null)
                     {
+                        enteredMouseAction += 2;
                         Point nativePoint = mouseEvents.Point;
-                       // Point nativePoint1 = InterceptMouse.GetCursorPosition();
-                        //Point nativePoint2 = InterceptMouse.GetCursorPosition();
-                        //Point nativePoint = new Point(nativePoint1.X, nativePoint2.Y);
                         int uy = enteredMouseAction * 2;
                         Color cm;
                         if (mouseEvents.MouseButton == System.Windows.Forms.MouseButtons.Left)
-                            cm = Color.FromArgb(50+(enteredMouseAction*200/40),255,0,0);
+                            cm = Color.FromArgb(50 + (enteredMouseAction * 200 / 40), 255, 0, 0);
                         else
                             cm = Color.FromArgb(50 + (enteredMouseAction * 200 / 40), 255, 255, 0);
                         g.FillEllipse(new SolidBrush(cm), mouseEvents.Point.X - enteredMouseAction, nativePoint.Y - enteredMouseAction, uy, uy);
+                        if (enteredMouseAction > 20)
+                        {
+                            mouseEvents = null;
+                            enteredMouseAction = 0;
+                        }
                     }
-                    if (enteredMouseAction > 20)
+                    //if (CaptureMouse)
                     {
-                        mouseEvents = null;
-                        enteredMouseAction = 0;
+                        CURSORINFO pci;
+                        pci.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CURSORINFO));
+
+                        if (GetCursorInfo(out pci))
+                        {
+                            if (pci.flags == CURSOR_SHOWING)
+                            {
+                                DrawIcon(g.GetHdc(), pci.ptScreenPos.x, pci.ptScreenPos.y, pci.hCursor);
+                                g.ReleaseHdc();
+                            }
+                        }
                     }
                 }
+
                 bmpScreenshot.Save(@"C:\Users\max\Pictures\screendump\img" + iterator++.ToString("D5") + ".png", ImageFormat.Png);
             }
         }
@@ -169,7 +177,7 @@ namespace GifStudio.ChildForms
 
         const Int32 CURSOR_SHOWING = 0x00000001;
 
-        public static Bitmap CaptureScreen(bool CaptureMouse)
+        /*public static Bitmap CaptureScreen(bool CaptureMouse)
         {
             Bitmap result = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
 
@@ -178,21 +186,6 @@ namespace GifStudio.ChildForms
                 using (Graphics g = Graphics.FromImage(result))
                 {
                     g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-
-                    if (CaptureMouse)
-                    {
-                        CURSORINFO pci;
-                        pci.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CURSORINFO));
-
-                        if (GetCursorInfo(out pci))
-                        {
-                            if (pci.flags == CURSOR_SHOWING)
-                            {
-                                DrawIcon(g.GetHdc(), pci.ptScreenPos.x, pci.ptScreenPos.y, pci.hCursor);
-                                g.ReleaseHdc();
-                            }
-                        }
-                    }
                 }
             }
             catch
@@ -201,6 +194,55 @@ namespace GifStudio.ChildForms
             }
 
             return result;
+        }*/
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            winIcon.Click += delegate(object sender2, EventArgs args)
+            {
+                running = false;
+                logicTimer.Enabled = false;
+                logicTimer.Stop();
+                try
+                {
+                    ((Studio)Parent).WindowState = FormWindowState.Normal;
+                }
+                catch (Exception ex)
+                {
+                }
+                Close();
+            };
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(
+                delegate()
+                {
+                    running = true;
+                    System.Threading.Thread.Sleep(6000);
+                    Invoke((Action)delegate()
+                    {
+                        logicTimer.Enabled = true;
+                        logicTimer.Start();
+                        worker1.Start();
+                        worker2.Start();
+                    });
+                }));
+            WindowState = FormWindowState.Minimized;
+            try
+            {
+                ((Studio)Parent).WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+            }
+            thread.Start();
+            winIcon.ShowBalloonTip(900, "Screen Recorder", "Starting in 5\nClick this icon to finish recording.", ToolTipIcon.Info);
+            System.Threading.Thread.Sleep(1000);
+            winIcon.ShowBalloonTip(900, "Screen Recorder", "Starting in 4\nClick this icon to finish recording.", ToolTipIcon.Info);
+            System.Threading.Thread.Sleep(1000);
+            winIcon.ShowBalloonTip(900, "Screen Recorder", "Starting in 3\nClick this icon to finish recording.", ToolTipIcon.Info);
+            System.Threading.Thread.Sleep(1000);
+            winIcon.ShowBalloonTip(900, "Screen Recorder", "Starting in 2\nClick this icon to finish recording.", ToolTipIcon.Info);
+            System.Threading.Thread.Sleep(1000);
+            winIcon.ShowBalloonTip(600, "Screen Recorder", "Starting in 1\nClick this icon to finish recording.", ToolTipIcon.Info);
         }
     }
 

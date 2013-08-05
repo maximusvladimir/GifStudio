@@ -106,8 +106,8 @@
     <Compile Include="Common\NeuQuant.cs" />
     <Compile Include="Common\VideoFramePullerConversion.cs" />
     <Compile Include="Converter\WMVtoFrames.cs" />
-    <Compile Include="Converter\WMVtoGIF.cs" />
     <Compile Include="Common\GifConversion.cs" />
+    <Compile Include="Converter\WMVtoGIF.cs" />
     <Compile Include="HtmlAgilityPack\crc32.cs" />
     <Compile Include="HtmlAgilityPack\EncodingFoundException.cs" />
     <Compile Include="HtmlAgilityPack\HtmlAttribute.cs" />
