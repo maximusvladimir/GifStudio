@@ -245,7 +245,7 @@ namespace GifStudio.ChildForms
         bool firstRun = true;
         private void mpeg_Completed(object sender, EventArgs e)
         {
-            if (firstRun)
+            /*if (firstRun)
             {
                 FFmpeg mpeg = new FFmpeg(_downloader.VideoPath, tempVidPath.Replace(".mpg",".wmv"));
                 mpeg.ProgressChanged += mpeg_ProgressChanged;
@@ -254,7 +254,7 @@ namespace GifStudio.ChildForms
                 mpeg.ConvertAsync();
                 firstRun = false;
                 return;
-            }
+            }*/
             string swap = ((FFmpeg)sender).Output;
             Invoke((Action)delegate()
             {
@@ -292,13 +292,13 @@ namespace GifStudio.ChildForms
                 {
                     Invoke((Action)delegate()
                     {
-                        float vf = (((send.Progress * 0.5f) * (progressBar1.Maximum / 2.0f)) + (progressBar1.Maximum / 2.0f));
+                        float vf = (((send.Progress /** 0.5f*/) * (progressBar1.Maximum / 2.0f)) + (progressBar1.Maximum / 2.0f));
                         progressBar1.Value = (int)vf;
                         Studio.SetStatus(this, "Processing video " + vf + " %");
                         Studio.SetProgress(this, (int)vf);
                     });
                 }
-                else
+               /* else
                 {
                     Invoke((Action)delegate()
                     {
@@ -307,7 +307,7 @@ namespace GifStudio.ChildForms
                         Studio.SetStatus(this, "Processing video " + vf + " %");
                         Studio.SetProgress(this, (int)vf);
                     });
-                }
+                }*/
             }
             catch (Exception)
             {
