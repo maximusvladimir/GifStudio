@@ -113,19 +113,10 @@ namespace Gifbrary.Common
         }
 
 
-        public string SpecialOutput
-        {
-            get;
-            set;
-        }
-
         public void Convert()
         {
             string fileargs = "";
-            if (!string.IsNullOrEmpty(SpecialOutput))
-                fileargs = "-i" + " \"" + Input + "\" " + Parameters + " " + SpecialOutput;
-            else
-                fileargs = "-i" + " \"" + Input + "\" " + Parameters + " \"" + Output + "\"";
+            fileargs = "-i" + " \"" + Input + "\" " + Parameters + " -metadata handler_name=\"GifStudio\" \"" + Output + "\"";
             System.Diagnostics.Debug.WriteLine(fileargs);
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             App.CleanupQueue.Add(p);

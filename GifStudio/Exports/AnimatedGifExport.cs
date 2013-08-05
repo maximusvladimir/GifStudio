@@ -17,6 +17,7 @@ namespace GifStudio
 {
     public partial class AnimatedGifExport : ExportWindow
     {
+        long maxspan = 0;
         public AnimatedGifExport(string file, int w, int h)
         {
             ExportData = new Exportable();
@@ -29,8 +30,22 @@ namespace GifStudio
             ChromaKey = Color.Fuchsia;
             ExportData.Quality = 50;
             ExportData.FPS = 30;
+            maxspan = new TimeSpan(FFmpeg.GetVideoDuration(file)).Ticks;
+            trimLength.Text = new TimeSpan(maxspan).ToString();
+            trimLength.TextChanged += trimLength_TextChanged;
+        }
 
-            trimLength.Text = new TimeSpan(FFmpeg.GetVideoDuration(file)).ToString();
+        void trimLength_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                long t = TimeSpan.Parse(trimLength.Text).Ticks;
+                if (t > maxspan)
+                    App.HandleError(Handle, "Trim length must be less than the video length.", null, 26);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         void textBoxPath_TextChanged(object sender, EventArgs e)
@@ -177,8 +192,15 @@ namespace GifStudio
         {
             if (checkBoxTrim.Checked)
             {
-                ExportData.TrimStart = trimStart.Text;
-                ExportData.TrimLength = trimLength.Text;
+                TimeSpan ts = TimeSpan.Parse(trimStart.Text);
+                TimeSpan tl = TimeSpan.Parse(trimLength.Text);
+                TimeSpan nl = ts + tl;
+                string coref = nl.ToString();
+                System.Diagnostics.Debug.WriteLine(coref);
+                ExportData.TrimStart = ts.ToString();
+                ExportData.TrimLength = coref;
+                //ExportData.TrimStart = trimStart.Text;
+                //ExportData.TrimLength = trimLength.Text;
             }
             System.Diagnostics.Debug.WriteLine(ExportData.TrimLength);
             int l = 0;
