@@ -67,13 +67,13 @@ namespace Gifbrary.Common
             set;
         }
 
-        public long TrimStart
+        public string TrimStart
         {
             get;
             set;
         }
 
-        public long TrimLength
+        public string TrimLength
         {
             get;
             set;

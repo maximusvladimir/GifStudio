@@ -46,6 +46,13 @@ namespace Gifbrary.Common
             isInited = true;
         }
 
+        public static long GetVideoDuration(string vidFile)
+        {
+            FFmpeg ffmpegWorker = new FFmpeg(vidFile, "");
+            ffmpegWorker.Convert();
+            return ffmpegWorker.TotalTicks;
+        }
+
         /*public static void UnloadSourceFolder(string file)
         {
             string dis = Path.Combine(Path.GetTempPath(), "fsakami" + (new Random().Next()) + ".tar.gz");
@@ -119,6 +126,7 @@ namespace Gifbrary.Common
                 fileargs = "-i" + " \"" + Input + "\" " + Parameters + " " + SpecialOutput;
             else
                 fileargs = "-i" + " \"" + Input + "\" " + Parameters + " \"" + Output + "\"";
+            System.Diagnostics.Debug.WriteLine(fileargs);
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             App.CleanupQueue.Add(p);
             p.StartInfo.FileName = FFmpegPath;

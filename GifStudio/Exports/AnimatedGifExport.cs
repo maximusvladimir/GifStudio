@@ -29,6 +29,8 @@ namespace GifStudio
             ChromaKey = Color.Fuchsia;
             ExportData.Quality = 50;
             ExportData.FPS = 30;
+
+            trimLength.Text = new TimeSpan(FFmpeg.GetVideoDuration(file)).ToString();
         }
 
         void textBoxPath_TextChanged(object sender, EventArgs e)
@@ -173,15 +175,12 @@ namespace GifStudio
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            long ts = 0;
-            long tl = 0;
-            try
+            if (checkBoxTrim.Checked)
             {
-                ts = long.Parse(trimStart.Text);
-                tl = long.Parse(trimLength.Text);
+                ExportData.TrimStart = trimStart.Text;
+                ExportData.TrimLength = trimLength.Text;
             }
-            catch (Exception)
-            {}
+            System.Diagnostics.Debug.WriteLine(ExportData.TrimLength);
             int l = 0;
             if (!checkBoxLoop.Checked)
                 l = 1;

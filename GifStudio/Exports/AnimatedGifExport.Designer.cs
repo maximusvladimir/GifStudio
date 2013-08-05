@@ -294,7 +294,6 @@
             // checkBoxTrim
             // 
             this.checkBoxTrim.AutoSize = true;
-            this.checkBoxTrim.Enabled = false;
             this.checkBoxTrim.Location = new System.Drawing.Point(9, 57);
             this.checkBoxTrim.Name = "checkBoxTrim";
             this.checkBoxTrim.Size = new System.Drawing.Size(49, 17);

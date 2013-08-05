@@ -152,13 +152,11 @@ namespace GifStudio
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            if (checkBoxTrim.Checked)
             {
-                ExportData.TrimStart = long.Parse(trimStart.Text);
-                ExportData.TrimLength = long.Parse(trimLength.Text);
+                ExportData.TrimStart = trimStart.Text;
+                ExportData.TrimLength = trimLength.Text;
             }
-            catch (Exception)
-            {}
             try
             {
                 ExportData.Width = int.Parse(textBoxCropW.Text);
