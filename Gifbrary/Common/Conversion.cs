@@ -52,7 +52,7 @@ namespace Gifbrary.Common
 
         public abstract int GetTotalFrames();
 
-        public abstract Image GetFrame(int i);
+        public abstract Bitmap GetFrame(int i);
 
         public virtual void Convert()
         {

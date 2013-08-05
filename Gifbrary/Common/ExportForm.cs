@@ -61,7 +61,7 @@ namespace Gifbrary.Common
             set;
         }
 
-        public int Quality
+        public float Quality
         {
             get;
             set;

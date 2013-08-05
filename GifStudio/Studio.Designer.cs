@@ -288,6 +288,7 @@
             this.gifCompressorToolStripMenuItem.Name = "gifCompressorToolStripMenuItem";
             this.gifCompressorToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.gifCompressorToolStripMenuItem.Text = "Gif Compressor";
+            this.gifCompressorToolStripMenuItem.Click += new System.EventHandler(this.gifCompressorToolStripMenuItem_Click);
             // 
             // flashVideoDownloaderToolStripMenuItem
             // 

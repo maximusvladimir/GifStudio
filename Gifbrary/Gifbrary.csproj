@@ -155,6 +155,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Read.cs" />
+    <Compile Include="Utilities\ColorTableReplacer.cs" />
+    <Compile Include="Utilities\Ditherer.cs" />
     <Compile Include="Utilities\VideoDownloader.cs" />
     <Compile Include="Utilities\VideoScanner.cs" />
   </ItemGroup>

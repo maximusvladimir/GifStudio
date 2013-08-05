@@ -47,7 +47,7 @@ namespace Gifbrary.Common
             var fc = new ImageFormatConverter();
             var strf = fc.ConvertToString(Format).ToLower();
             EncoderParameters pars = new EncoderParameters(1);
-            pars.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (byte)ExportData.Quality);
+            pars.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)(100-((ExportData.Quality*99)+1)));
             ImageCodecInfo encoder = FindEncoder(Format) ?? FindEncoder(ImageFormat.Png);
             for (int c = 0; c < GetTotalFrames(); c++)
             {

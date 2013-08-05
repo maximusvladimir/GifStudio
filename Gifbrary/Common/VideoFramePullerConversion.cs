@@ -79,7 +79,7 @@ namespace Gifbrary.Common
             set;
         }
 
-        public override Image GetFrame(int i)
+        public override Bitmap GetFrame(int i)
         {
             return new Bitmap(files[i]);
         }

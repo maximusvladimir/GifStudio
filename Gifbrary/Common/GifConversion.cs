@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using SharpApng;
+using Gifbrary.Utilities;
 
 namespace Gifbrary.Common
 {
@@ -32,7 +33,7 @@ namespace Gifbrary.Common
             //SharpApng.Apng ping = new Apng();
             AnimatedGifEncoder e = new AnimatedGifEncoder();
             e.Start(ExportData.DestinationFilePath);
-            e.SetQuality(21 - ((ExportData.Quality * 20) / 100));
+            e.SetQuality((int)(20-(20 * ExportData.Quality)));
             e.SetDelay(1000 / ExportData.FPS);
             e.SetRepeat(Loop);
             if (ExportData.ChromaKey != null)
@@ -41,11 +42,14 @@ namespace Gifbrary.Common
             SetupEncoder();
             if (kill)
                 return;
+            var ocd = new OrderedColorDithering();
             for (int i = 0; i < GetTotalFrames(); i++)
             {
                 if (kill)
                     return;
-                Image b = GetFrame(i);
+                Bitmap b = GetFrame(i);
+                //if (ExportData.Quality < 30)
+                  //  b = ocd.Apply(b);
                 e.AddFrame(b);
               //  ping.AddFrame((Bitmap)b, 10, 10);
                 OnProgressChanged(i);

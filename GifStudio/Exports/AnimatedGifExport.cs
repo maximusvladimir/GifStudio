@@ -28,7 +28,7 @@ namespace GifStudio
             textBoxCropW.Text = w + "";
 
             ChromaKey = Color.Fuchsia;
-            ExportData.Quality = 50;
+            ExportData.Quality = 0.5f;
             ExportData.FPS = 30;
             maxspan = new TimeSpan(FFmpeg.GetVideoDuration(file)).Ticks;
             trimLength.Text = new TimeSpan(maxspan).ToString();
@@ -92,7 +92,7 @@ namespace GifStudio
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             labelQuality.Text = trackBar1.Value + "";
-            ExportData.Quality = trackBar1.Value;
+            ExportData.Quality = ((float)trackBar1.Value)/((float)trackBar1.Maximum);
         }
 
         private void helpBoxQuality_Click(object sender, EventArgs e)
