@@ -213,7 +213,15 @@ namespace Gifbrary
                         File.Delete((string)post[c]);
                     }
                     catch (Exception)
-                    { }
+                    {
+                        try
+                        {
+                            Directory.Delete((string)post[c], true);
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
                 }
                 else if (post[c] is IDisposable)
                 {
