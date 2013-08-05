@@ -105,9 +105,20 @@ namespace Gifbrary.Common
             set;
         }
 
+
+        public string SpecialOutput
+        {
+            get;
+            set;
+        }
+
         public void Convert()
         {
-            string fileargs = "-i" + " \"" + Input + "\" " + Parameters + " \"" + Output + "\"";
+            string fileargs = "";
+            if (!string.IsNullOrEmpty(SpecialOutput))
+                fileargs = "-i" + " \"" + Input + "\" " + Parameters + " " + SpecialOutput;
+            else
+                fileargs = "-i" + " \"" + Input + "\" " + Parameters + " \"" + Output + "\"";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             App.CleanupQueue.Add(p);
             p.StartInfo.FileName = FFmpegPath;
