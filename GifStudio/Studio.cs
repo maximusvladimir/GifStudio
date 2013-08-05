@@ -242,8 +242,10 @@ namespace GifStudio
 
         private void screenRecorderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ScreenRecorderChildForm srcf = new ScreenRecorderChildForm();
-            srcf.Show(this);
+            using (ScreenRecorderChildForm srcf = new ScreenRecorderChildForm())
+            {
+                srcf.ShowDialog(this);
+            }
         }
     }
 }
