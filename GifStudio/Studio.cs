@@ -191,9 +191,11 @@ namespace GifStudio
             Form f = ActiveMdiChild;
             if (f != null && f is VideoChildForm)
             {
-                VideoChildForm vcf = (VideoChildForm)f;
-                export = new AnimatedGifExport(vcf.FilePath,vcf.VideoControl.Player.NaturalVideoWidth,vcf.VideoControl.Player.NaturalVideoHeight);
-                export.ShowDialog(this);
+                using (VideoChildForm vcf = (VideoChildForm)f)
+                {
+                    export = new AnimatedGifExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
+                    export.ShowDialog(this);
+                }
             }
         }
 
@@ -210,9 +212,11 @@ namespace GifStudio
             Form f = ActiveMdiChild;
             if (f != null && f is VideoChildForm)
             {
-                VideoChildForm vcf = (VideoChildForm)f;
-                export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
-                export.ShowDialog(this);
+                using (VideoChildForm vcf = (VideoChildForm)f)
+                {
+                    export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
+                    export.ShowDialog(this);
+                }
             }
         }
 
@@ -230,8 +234,10 @@ namespace GifStudio
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            About about = new About();
-            about.ShowDialog(this);
+            using (About about = new About())
+            {
+                about.ShowDialog(this);
+            }
         }
 
         private void screenRecorderToolStripMenuItem_Click(object sender, EventArgs e)
