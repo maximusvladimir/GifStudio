@@ -121,6 +121,29 @@ namespace Gifbrary
             }
         }
 
+        public static bool IsValidPath(string file)
+        {
+            bool valid = true;
+            try
+            {
+                if (!File.Exists(file))
+                    File.Create(file);
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+                valid = false;
+            }
+            try
+            {
+                File.Delete(file);
+            }
+            catch (Exception)
+            { }
+            return valid;
+        }
+
         public static void HandleHelp(IntPtr handler, string rootMSG, string moreDetails, string helpTopic)
         {
             TaskDialog dialog = new TaskDialog();

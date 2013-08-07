@@ -282,32 +282,8 @@ namespace GifStudio
 
         private void gifCompressorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.AutoUpgradeEnabled = true;
-            ofd.CheckFileExists = true;
-            ofd.Filter = "Animated GIF file (*.gif)|*.gif";
-            ofd.RestoreDirectory = true;
-            ofd.SupportMultiDottedExtensions = true;
-            ofd.Title = "Open the animated gif to compress";
-            ofd.ShowDialog();
-
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.AutoUpgradeEnabled = true;
-            sfd.AddExtension = false;
-            sfd.Filter = "Animated GIF file (*.gif)|*.gif";
-            sfd.RestoreDirectory = true;
-            sfd.SupportMultiDottedExtensions = true;
-            sfd.Title = "Save the newly created animated gif";
-            sfd.ShowDialog();
-
-            int start = File.ReadAllBytes(ofd.FileName).Length;
-
-            Gifbrary.Utilities.ColorTableReplacer ctr = new Gifbrary.Utilities.ColorTableReplacer(ofd.FileName,sfd.FileName);
-            ctr.Start();
-
-            int end = File.ReadAllBytes(sfd.FileName).Length;
-
-            MessageBox.Show("Started: " + start + ". Ended: " + end + ".");
+            GifCompressor compressor = new GifCompressor();
+            compressor.ShowDialog(this);
         }
     }
 }

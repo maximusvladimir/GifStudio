@@ -12,34 +12,111 @@ namespace Gifbrary.Utilities
     {
         private string output = "";
         private string intput = "";
+        public event EventHandler ProgressChanged;
+        public event EventHandler Finished;
         public ColorTableReplacer(string file, string output)
         {
             intput = file;
             this.output = output;
+            randomProvider = new Random();
+        }
+        public uint QualityColors
+        {
+            get;
+            set;
+        }
+        public void OnProgressChanged()
+        {
+            if (ProgressChanged != null)
+            {
+                ProgressChanged(this, EventArgs.Empty);
+            }
+        }
+        public void OnFinished()
+        {
+            if (Finished != null)
+                Finished(this, EventArgs.Empty);
+        }
+        public float Progress
+        {
+            get;
+            set;
+        }
+        bool kill = false;
+        public void Kill()
+        {
+            kill = true;
+        }
+        public void StartAsync()
+        {
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    Start();
+                }));
+            thread.Start();
         }
         public void Start()
         {
             Bitmap gif = new Bitmap(intput);
             AnimatedGifEncoder e = new AnimatedGifEncoder();
             e.Start(output);
-            e.SetRepeat(0);
+            byte[] repeats = gif.GetPropertyItem(0x5101).Value;
+            if (repeats != null && repeats.Length >= 1)
+                e.SetRepeat(repeats[0]);
+            else
+                e.SetRepeat(0);
             byte[] times = gif.GetPropertyItem(0x5100).Value;
             int dur = BitConverter.ToInt32(times, 0);
             e.SetDelay(dur);
+            e.SetTransparent(Color.FromArgb(0, 0, 0, 0));
             FrameDimension dimension = new FrameDimension(gif.FrameDimensionsList[0]);
-            for (int c = 0; c < gif.GetFrameCount(dimension); c++)
+            int frames = gif.GetFrameCount(dimension);
+            for (int c = 0; c < frames; c++)
             {
+                if (kill)
+                {
+                    try
+                    {
+                        e.Finish();
+                    }
+                    catch (Exception)
+                    { }
+                    return;
+                }
                 gif.SelectActiveFrame(dimension, c);
                 using (Bitmap copy = new Bitmap(gif))
                 {
-                    using (Bitmap nn = SaveGIFWithNewColorTable(copy, 16, true))
+                    if (kill)
+                    {
+                        try
+                        {
+                            e.Finish();
+                        }
+                        catch (Exception)
+                        { }
+                        return;
+                    }
+                    using (Bitmap nn = SaveGIFWithNewColorTable(copy, QualityColors, true))
                     {
                         e.AddFrame(nn);
                     }
-                }         
+                    if (kill)
+                    {
+                        try
+                        {
+                            e.Finish();
+                        }
+                        catch (Exception)
+                        { }
+                        return;
+                    }
+                }
+                Progress = ((float)c) / ((float)frames);
+                OnProgressChanged();
             }
             gif.Dispose();
             e.Finish();
+            OnFinished();
         }
         protected ColorPalette GetColorPalette(uint nColors)
         {
@@ -55,7 +132,8 @@ namespace Gifbrary.Utilities
             bitmap.Dispose();
             return palette;
         }
-        private Bitmap SaveGIFWithNewColorTable(Image image,uint nColors,bool fTransparent)
+        Random randomProvider;
+        private Bitmap SaveGIFWithNewColorTable(Bitmap image,uint nColors,bool fTransparent)
         {
             if (nColors > 256)
                 nColors = 256;
@@ -66,17 +144,36 @@ namespace Gifbrary.Utilities
             Bitmap bitmap = new Bitmap(Width,
                                     Height,
                                     PixelFormat.Format8bppIndexed);
-            ColorPalette pal = GetColorPalette(nColors);
-            for (uint i = 0; i < nColors; i++)
+            ColorPalette pal = GetColorPalette(nColors+1);
+            Dictionary<Color, int> occurences = new Dictionary<Color, int>();
+            int darks = 0;
+            int halfColors = (int)(nColors / 2);
+            for (int x = 0; x < Width; x+=5)
             {
-                uint Alpha = 0xFF;
-                uint Intensity = i * 0xFF / (nColors - 1);
-                if (i == 0 && fTransparent)
-                    Alpha = 0;
-                pal.Entries[i] = Color.FromArgb((int)Alpha,
-                                                (int)Intensity,
-                                                (int)Intensity,
-                                                (int)Intensity);
+                for (int y = 0; y < Height; y+=5)
+                {
+                    Color c = image.GetPixel(x, y);
+                    if (c.R < 35 && c.G < 35 && c.B < 35)
+                    {
+                        if (darks > halfColors)
+                            continue;
+                        else
+                            darks++;
+                    }
+                    if (occurences.ContainsKey(c))
+                        occurences[c]++;
+                    else
+                        occurences.Add(c, 1);
+                }
+            }
+            var sortedDict = (from entry in occurences orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+            var newDict = sortedDict.Keys.ToArray<Color>();
+            pal.Entries[0] = Color.FromArgb(0,0,0,0);
+            for (int c = 1; c < nColors+1; c++)
+            {
+                if (c > newDict.Length-1)
+                    break;
+                pal.Entries[c] = newDict[c];
             }
             bitmap.Palette = pal;
             Bitmap BmpCopy = new Bitmap(Width,
