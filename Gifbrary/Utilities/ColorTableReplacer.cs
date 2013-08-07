@@ -1,4 +1,5 @@
 ﻿using Gif.Components;
+using ImageQuantization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -76,6 +77,7 @@ namespace Gifbrary.Utilities
             e.SetDelay(dur);
             e.SetTransparent(Color.FromArgb(0, 0, 0, 0));
             FrameDimension dimension = new FrameDimension(gif.FrameDimensionsList[0]);
+            OctreeQuantizer quantizer = new OctreeQuantizer((int)QualityColors, 8);
             int frames = gif.GetFrameCount(dimension);
             for (int c = 0; c < frames; c++)
             {
@@ -102,7 +104,12 @@ namespace Gifbrary.Utilities
                         { }
                         return;
                     }
-                    using (Bitmap nn = SaveGIFWithNewColorTable(copy, QualityColors, true))
+                    Bitmap nn = null;
+                    if (Grayscale)
+                        nn = SaveGIFWithNewColorTable(copy, QualityColors, true);
+                    else
+                        nn = quantizer.Quantize(copy);
+                    using (nn)
                     {
                         e.AddFrame(nn);
                     }
@@ -153,11 +160,11 @@ namespace Gifbrary.Utilities
             ColorPalette pal = GetColorPalette(nColors+1);
             if (!Grayscale)
             {
-                pal.Entries[0] = Color.FromArgb(0, 0, 0, 0);
+                /*pal.Entries[0] = Color.FromArgb(0, 0, 0, 0);
                 for (int c = 1; c < nColors + 1; c++)
                 {
                     pal.Entries[c] = Color.FromArgb(randomProvider.Next(255), randomProvider.Next(255), randomProvider.Next(255));
-                }
+                }*/
                 /*Dictionary<Color, int> occurences = new Dictionary<Color, int>();
                 int darks = 0;
                 int halfColors = (int)(nColors / 2);

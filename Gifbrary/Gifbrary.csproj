@@ -157,6 +157,10 @@
     <Compile Include="Read.cs" />
     <Compile Include="Utilities\ColorTableReplacer.cs" />
     <Compile Include="Utilities\Ditherer.cs" />
+    <Compile Include="Utilities\GrayscaleQuantizer.cs" />
+    <Compile Include="Utilities\OctreeQuantizer.cs" />
+    <Compile Include="Utilities\PaletteQuantizer.cs" />
+    <Compile Include="Utilities\Quantizer.cs" />
     <Compile Include="Utilities\VideoDownloader.cs" />
     <Compile Include="Utilities\VideoScanner.cs" />
   </ItemGroup>
