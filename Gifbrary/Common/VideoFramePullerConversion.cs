@@ -23,14 +23,24 @@ namespace Gifbrary.Common
         public VideoFramePullerConversion(Exportable ext)
             : base(ext)
         {
-            rtmp = Path.Combine(App.AppDataPath, "Downloads\\r" + (new Random().Next()));
+            string downloads = Path.Combine(App.AppDataPath, "Downloads\\");
+            try
+            {
+                Directory.CreateDirectory(downloads);
+            }
+            catch (Exception ex)
+            {
+                //stem.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            rtmp = Path.Combine(App.AppDataPath, "Downloads\\" + Guid.NewGuid().ToString().Replace("{","").Replace("}",""));
             App.CleanupQueue.Add(rtmp);
             try
             {
                 Directory.CreateDirectory(rtmp);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                //stem.Diagnostics.Debug.WriteLine(ex.Message);
             }
             System.Diagnostics.Debug.WriteLine(rtmp);
             ffmpeg = new FFmpeg(ext.SourceFilePath, Path.Combine(rtmp, "%5d.png"));
@@ -58,6 +68,7 @@ namespace Gifbrary.Common
             else
                 ffmpeg.Parameters = "-r " + FPS + " -f image2";
             ffmpeg.Convert();
+            System.Diagnostics.Debug.WriteLine("Exiting context");
             try
             {
                 files = Directory.GetFiles(rtmp);

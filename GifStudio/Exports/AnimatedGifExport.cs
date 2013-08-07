@@ -221,13 +221,13 @@ namespace GifStudio
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!App.IsValidPath(ExportData.DestinationFilePath))
+            /*if (!App.IsValidPath(ExportData.DestinationFilePath))
             {
                 App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH,
                     global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_DETAILS,
                     global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC);
                 return;
-            }
+            }*/
             progressBar1.Style = ProgressBarStyle.Blocks;
             buttonSave.Text = "Exporting";
             buttonSave.Enabled = false;

@@ -191,7 +191,13 @@ namespace Gifbrary.Common
                     }
                     if (btw != null)
                     {
-                        long tic = TimeSpan.Parse(btw).Ticks;
+                        long tic = 0;
+                        try
+                        {
+                            tic = TimeSpan.Parse(btw).Ticks;
+                        }
+                        catch (Exception)
+                        { }
                         if (TotalTicks != 0)
                         {
                             float p = ((float)tic) / ((float)TotalTicks);
