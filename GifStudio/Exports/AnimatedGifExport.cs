@@ -225,7 +225,7 @@ namespace GifStudio
             {
                 App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH,
                     global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_DETAILS,
-                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC, );
+                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC);
                 return;
             }
             progressBar1.Style = ProgressBarStyle.Blocks;

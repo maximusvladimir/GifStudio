@@ -54,7 +54,7 @@ namespace GifStudio.ChildForms
             {
                 App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH,
                     global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_DETAILS,
-                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC, );
+                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC);
                 return;
             }
             worker = new ColorTableReplacer(textBoxInput.Text, textBoxOutput.Text);
