@@ -61,6 +61,8 @@ namespace GifStudio.ChildForms
             worker.QualityColors = (uint)decimal.ToInt32(numericColors.Value);
             progressBar1.Style = ProgressBarStyle.Blocks;
             buttonCompress.Enabled = false;
+            if (checkBoxGrayscale.Checked)
+                worker.Grayscale = true;
             worker.ProgressChanged += worker_ProgressChanged;
             worker.Finished += worker_Finished;
             worker.StartAsync();

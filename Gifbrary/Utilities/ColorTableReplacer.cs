@@ -19,6 +19,7 @@ namespace Gifbrary.Utilities
             intput = file;
             this.output = output;
             randomProvider = new Random();
+            Grayscale = false;
         }
         public uint QualityColors
         {
@@ -46,6 +47,11 @@ namespace Gifbrary.Utilities
         public void Kill()
         {
             kill = true;
+        }
+        public bool Grayscale
+        {
+            get;
+            set;
         }
         public void StartAsync()
         {
@@ -145,35 +151,52 @@ namespace Gifbrary.Utilities
                                     Height,
                                     PixelFormat.Format8bppIndexed);
             ColorPalette pal = GetColorPalette(nColors+1);
-            Dictionary<Color, int> occurences = new Dictionary<Color, int>();
-            int darks = 0;
-            int halfColors = (int)(nColors / 2);
-            for (int x = 0; x < Width; x+=5)
+            if (!Grayscale)
             {
-                for (int y = 0; y < Height; y+=5)
+                Dictionary<Color, int> occurences = new Dictionary<Color, int>();
+                int darks = 0;
+                int halfColors = (int)(nColors / 2);
+                for (int x = 0; x < Width; x += 5)
                 {
-                    Color c = image.GetPixel(x, y);
-                    if (c.R < 35 && c.G < 35 && c.B < 35)
+                    for (int y = 0; y < Height; y += 5)
                     {
-                        if (darks > halfColors)
-                            continue;
+                        Color c = image.GetPixel(x, y);
+                        if (c.R < 35 && c.G < 35 && c.B < 35)
+                        {
+                            if (darks > halfColors)
+                                continue;
+                            else
+                                darks++;
+                        }
+                        if (occurences.ContainsKey(c))
+                            occurences[c]++;
                         else
-                            darks++;
+                            occurences.Add(c, 1);
                     }
-                    if (occurences.ContainsKey(c))
-                        occurences[c]++;
-                    else
-                        occurences.Add(c, 1);
+                }
+                var sortedDict = (from entry in occurences orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+                var newDict = sortedDict.Keys.ToArray<Color>();
+                pal.Entries[0] = Color.FromArgb(0, 0, 0, 0);
+                for (int c = 1; c < nColors + 1; c++)
+                {
+                    if (c > newDict.Length - 1)
+                        break;
+                    pal.Entries[c] = newDict[c];
                 }
             }
-            var sortedDict = (from entry in occurences orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
-            var newDict = sortedDict.Keys.ToArray<Color>();
-            pal.Entries[0] = Color.FromArgb(0,0,0,0);
-            for (int c = 1; c < nColors+1; c++)
+            else
             {
-                if (c > newDict.Length-1)
-                    break;
-                pal.Entries[c] = newDict[c];
+                for (uint i = 0; i < nColors; i++)
+                {
+                    uint Alpha = 0xFF;
+                    uint Intensity = i * 0xFF / (nColors - 1);
+                    if (i == 0 && fTransparent)
+                        Alpha = 0;
+                    pal.Entries[i] = Color.FromArgb((int)Alpha,
+                                                    (int)Intensity,
+                                                    (int)Intensity,
+                                                    (int)Intensity);
+                }
             }
             bitmap.Palette = pal;
             Bitmap BmpCopy = new Bitmap(Width,

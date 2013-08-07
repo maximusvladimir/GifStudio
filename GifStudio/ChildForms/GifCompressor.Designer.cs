@@ -40,6 +40,7 @@
             this.buttonCompress = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkBoxGrayscale = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericColors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,7 +129,7 @@
             // 
             // buttonCompress
             // 
-            this.buttonCompress.Location = new System.Drawing.Point(403, 90);
+            this.buttonCompress.Location = new System.Drawing.Point(403, 114);
             this.buttonCompress.Name = "buttonCompress";
             this.buttonCompress.Size = new System.Drawing.Size(75, 23);
             this.buttonCompress.TabIndex = 8;
@@ -138,7 +139,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 90);
+            this.progressBar1.Location = new System.Drawing.Point(16, 114);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(289, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -146,7 +147,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(319, 90);
+            this.buttonCancel.Location = new System.Drawing.Point(319, 114);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 11;
@@ -154,11 +155,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // checkBoxGrayscale
+            // 
+            this.checkBoxGrayscale.AutoSize = true;
+            this.checkBoxGrayscale.Location = new System.Drawing.Point(16, 91);
+            this.checkBoxGrayscale.Name = "checkBoxGrayscale";
+            this.checkBoxGrayscale.Size = new System.Drawing.Size(153, 17);
+            this.checkBoxGrayscale.TabIndex = 12;
+            this.checkBoxGrayscale.Text = "Make everything grayscale";
+            this.checkBoxGrayscale.UseVisualStyleBackColor = true;
+            // 
             // GifCompressor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 125);
+            this.ClientSize = new System.Drawing.Size(490, 148);
+            this.Controls.Add(this.checkBoxGrayscale);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonCompress);
@@ -170,7 +182,11 @@
             this.Controls.Add(this.buttonBrowseInput);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(506, 186);
+            this.MinimumSize = new System.Drawing.Size(506, 186);
             this.Name = "GifCompressor";
             this.Text = "GIF Compressor";
             ((System.ComponentModel.ISupportInitialize)(this.numericColors)).EndInit();
@@ -192,5 +208,6 @@
         private System.Windows.Forms.Button buttonCompress;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.CheckBox checkBoxGrayscale;
     }
 }
