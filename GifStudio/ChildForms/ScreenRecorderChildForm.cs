@@ -35,6 +35,45 @@ namespace GifStudio.ChildForms
             logicTimer.Interval = 33;
 
             FormClosing += ScreenRecorderChildForm_FormClosing;
+
+            Screen[] screens = Screen.AllScreens;
+            for (int c = 0; c < screens.Length; c++)
+            {
+                string data = screens[c].DeviceName;
+                int imageIndex = 2;
+                if (!string.IsNullOrEmpty(data))
+                {
+                    if (data.IndexOf("\\\\.\\") > -1)
+                        data = data.Replace("\\\\.\\", "");
+                    data = data.ToLower();
+                    if (data.ToLower().IndexOf("splay") > -1)
+                        imageIndex = 0;
+                    else if (data.ToLower().IndexOf("pro") > -1)
+                        imageIndex = 1;
+                    if (data.IndexOf("lisplay") > -1)
+                        data = data.Replace("lisplay", "display");
+                    if (data.Length >= 2)
+                    {
+                        string f = data[c].ToString();
+                        data = f.ToUpper() + data.Substring(1);
+                    }
+
+                    try
+                    {
+                        data = System.Text.RegularExpressions.Regex.Replace(data, "(\\B[0-9])", " $1");
+                    }
+                    catch (Exception)
+                    { }
+                }
+                else
+                    data = "";
+                if (screens[c].Primary)
+                    data += " (Primary Screen)";
+                data += " (" + screens[c].Bounds.Size.Width + "," + screens[c].Bounds.Size.Height + ")";
+                ListViewItem item = new ListViewItem(data,0,listViewDisplays.Groups[0]);
+                item.Font = new System.Drawing.Font(item.Font.FontFamily, 8.0f);
+                listViewDisplays.Items.Add(item);
+            }
         }
 
         void mouser_Click(object sender, NativeMouseEventArgs e)
@@ -244,6 +283,32 @@ namespace GifStudio.ChildForms
             System.Threading.Thread.Sleep(1000);
             winIcon.ShowBalloonTip(600, "Screen Recorder", "Starting in 1\nClick this icon to finish recording.", ToolTipIcon.Info);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Screen[] screens = Screen.AllScreens;
+            bool alreadyFired = false;
+            MonitorIdentifyComponent[] mic = new MonitorIdentifyComponent[screens.Length];
+            for (int c = 0; c < screens.Length; c++)
+            {
+                mic[c] = new MonitorIdentifyComponent(c+1);
+                mic[c].FormClosing += delegate(object sender3, FormClosingEventArgs fcea)
+                {
+                    if (!alreadyFired)
+                    {
+                        alreadyFired = true;
+                        for (int d = 0; d < screens.Length; d++)
+                        {
+                            if (c != d)
+                                mic[d].Close();
+                        }
+                    }
+                };
+                mic[c].Show(this);
+                mic[c].Location = new Point(screens[c].WorkingArea.Left, screens[c].WorkingArea.Top);
+                mic[c].WindowState = FormWindowState.Maximized;
+            }
+        }
     }
 
     public class NativeMouseEventArgs : EventArgs
@@ -269,6 +334,7 @@ namespace GifStudio.ChildForms
         private LowLevelMouseProc _proc;
         private IntPtr _hookID = IntPtr.Zero;
         public event EventHandler<NativeMouseEventArgs> Click;
+        private LowLevelKeyProc _keyproc;
         public InterceptMouse()
         {
             _proc = HookCallback;
@@ -294,6 +360,7 @@ namespace GifStudio.ChildForms
         }
 
         private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+        private delegate IntPtr LowLevelKeyProc(int nCode, IntPtr wParam, IntPtr lParam);
 
         private IntPtr HookCallback(
             int nCode, IntPtr wParam, IntPtr lParam)

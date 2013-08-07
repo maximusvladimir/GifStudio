@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenRecorderChildForm));
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Monitors", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Projectors", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Others", System.Windows.Forms.HorizontalAlignment.Left);
             this.button1 = new System.Windows.Forms.Button();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,11 +44,15 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.winIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.listViewDisplays = new System.Windows.Forms.ListView();
+            this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,6 +149,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox5);
             this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox2);
@@ -152,6 +160,30 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Checked = true;
+            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox5.Location = new System.Drawing.Point(10, 113);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(199, 17);
+            this.checkBox5.TabIndex = 11;
+            this.checkBox5.Text = "Use key logger while using keyboard";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(10, 90);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(186, 17);
+            this.checkBox4.TabIndex = 3;
+            this.checkBox4.Text = "Open movie when done recording";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox3
             // 
@@ -198,23 +230,52 @@
             this.winIcon.Text = "Click to stop recording";
             this.winIcon.Visible = true;
             // 
-            // checkBox4
+            // listViewDisplays
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Checked = true;
-            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Location = new System.Drawing.Point(10, 90);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(186, 17);
-            this.checkBox4.TabIndex = 3;
-            this.checkBox4.Text = "Open movie when done recording";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            listViewGroup1.Header = "Monitors";
+            listViewGroup1.Name = "listViewGroupMonitors";
+            listViewGroup2.Header = "Projectors";
+            listViewGroup2.Name = "listViewGroupProjectors";
+            listViewGroup3.Header = "Others";
+            listViewGroup3.Name = "listViewGroupOthers";
+            this.listViewDisplays.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3});
+            this.listViewDisplays.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewDisplays.LargeImageList = this.imageListIcons;
+            this.listViewDisplays.Location = new System.Drawing.Point(335, 40);
+            this.listViewDisplays.MultiSelect = false;
+            this.listViewDisplays.Name = "listViewDisplays";
+            this.listViewDisplays.Size = new System.Drawing.Size(232, 180);
+            this.listViewDisplays.TabIndex = 11;
+            this.listViewDisplays.UseCompatibleStateImageBehavior = false;
+            this.listViewDisplays.View = System.Windows.Forms.View.Tile;
+            // 
+            // imageListIcons
+            // 
+            this.imageListIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListIcons.ImageStream")));
+            this.imageListIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListIcons.Images.SetKeyName(0, "1375929265_14.png");
+            this.imageListIcons.Images.SetKeyName(1, "1375929281_40.png");
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(492, 226);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Identify";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // ScreenRecorderChildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 303);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.listViewDisplays);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button3);
@@ -255,5 +316,9 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.NotifyIcon winIcon;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.ListView listViewDisplays;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ImageList imageListIcons;
     }
 }

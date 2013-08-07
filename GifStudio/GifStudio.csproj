@@ -115,6 +115,12 @@
     <Compile Include="ChildForms\GifCompressor.Designer.cs">
       <DependentUpon>GifCompressor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildForms\MonitorIdentifyComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\MonitorIdentifyComponent.Designer.cs">
+      <DependentUpon>MonitorIdentifyComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\ScreenRecorderChildForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\GifCompressor.resx">
       <DependentUpon>GifCompressor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\MonitorIdentifyComponent.resx">
+      <DependentUpon>MonitorIdentifyComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\ScreenRecorderChildForm.resx">
       <DependentUpon>ScreenRecorderChildForm.cs</DependentUpon>
