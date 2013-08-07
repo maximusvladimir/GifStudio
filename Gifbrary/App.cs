@@ -124,12 +124,20 @@ namespace Gifbrary
         public static bool IsValidPath(string file)
         {
             bool valid = true;
+            bool delete = true;
             try
             {
                 if (!File.Exists(file))
                     File.Create(file);
                 else
+                {
+                    delete = false;
+                    using (FileStream reader = new FileStream(file, FileMode.Open, FileAccess.ReadWrite))
+                    {
+                        
+                    }
                     return true;
+                }
             }
             catch (Exception)
             {
@@ -137,7 +145,8 @@ namespace Gifbrary
             }
             try
             {
-                File.Delete(file);
+                if (delete)
+                    File.Delete(file);
             }
             catch (Exception)
             { }

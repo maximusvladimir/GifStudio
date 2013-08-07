@@ -204,7 +204,7 @@ namespace GifStudio
                 //ExportData.TrimStart = trimStart.Text;
                 //ExportData.TrimLength = trimLength.Text;
             }
-            System.Diagnostics.Debug.WriteLine(ExportData.TrimLength);
+            //System.Diagnostics.Debug.WriteLine(ExportData.TrimLength);
             int l = 0;
             if (!checkBoxLoop.Checked)
                 l = 1;
@@ -219,6 +219,14 @@ namespace GifStudio
             if (checkBoxCrop.Checked && ExportData.Width <= 0 || ExportData.Height <= 0)
             {
                 MessageBox.Show("The desired image must have a width and height greater than zero, and have numbers only.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!App.IsValidPath(ExportData.DestinationFilePath))
+            {
+                App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH,
+                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_DETAILS,
+                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC, );
+                return;
             }
             progressBar1.Style = ProgressBarStyle.Blocks;
             buttonSave.Text = "Exporting";

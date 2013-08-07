@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="photos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -244,8 +244,16 @@
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC" xml:space="preserve">
     <value>Resizing the output image</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_96.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="STR_EXP_ERROR_BAD_PATH" xml:space="preserve">
+    <value>Invalid file path(s) or permissions to the files were denied.</value>
+  </data>
+  <data name="STR_EXP_ERROR_BAD_PATH_DETAILS" xml:space="preserve">
+    <value>Look at the path(s) again, and ensure they are valid. Check the filepath and make sure you have permission to access it, and that you have given this program rights to those permissions.</value>
+  </data>
+  <data name="STR_EXP_ERROR_BAD_PATH_TOPIC" xml:space="preserve">
+    <value>Unable to create/open file</value>
   </data>
 </root>

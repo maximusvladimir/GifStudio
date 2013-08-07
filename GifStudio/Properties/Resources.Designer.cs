@@ -419,6 +419,33 @@ namespace GifStudio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid file path(s) or permissions to the files were denied..
+        /// </summary>
+        internal static string STR_EXP_ERROR_BAD_PATH {
+            get {
+                return ResourceManager.GetString("STR_EXP_ERROR_BAD_PATH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Look at the path(s) again, and ensure they are valid. Check the filepath and make sure you have permission to access it, and that you have given this program rights to those permissions..
+        /// </summary>
+        internal static string STR_EXP_ERROR_BAD_PATH_DETAILS {
+            get {
+                return ResourceManager.GetString("STR_EXP_ERROR_BAD_PATH_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to create/open file.
+        /// </summary>
+        internal static string STR_EXP_ERROR_BAD_PATH_TOPIC {
+            get {
+                return ResourceManager.GetString("STR_EXP_ERROR_BAD_PATH_TOPIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to contact server. Your internet connection may be down..
         /// </summary>
         internal static string STR_EXP_ERROR_NO_INTERNET {

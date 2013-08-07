@@ -52,9 +52,9 @@ namespace GifStudio.ChildForms
         {
             if (!App.IsValidPath(textBoxInput.Text) || !App.IsValidPath(textBoxOutput.Text))
             {
-                App.HandleHelp(Handle, "Invalid file path(s) or permissions to the files were denied", 
-                    "Look at the path(s) again, and ensure they are valid. Check the filepath and make sure you have permission to access it, and that you have given this program rights to those permissions.", 
-                    "Unable to create/open file");
+                App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH,
+                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_DETAILS,
+                    global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC, );
                 return;
             }
             worker = new ColorTableReplacer(textBoxInput.Text, textBoxOutput.Text);
