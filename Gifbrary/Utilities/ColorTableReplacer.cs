@@ -153,7 +153,12 @@ namespace Gifbrary.Utilities
             ColorPalette pal = GetColorPalette(nColors+1);
             if (!Grayscale)
             {
-                Dictionary<Color, int> occurences = new Dictionary<Color, int>();
+                pal.Entries[0] = Color.FromArgb(0, 0, 0, 0);
+                for (int c = 1; c < nColors + 1; c++)
+                {
+                    pal.Entries[c] = Color.FromArgb(randomProvider.Next(255), randomProvider.Next(255), randomProvider.Next(255));
+                }
+                /*Dictionary<Color, int> occurences = new Dictionary<Color, int>();
                 int darks = 0;
                 int halfColors = (int)(nColors / 2);
                 for (int x = 0; x < Width; x += 5)
@@ -182,7 +187,7 @@ namespace Gifbrary.Utilities
                     if (c > newDict.Length - 1)
                         break;
                     pal.Entries[c] = newDict[c];
-                }
+                }*/
             }
             else
             {

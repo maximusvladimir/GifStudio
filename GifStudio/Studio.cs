@@ -68,7 +68,7 @@ namespace GifStudio
                 if (InvokeRequired)
                     Invoke(act);
                 else
-                    act();
+                    act.Invoke();
             }
         }
 
@@ -100,11 +100,10 @@ namespace GifStudio
                     _statustext = "Ready.";
                 if (InvokeRequired)
                 {
-                    StatusLabelInvoke l = delegate(string s)
+                    Invoke((Action)delegate()
                     {
                         Status.Text = _statustext;
-                    };
-                    Invoke(l, _statustext);
+                    });
                 }
                 else
                 {

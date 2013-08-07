@@ -70,16 +70,19 @@ namespace GifStudio.ChildForms
 
         private void worker_Finished(object sender, EventArgs e)
         {
-            try
+            Invoke((Action)delegate()
             {
-                int inbytes = File.ReadAllBytes(textBoxInput.Text).Length;
-                int outbytes = File.ReadAllBytes(textBoxOutput.Text).Length;
-                Studio.SetProgress(this, 100);
-                Studio.SetStatus(this, "Compression completed successfully. File reduced by " + ((inbytes - outbytes)/1024) + " kb.");
-            }
-            catch (Exception)
-            { }
-            Close();
+                try
+                {
+                    int inbytes = File.ReadAllBytes(textBoxInput.Text).Length;
+                    int outbytes = File.ReadAllBytes(textBoxOutput.Text).Length;
+                    Studio.SetProgress(this, 100);
+                    Studio.SetStatus(this, "Compression completed successfully. File reduced by " + ((inbytes - outbytes) / 1024) + " kb.");
+                }
+                catch (Exception)
+                { }
+                Close();
+            });
         }
 
         private void worker_ProgressChanged(object sender, EventArgs e)
@@ -94,14 +97,18 @@ namespace GifStudio.ChildForms
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (worker != null)
+            Invoke((Action)delegate()
             {
-                worker.Kill();
-                buttonCompress.Enabled = true;
-                progressBar1.Style = ProgressBarStyle.Continuous;
-            }
-            else
-                Close();
+                Studio.SetProgress(this, (int)(worker.Progress * 100));
+                if (worker != null)
+                {
+                    worker.Kill();
+                    buttonCompress.Enabled = true;
+                    progressBar1.Style = ProgressBarStyle.Continuous;
+                }
+                else
+                    Close();
+            });
         }
     }
 }

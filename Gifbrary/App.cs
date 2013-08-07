@@ -108,7 +108,7 @@ namespace Gifbrary
         public static void SetProgress(int value)
         {
             var prog = Microsoft.WindowsAPICodePack.Taskbar.TaskbarManager.Instance;
-            if (value == 100)
+            if (value >= 98)
                 prog.SetProgressState(Microsoft.WindowsAPICodePack.Taskbar.TaskbarProgressBarState.NoProgress);
             else
             {
