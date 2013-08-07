@@ -45,6 +45,7 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.winIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,6 +142,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
@@ -196,6 +198,18 @@
             this.winIcon.Text = "Click to stop recording";
             this.winIcon.Visible = true;
             // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(10, 90);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(186, 17);
+            this.checkBox4.TabIndex = 3;
+            this.checkBox4.Text = "Open movie when done recording";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
             // ScreenRecorderChildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,5 +254,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.NotifyIcon winIcon;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

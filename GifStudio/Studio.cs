@@ -284,5 +284,10 @@ namespace GifStudio
             GifCompressor compressor = new GifCompressor();
             compressor.ShowDialog(this);
         }
+
+        private void openFramesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

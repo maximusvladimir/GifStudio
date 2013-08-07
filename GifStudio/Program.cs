@@ -11,21 +11,19 @@ namespace GifStudio
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main(string[] args)
         {
-            int randy = 0;
-            //unsafe
+            if (args != null && args.Length >= 1)
             {
-                IntPtr ptr = System.Runtime.InteropServices.Marshal.AllocHGlobal(128);
-                randy = (int)ptr;
-                System.Runtime.InteropServices.Marshal.FreeHGlobal(ptr);
             }
-            System.Diagnostics.Debug.WriteLine(randy);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-            Gifbrary.Common.FFmpeg.Init();
-            Application.Run(new Studio());
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                Gifbrary.Common.FFmpeg.Init();
+                Application.Run(new Studio());
+            }
 
             Shutdown();
         }
