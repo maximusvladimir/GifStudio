@@ -26,6 +26,8 @@ namespace GifStudio.ChildForms
             mouser = new InterceptMouse();
             mouser.Click += mouser_Click;
 
+            Move += ScreenRecorderChildForm_Move;
+
             worker1 = new System.Threading.Thread(new System.Threading.ThreadStart(Thread1));
             worker1.Name = "ScreenshotThread0";
             worker2 = new System.Threading.Thread(new System.Threading.ThreadStart(Thread2));
@@ -37,6 +39,25 @@ namespace GifStudio.ChildForms
             FormClosing += ScreenRecorderChildForm_FormClosing;
 
             Screen[] screens = Screen.AllScreens;
+            /*List<Screen> stmp = new List<Screen>();
+            stmp.AddRange(Screen.AllScreens);
+            Screen projector = Screen.AllScreens[0];
+            typeof(Screen).GetField("deviceName", System.Reflection.BindingFlags.Instance | 
+                System.Reflection.BindingFlags.NonPublic).SetValue(projector, "\\\\.\\PROJECTOR3");
+            stmp.Add(projector);
+            Screen[] screens = stmp.ToArray();
+            stmp = null;*/
+            System.Management.SelectQuery q = new System.Management.SelectQuery("SELECT Name, DeviceID, Description FROM Win32_DesktopMonitor");
+            using (System.Management.ManagementObjectSearcher mos = new System.Management.ManagementObjectSearcher(q))
+            {
+                foreach (System.Management.ManagementObject mo in mos.Get())
+                {
+                    Console.WriteLine("{0}, {1}, {2}",
+                        mo.Properties["Name"].Value.ToString(),
+                        mo.Properties["DeviceID"].Value.ToString(),
+                        mo.Properties["Description"].Value.ToString());
+                }
+            }
             for (int c = 0; c < screens.Length; c++)
             {
                 string data = screens[c].DeviceName;
@@ -50,11 +71,11 @@ namespace GifStudio.ChildForms
                         imageIndex = 0;
                     else if (data.ToLower().IndexOf("pro") > -1)
                         imageIndex = 1;
-                    if (data.IndexOf("lisplay") > -1)
-                        data = data.Replace("lisplay", "display");
+                    if (data.IndexOf("iisplay") > -1)
+                        data = data.Replace("iisplay", "display");
                     if (data.Length >= 2)
                     {
-                        string f = data[c].ToString();
+                        string f = data[0].ToString();
                         data = f.ToUpper() + data.Substring(1);
                     }
 
@@ -70,9 +91,22 @@ namespace GifStudio.ChildForms
                 if (screens[c].Primary)
                     data += " (Primary Screen)";
                 data += " (" + screens[c].Bounds.Size.Width + "," + screens[c].Bounds.Size.Height + ")";
-                ListViewItem item = new ListViewItem(data,0,listViewDisplays.Groups[0]);
+                ListViewItem item = new ListViewItem(data,imageIndex,listViewDisplays.Groups[imageIndex]);
                 item.Font = new System.Drawing.Font(item.Font.FontFamily, 8.0f);
                 listViewDisplays.Items.Add(item);
+            }
+        }
+
+        private void ScreenRecorderChildForm_Move(object sender, EventArgs e)
+        {
+            for (int c = 0; c < Screen.AllScreens.Length; c++)
+            {
+                if (this.Bounds.IntersectsWith(Screen.AllScreens[c].Bounds))
+                {
+                    listViewDisplays.SelectedIndices.Clear();
+                    listViewDisplays.SelectedIndices.Add(c);
+                    break;
+                }
             }
         }
 
@@ -308,6 +342,11 @@ namespace GifStudio.ChildForms
                 mic[c].Location = new Point(screens[c].WorkingArea.Left, screens[c].WorkingArea.Top);
                 mic[c].WindowState = FormWindowState.Maximized;
             }
+        }
+
+        private void listViewDisplays_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 

@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\..\..\Users\max\Downloads\WPFMediaKit\System.Windows.Interactivity.dll</HintPath>
     </Reference>

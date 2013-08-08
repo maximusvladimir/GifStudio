@@ -251,6 +251,7 @@
             this.listViewDisplays.TabIndex = 11;
             this.listViewDisplays.UseCompatibleStateImageBehavior = false;
             this.listViewDisplays.View = System.Windows.Forms.View.Tile;
+            this.listViewDisplays.SelectedIndexChanged += new System.EventHandler(this.listViewDisplays_SelectedIndexChanged);
             // 
             // imageListIcons
             // 
