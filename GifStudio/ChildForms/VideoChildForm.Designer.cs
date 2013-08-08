@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoChildForm));
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.videoFeedback1 = new GifStudio.VideoFeedback();
             this.panel1 = new System.Windows.Forms.Panel();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.timeDuration = new System.Windows.Forms.Label();
@@ -42,16 +40,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // elementHost1
-            // 
-            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost1.Location = new System.Drawing.Point(0, 0);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(463, 312);
-            this.elementHost1.TabIndex = 1;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.videoFeedback1;
             // 
             // panel1
             // 
@@ -138,7 +126,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 351);
-            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VideoChildForm";
@@ -152,9 +139,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private VideoFeedback videoFeedback1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkLoop;
         private System.Windows.Forms.TrackBar trackBar1;
@@ -162,6 +146,5 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label timeElapsed;
         private System.Windows.Forms.Button button1;
-
     }
 }

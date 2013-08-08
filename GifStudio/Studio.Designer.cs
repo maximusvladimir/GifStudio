@@ -56,6 +56,8 @@
             this.gifCompressorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flashVideoDownloaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenRecorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.uploadVideoToYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +185,7 @@
             this.toolBarToolStripMenuItem.CheckOnClick = true;
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.toolBarToolStripMenuItem.Text = "&Toolbar";
             this.toolBarToolStripMenuItem.Click += new System.EventHandler(this.ToolBarToolStripMenuItem_Click);
             // 
@@ -193,7 +195,7 @@
             this.statusBarToolStripMenuItem.CheckOnClick = true;
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.statusBarToolStripMenuItem.Text = "&Status Bar";
             this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.StatusBarToolStripMenuItem_Click);
             // 
@@ -267,7 +269,9 @@
             this.toolStripSeparator1,
             this.gifCompressorToolStripMenuItem,
             this.flashVideoDownloaderToolStripMenuItem,
-            this.screenRecorderToolStripMenuItem});
+            this.screenRecorderToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.uploadVideoToYouTubeToolStripMenuItem});
             this.toolsMenu.Name = "toolsMenu";
             this.toolsMenu.Size = new System.Drawing.Size(48, 20);
             this.toolsMenu.Text = "&Tools";
@@ -275,19 +279,19 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // gifCompressorToolStripMenuItem
             // 
             this.gifCompressorToolStripMenuItem.Image = global::GifStudio.Properties.Resources.arrow_transition_270;
             this.gifCompressorToolStripMenuItem.Name = "gifCompressorToolStripMenuItem";
-            this.gifCompressorToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.gifCompressorToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.gifCompressorToolStripMenuItem.Text = "Gif Compressor";
             this.gifCompressorToolStripMenuItem.Click += new System.EventHandler(this.gifCompressorToolStripMenuItem_Click);
             // 
@@ -295,7 +299,7 @@
             // 
             this.flashVideoDownloaderToolStripMenuItem.Image = global::GifStudio.Properties.Resources.download_cloud;
             this.flashVideoDownloaderToolStripMenuItem.Name = "flashVideoDownloaderToolStripMenuItem";
-            this.flashVideoDownloaderToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.flashVideoDownloaderToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.flashVideoDownloaderToolStripMenuItem.Text = "Flash video downloader";
             this.flashVideoDownloaderToolStripMenuItem.Click += new System.EventHandler(this.flashVideoDownloaderToolStripMenuItem_Click);
             // 
@@ -303,9 +307,22 @@
             // 
             this.screenRecorderToolStripMenuItem.Image = global::GifStudio.Properties.Resources.camcorder;
             this.screenRecorderToolStripMenuItem.Name = "screenRecorderToolStripMenuItem";
-            this.screenRecorderToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.screenRecorderToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.screenRecorderToolStripMenuItem.Text = "Screen recorder";
             this.screenRecorderToolStripMenuItem.Click += new System.EventHandler(this.screenRecorderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
+            // 
+            // uploadVideoToYouTubeToolStripMenuItem
+            // 
+            this.uploadVideoToYouTubeToolStripMenuItem.Image = global::GifStudio.Properties.Resources._1376004565_youtube;
+            this.uploadVideoToYouTubeToolStripMenuItem.Name = "uploadVideoToYouTubeToolStripMenuItem";
+            this.uploadVideoToYouTubeToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.uploadVideoToYouTubeToolStripMenuItem.Text = "Upload Video to YouTube";
+            this.uploadVideoToYouTubeToolStripMenuItem.Click += new System.EventHandler(this.uploadVideoToYouTubeToolStripMenuItem_Click);
             // 
             // windowsMenu
             // 
@@ -560,6 +577,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripMenuItem screenRecorderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem uploadVideoToYouTubeToolStripMenuItem;
     }
 }
 

@@ -63,6 +63,16 @@ namespace GifStudio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1376004565_youtube {
+            get {
+                object obj = ResourceManager.GetObject("1376004565_youtube", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap application_cascade {
             get {
                 object obj = ResourceManager.GetObject("application_cascade", resourceCulture);
@@ -176,6 +186,16 @@ namespace GifStudio.Properties {
         internal static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lock_warning {
+            get {
+                object obj = ResourceManager.GetObject("lock-warning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

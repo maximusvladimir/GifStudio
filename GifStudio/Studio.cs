@@ -224,7 +224,7 @@ namespace GifStudio
             {
                 using (VideoChildForm vcf = (VideoChildForm)f)
                 {
-                    export = new AnimatedGifExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
+                    //export = new AnimatedGifExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
                     export.ShowDialog(this);
                 }
             }
@@ -245,7 +245,7 @@ namespace GifStudio
             {
                 using (VideoChildForm vcf = (VideoChildForm)f)
                 {
-                    export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
+                    //export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
                     export.ShowDialog(this);
                 }
             }
@@ -288,6 +288,14 @@ namespace GifStudio
         private void openFramesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void uploadVideoToYouTubeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (YoutubeVideoUploaderChildForm yvucf = new YoutubeVideoUploaderChildForm())
+            {
+                yvucf.ShowDialog(this);
+            }
         }
     }
 }

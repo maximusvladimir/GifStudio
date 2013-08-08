@@ -103,6 +103,7 @@ namespace GifStudio.ChildForms
             {
                 if (this.Bounds.IntersectsWith(Screen.AllScreens[c].Bounds))
                 {
+                    listViewDisplays.Focus();
                     listViewDisplays.SelectedIndices.Clear();
                     listViewDisplays.SelectedIndices.Add(c);
                     break;

@@ -62,15 +62,6 @@
     <Reference Include="DirectShowLib-2005">
       <HintPath>Libraries\DirectShowLib-2005.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.WMPLib">
-      <HintPath>Libraries\Interop.WMPLib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="ShaderEffectLibrary">
-      <HintPath>Libraries\ShaderEffectLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -84,12 +75,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="WPFMediaKit">
-      <HintPath>Libraries\WPFMediaKit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChildForms\About.cs">
@@ -128,6 +113,18 @@
     <Compile Include="ChildForms\ScreenRecorderChildForm.Designer.cs">
       <DependentUpon>ScreenRecorderChildForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildForms\VideoUploadControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChildForms\VideoUploadControl.Designer.cs">
+      <DependentUpon>VideoUploadControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildForms\YoutubeVideoUploaderChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\YoutubeVideoUploaderChildForm.Designer.cs">
+      <DependentUpon>YoutubeVideoUploaderChildForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exports\AnimatedGifExport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,9 +157,6 @@
     <Compile Include="ChildForms\VideoChildForm.Designer.cs">
       <DependentUpon>VideoChildForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VideoFeedback.xaml.cs">
-      <DependentUpon>VideoFeedback.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="ChildForms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +174,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\ScreenRecorderChildForm.resx">
       <DependentUpon>ScreenRecorderChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\VideoUploadControl.resx">
+      <DependentUpon>VideoUploadControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\YoutubeVideoUploaderChildForm.resx">
+      <DependentUpon>YoutubeVideoUploaderChildForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Exports\AnimatedGifExport.resx">
       <DependentUpon>AnimatedGifExport.cs</DependentUpon>
@@ -260,6 +260,8 @@
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
     <Content Include="1375233411_49848.ico" />
+    <None Include="Resources\lock-warning.gif" />
+    <None Include="Resources\1376004565_youtube.png" />
     <None Include="Resources\logo_96.png" />
     <None Include="Resources\png48.png" />
     <None Include="Resources\logo_120.png" />
@@ -281,10 +283,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="VideoFeedback.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="photos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,14 +145,17 @@
   <data name="application_tile_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_tile_horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_96.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="STR_EXP_ANI_GIF_HELP_TRIM_TOPIC" xml:space="preserve">
     <value>Adjusting the video length and start time</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO" xml:space="preserve">
     <value>No video could be found at the given url.</value>
   </data>
-  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="photo-album--minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo-album--minus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,11 +181,14 @@
   <data name="disk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\disk.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="STR_EXP_ERROR_BAD_PATH_DETAILS" xml:space="preserve">
+    <value>Look at the path(s) again, and ensure they are valid. Check the filepath and make sure you have permission to access it, and that you have given this program rights to those permissions.</value>
+  </data>
   <data name="photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,6 +223,9 @@
   <data name="photo-album--plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo-album--plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="1376004565_youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1376004565_youtube.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -241,19 +250,17 @@
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE" xml:space="preserve">
     <value>Resizing an image will stretch the size of an image to make it bigger or smaller from its original size.</value>
   </data>
-  <data name="STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC" xml:space="preserve">
-    <value>Resizing the output image</value>
-  </data>
-  <data name="logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo_96.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="STR_EXP_ERROR_BAD_PATH" xml:space="preserve">
     <value>Invalid file path(s) or permissions to the files were denied.</value>
   </data>
-  <data name="STR_EXP_ERROR_BAD_PATH_DETAILS" xml:space="preserve">
-    <value>Look at the path(s) again, and ensure they are valid. Check the filepath and make sure you have permission to access it, and that you have given this program rights to those permissions.</value>
+  <data name="STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC" xml:space="preserve">
+    <value>Resizing the output image</value>
   </data>
   <data name="STR_EXP_ERROR_BAD_PATH_TOPIC" xml:space="preserve">
     <value>Unable to create/open file</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lock-warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock-warning.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

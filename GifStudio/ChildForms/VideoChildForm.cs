@@ -16,7 +16,6 @@ namespace GifStudio
             InitializeComponent();
             DoChildResize();
             Resize += VideoChildForm_Resize;
-            VideoControl.Player.MediaOpened += Player_MediaOpened;
             //VideoControl.Player.Loop = true;
             scrubAnayliser = new Timer();
             scrubAnayliser.Enabled = true;
@@ -25,13 +24,6 @@ namespace GifStudio
             scrubAnayliser.Start();
 
             trackBar1.MouseMove += trackBar1_MouseMove;
-        }
-
-        void Player_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
-        {
-            mediaOpened = true;
-            VideoControl.Player.Play();
-            playing = true;
         }
 
         public string FilePath
@@ -50,8 +42,8 @@ namespace GifStudio
         {
             if (!mediaOpened)
                 return;
-            long dur = VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
-            long pos = VideoControl.Player.Position.Ticks;
+            long dur = 0;//VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
+            long pos = 0;// VideoControl.Player.Position.Ticks;
             TimeSpan span = new TimeSpan(pos);
             timeElapsed.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") + 
                 ":" + span.Seconds.ToString("D2");
@@ -78,14 +70,12 @@ namespace GifStudio
 
         private void DoChildResize()
         {
-            VideoControl.Width = Width;
-            VideoControl.Height = Height;
-            //VideoControl.Margin = new System.Windows.Thickness(0, 0, Height - menuStrip1.Height, Width);
-            VideoControl.InvalidateVisual();
-            VideoControl.Player.Width = Width;
-            VideoControl.Player.Height = Height;
-            //VideoControl.Player.Margin = new System.Windows.Thickness(0, 0, Height - menuStrip1.Height, Width);
-            VideoControl.Player.InvalidateVisual();
+            ///VideoControl.Width = Width;
+            //VideoControl.Height = Height;
+            //VideoControl.InvalidateVisual();
+            //VideoControl.Player.Width = Width;
+            //VideoControl.Player.Height = Height;
+            //VideoControl.Player.InvalidateVisual();
         }
 
         private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -96,35 +86,27 @@ namespace GifStudio
         public void SetVideo(string filePath)
         {
             FilePath = filePath;
-            VideoControl.Player.Source = new Uri(filePath);
+            //VideoControl.Player.Source = new Uri(filePath);
             System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(
                 delegate()
                 {
                     System.Threading.Thread.Sleep(1500);
                     Invoke((Action)delegate()
                     {
-                        VideoControl.Player.Play();
+                        //VideoControl.Player.Play();
                     });
                 }));
             thread.Start();
         }
 
-        public VideoFeedback VideoControl
-        {
-            get
-            {
-                return (VideoFeedback)elementHost1.Child;
-            }
-        }
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (!VideoControl.Player.NaturalDuration.HasTimeSpan)
+            /*if (!VideoControl.Player.NaturalDuration.HasTimeSpan)
                 return;
             long dur = VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
             VideoControl.Player.Pause();
             VideoControl.Player.Position = new TimeSpan(((trackBar1.Value * dur) / trackBar1.Maximum));
-            VideoControl.Player.Play();
+            VideoControl.Player.Play();*/
             button1.Text = "Play";
             playing = true;
 
@@ -144,13 +126,13 @@ namespace GifStudio
             if (playing)
             {
                 button1.Text = "Play";
-                VideoControl.Player.Pause();
+                //VideoControl.Player.Pause();
                 playing = false;
             }
             else
             {
                 button1.Text = "Pause";
-                VideoControl.Player.Play();
+                //VideoControl.Player.Play();
                 playing = true;
             }
         }
