@@ -12,6 +12,7 @@ namespace Gifbrary
 {
     public class App
     {
+        public static string SERFJ = "AI39si7bXTu92wh6hy6fYPSMp18MAbZ03yh2T6L29JrwjiLpJUKJKjYiJSHivj3H2Yx1aAOy4-b1h1TFYiFunyz3-igHrfI2ag";
         public static List<object> CleanupQueue = new List<object>();
         public static void HandleError(IntPtr handler, string rootMSG, Exception ex, int opCode)
         {

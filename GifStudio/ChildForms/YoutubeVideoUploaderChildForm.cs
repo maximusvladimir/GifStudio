@@ -1,9 +1,14 @@
-﻿using System;
+﻿using Gifbrary;
+using Google.GData.Client;
+using Google.GData.YouTube;
+using Google.YouTube;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows.Forms;
 
@@ -57,13 +62,50 @@ namespace GifStudio.ChildForms
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            DoLoginFailedAnimation("Bad password.");
+            Ping pinger = new Ping();
+            try
+            {
+                PingReply reply = pinger.Send("www.youtube.com", 7000);
+                if (reply.Status != IPStatus.Success)
+                {
+                    DoNoInternetAnimation();
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                DoNoInternetAnimation();
+                return;
+            }
+
+            YouTubeRequestSettings settings = new YouTubeRequestSettings("GifStudio",App.SERFJ,textBoxUsername.Text, textBoxPassword.Text);
+            YouTubeRequest request = new YouTubeRequest(settings);
+            YouTubeQuery query = new YouTubeQuery(YouTubeQuery.DefaultUploads);
+            Feed<Video> feed = request.Get<Video>(query);
+            int res = -52226;
+            try
+            {
+                res = feed.TotalResults;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.ToLower().IndexOf("invalid") > -1)
+                {
+                    DoLoginFailedAnimation("Bad username or password. Check your speelling and try again.");
+                    return;
+                }
+                else
+                    throw ex;
+            }
+            if (res != -52226)
+                DoLoginSuccessAnimation();
         }
 
         public void DoNoInternetAnimation()
         {
             backgroundAnimator.Enabled = true;
             backgroundAnimator.Start();
+            labelFailReason.Text = "Could not contact YouTube.";
         }
 
         public void DoLoginFailedAnimation(string reason)
