@@ -15,5 +15,10 @@ namespace GifStudio.ChildForms
         {
             InitializeComponent();
         }
+
+        private void buttonAddTag_Click(object sender, EventArgs e)
+        {
+            listBoxTags.Items.Add(textBoxTagAdder.Text);
+        }
     }
 }

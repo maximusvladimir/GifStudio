@@ -62,43 +62,82 @@ namespace GifStudio.ChildForms
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            Ping pinger = new Ping();
-            try
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += delegate(object worksender, DoWorkEventArgs args)
             {
-                PingReply reply = pinger.Send("www.youtube.com", 7000);
-                if (reply.Status != IPStatus.Success)
+                Ping pinger = new Ping();
+                try
                 {
-                    DoNoInternetAnimation();
+                    PingReply reply = pinger.Send("www.youtube.com", 7000);
+                    if (reply.Status != IPStatus.Success)
+                    {
+                        Invoke((Action)delegate()
+                        {
+                            DoNoInternetAnimation();
+                        });
+                        Invoke((Action)delegate()
+                        {
+                            Cursor = Cursors.Default;
+                        });
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
+                    Invoke((Action)delegate()
+                    {
+                        DoNoInternetAnimation();
+                    });
+                    Invoke((Action)delegate()
+                    {
+                        Cursor = Cursors.Default;
+                    });
                     return;
                 }
-            }
-            catch (Exception)
-            {
-                DoNoInternetAnimation();
-                return;
-            }
+                int res = -52226;
 
-            YouTubeRequestSettings settings = new YouTubeRequestSettings("GifStudio",App.SERFJ,textBoxUsername.Text, textBoxPassword.Text);
-            YouTubeRequest request = new YouTubeRequest(settings);
-            YouTubeQuery query = new YouTubeQuery(YouTubeQuery.DefaultUploads);
-            Feed<Video> feed = request.Get<Video>(query);
-            int res = -52226;
-            try
-            {
-                res = feed.TotalResults;
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.ToLower().IndexOf("invalid") > -1)
+                YouTubeRequestSettings settings = new YouTubeRequestSettings("GifStudio", App.SERFJ, textBoxUsername.Text, textBoxPassword.Text);
+                YouTubeRequest request = new YouTubeRequest(settings);
+                YouTubeQuery query = new YouTubeQuery(YouTubeQuery.FavoritesVideo);
+                Feed<Video> feed = request.Get<Video>(query);
+                try
                 {
-                    DoLoginFailedAnimation("Bad username or password. Check your speelling and try again.");
-                    return;
+                    res = feed.TotalResults;
                 }
-                else
-                    throw ex;
-            }
-            if (res != -52226)
-                DoLoginSuccessAnimation();
+                catch (Exception ex)
+                {
+                    if (ex.Message.ToLower().IndexOf("invalid") > -1)
+                    {
+                        Invoke((Action)delegate()
+                        {
+                            DoLoginFailedAnimation("Bad username or password. Check your speelling and try again.");
+                        });
+                        Invoke((Action)delegate()
+                        {
+                            Cursor = Cursors.Default;
+                        });
+                        return;
+                    }
+                    else if (ex is GDataRequestException)
+                    {
+                        res = 0;
+                    }
+                    else
+                        throw ex;
+                }
+                if (res != -52226)
+                    Invoke((Action)delegate()
+                            {
+                                Console.WriteLine(res + "totals");
+                                DoLoginSuccessAnimation();
+                            });
+                Invoke((Action)delegate()
+                {
+                    Cursor = Cursors.Default;
+                });
+            };
+            Cursor = Cursors.WaitCursor;
+            worker.RunWorkerAsync();
         }
 
         public void DoNoInternetAnimation()
