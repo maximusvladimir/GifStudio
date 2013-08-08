@@ -37,6 +37,7 @@
             this.listBoxTags = new System.Windows.Forms.ListBox();
             this.textBoxTagAdder = new System.Windows.Forms.TextBox();
             this.buttonAddTag = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,7 +96,7 @@
             this.listBoxTags.FormattingEnabled = true;
             this.listBoxTags.Location = new System.Drawing.Point(6, 132);
             this.listBoxTags.Name = "listBoxTags";
-            this.listBoxTags.Size = new System.Drawing.Size(198, 43);
+            this.listBoxTags.Size = new System.Drawing.Size(198, 69);
             this.listBoxTags.TabIndex = 6;
             // 
             // textBoxTagAdder
@@ -115,11 +116,21 @@
             this.buttonAddTag.UseVisualStyleBackColor = true;
             this.buttonAddTag.Click += new System.EventHandler(this.buttonAddTag_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(235, 216);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "label4";
+            // 
             // VideoUploadControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonAddTag);
             this.Controls.Add(this.textBoxTagAdder);
             this.Controls.Add(this.listBoxTags);
@@ -149,5 +160,6 @@
         private System.Windows.Forms.ListBox listBoxTags;
         private System.Windows.Forms.TextBox textBoxTagAdder;
         private System.Windows.Forms.Button buttonAddTag;
+        private System.Windows.Forms.Label label4;
     }
 }
