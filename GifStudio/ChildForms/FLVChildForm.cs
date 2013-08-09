@@ -81,11 +81,6 @@ namespace GifStudio.ChildForms
             if (string.IsNullOrEmpty(_url))
                 return;
 
-            if (!_url.StartsWith("http://") || !_url.StartsWith("https://"))
-            {
-                _url = "http://" + _url;
-            }
-
             bool createFail = false;
 
             try
@@ -352,10 +347,7 @@ namespace GifStudio.ChildForms
             string _url = boxURL.Text;
             if (string.IsNullOrEmpty(_url))
                 return;
-            if (!_url.StartsWith("http://") || !_url.StartsWith("https://"))
-            {
-                _url = "http://" + _url;
-            }
+
             bool createFail = false;
 
             try
