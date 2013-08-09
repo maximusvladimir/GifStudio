@@ -1,0 +1,8 @@
+<?xml version='1.0'?>
+<Obfuscator>
+  <Var name="InPath" value=".\GifStudio\bin\x86\Release" />
+  <Var name="OutPath" value=".\GifStudio\bin\x86\Release\Confused" />
+  <Var name="ReuseNames" value="true" />
+
+  <Module file="$(InPath)\studio.exe" />/>
+</Obfuscator>

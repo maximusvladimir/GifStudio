@@ -1,1 +1,0 @@
-ILMerge.exe /target:library /out:Gifbrary.dll Gifbrary.dll DirectShowLib-2005.dll Microsoft.WindowsAPICodePack.dll
