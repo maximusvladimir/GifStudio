@@ -35,9 +35,9 @@ namespace GifStudio.ChildForms
                 {
                     phaser += 0.04;
                     int randomadd = (int)(Math.Sin(phaser) * 30);
-                    for (int x = -1; x < Width / 5; x++)
+                    for (int x = -1; x < Width / 3; x++)
                     {
-                        for (int y = -1; y < Height/5; y++)
+                        for (int y = -1; y < Height/3; y++)
                         {
                             int intensity = randy.Next(0, 150) + randomadd;
                             if (intensity > 255)
@@ -62,6 +62,11 @@ namespace GifStudio.ChildForms
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBoxUsername.Text) || string.IsNullOrEmpty(textBoxPassword.Text))
+            {
+                labelFailReason.Text = "Please enter a username and password.";
+                return;
+            }
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += delegate(object worksender, DoWorkEventArgs args)
             {
@@ -194,6 +199,29 @@ namespace GifStudio.ChildForms
                 if (panelLogin.Location.X < (-panelLogin.Width) - 100)
                 {
                     animator.Stop();
+
+                    Timer animator2 = new Timer();
+                    animator2.Interval = 30;
+                    delta = 1.0;
+                    int iColor = 0;
+                    animator2.Tick += delegate(object animatorSender2, EventArgs animatorE2)
+                    {
+                        delta += Math.Pow(delta, 0.3) * 0.35;
+                        videoUploadControl1.Location = new Point((int)(videoUploadControl1.Location.X - delta), videoUploadControl1.Location.Y);
+                        iColor += 1;
+                        if (iColor > 100)
+                            iColor = 100;
+                        videoUploadControl1.Opacity = iColor;
+                        videoUploadControl1.Invalidate();
+                        if (videoUploadControl1.Location.X <= 0)
+                        {
+                            videoUploadControl1.Location = new Point(0, videoUploadControl1.Location.Y);
+                            animator2.Stop();
+                        }
+                    };
+                    animator2.Enabled = true;
+                    animator2.Start();
+
                 }
             };
             animator.Enabled = true;

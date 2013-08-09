@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label6.Text" xml:space="preserve">
+    <value>By clicking Publish, you certify that you own all rights to the content or that you are authorized by the owner to make the content available on YouTube, and that it otherwise complies with the YouTube Terms of Service.</value>
+  </data>
 </root>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoUploadControl));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
@@ -38,12 +39,21 @@
             this.textBoxTagAdder = new System.Windows.Forms.TextBox();
             this.buttonAddTag = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.buttonPublish = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.linkLabelYouTubeTermsOfService = new System.Windows.Forms.LinkLabel();
+            this.linkLabelSafety = new System.Windows.Forms.LinkLabel();
+            this.buttonRemoveTag = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(303, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(254, 22);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(160, 99);
             this.pictureBox1.TabIndex = 0;
@@ -72,6 +82,7 @@
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(198, 22);
             this.textBoxDescription.TabIndex = 4;
+            this.textBoxDescription.Text = "A movie I made.";
             // 
             // label2
             // 
@@ -119,17 +130,118 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(235, 216);
+            this.label4.Location = new System.Drawing.Point(3, 204);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 9;
-            this.label4.Text = "label4";
+            this.label4.Text = "Category:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Public",
+            "Private"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 220);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(198, 21);
+            this.comboBox1.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 244);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Visibility:";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Public",
+            "Private"});
+            this.comboBox2.Location = new System.Drawing.Point(6, 260);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(198, 21);
+            this.comboBox2.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(210, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(243, 76);
+            this.label6.TabIndex = 13;
+            this.label6.Text = resources.GetString("label6.Text");
+            // 
+            // buttonPublish
+            // 
+            this.buttonPublish.Location = new System.Drawing.Point(307, 260);
+            this.buttonPublish.Name = "buttonPublish";
+            this.buttonPublish.Size = new System.Drawing.Size(75, 23);
+            this.buttonPublish.TabIndex = 14;
+            this.buttonPublish.Text = "Publish";
+            this.buttonPublish.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(388, 260);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 15;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // linkLabelYouTubeTermsOfService
+            // 
+            this.linkLabelYouTubeTermsOfService.AutoSize = true;
+            this.linkLabelYouTubeTermsOfService.Location = new System.Drawing.Point(264, 213);
+            this.linkLabelYouTubeTermsOfService.Name = "linkLabelYouTubeTermsOfService";
+            this.linkLabelYouTubeTermsOfService.Size = new System.Drawing.Size(135, 13);
+            this.linkLabelYouTubeTermsOfService.TabIndex = 16;
+            this.linkLabelYouTubeTermsOfService.TabStop = true;
+            this.linkLabelYouTubeTermsOfService.Text = "YouTube Terms of Service";
+            this.linkLabelYouTubeTermsOfService.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelYouTubeTermsOfService_LinkClicked);
+            // 
+            // linkLabelSafety
+            // 
+            this.linkLabelSafety.AutoSize = true;
+            this.linkLabelSafety.Location = new System.Drawing.Point(280, 236);
+            this.linkLabelSafety.Name = "linkLabelSafety";
+            this.linkLabelSafety.Size = new System.Drawing.Size(102, 13);
+            this.linkLabelSafety.TabIndex = 17;
+            this.linkLabelSafety.TabStop = true;
+            this.linkLabelSafety.Text = "Safety on YouTube";
+            this.linkLabelSafety.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSafety_LinkClicked);
+            // 
+            // buttonRemoveTag
+            // 
+            this.buttonRemoveTag.Location = new System.Drawing.Point(176, 104);
+            this.buttonRemoveTag.Name = "buttonRemoveTag";
+            this.buttonRemoveTag.Size = new System.Drawing.Size(28, 23);
+            this.buttonRemoveTag.TabIndex = 18;
+            this.buttonRemoveTag.Text = "-";
+            this.buttonRemoveTag.UseVisualStyleBackColor = true;
+            this.buttonRemoveTag.Click += new System.EventHandler(this.buttonRemoveTag_Click);
             // 
             // VideoUploadControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.buttonRemoveTag);
+            this.Controls.Add(this.linkLabelSafety);
+            this.Controls.Add(this.linkLabelYouTubeTermsOfService);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonPublish);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonAddTag);
             this.Controls.Add(this.textBoxTagAdder);
@@ -161,5 +273,14 @@
         private System.Windows.Forms.TextBox textBoxTagAdder;
         private System.Windows.Forms.Button buttonAddTag;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonPublish;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.LinkLabel linkLabelYouTubeTermsOfService;
+        private System.Windows.Forms.LinkLabel linkLabelSafety;
+        private System.Windows.Forms.Button buttonRemoveTag;
     }
 }
