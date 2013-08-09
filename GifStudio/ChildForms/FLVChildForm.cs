@@ -20,6 +20,14 @@ namespace GifStudio.ChildForms
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
+            if (App.HistoryReady)
+            {
+                boxURL.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                foreach (string str in App.HistoryUrls)
+                {
+                    boxURL.AutoCompleteCustomSource.Add(str);
+                }
+            }
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -72,6 +80,11 @@ namespace GifStudio.ChildForms
             string _url = boxURL.Text;
             if (string.IsNullOrEmpty(_url))
                 return;
+
+            if (!_url.StartsWith("http://") || !_url.StartsWith("https://"))
+            {
+                _url = "http://" + _url;
+            }
 
             bool createFail = false;
 
@@ -332,12 +345,17 @@ namespace GifStudio.ChildForms
             }
         }
         private YouTubeVideoQuality[] quality;
+        private bool killQualityScan = false;
         private void boxURL_TextChanged(object sender, EventArgs e)
         {
+            killQualityScan = true;
             string _url = boxURL.Text;
             if (string.IsNullOrEmpty(_url))
                 return;
-
+            if (!_url.StartsWith("http://") || !_url.StartsWith("https://"))
+            {
+                _url = "http://" + _url;
+            }
             bool createFail = false;
 
             try
@@ -353,54 +371,73 @@ namespace GifStudio.ChildForms
                 return;
 
             if (!_url.EndsWith(".mp4") && !_url.EndsWith(".wmv") && !_url.EndsWith(".flv") &&
-                !_url.EndsWith(".avi"))
+                !_url.EndsWith(".avi") && (_url.IndexOf("youtube.com/wat") > -1 || _url.IndexOf("youtu.be/wat") > -1))
             {
                 button3.Enabled = false;
                 System.Threading.Thread worker = new System.Threading.Thread(
-                    new System.Threading.ThreadStart(delegate() 
+                    new System.Threading.ThreadStart(delegate()
                         {
-                            string[] st = null;
-                            try
+                            bool found = false;
+                            killQualityScan = false;
+                            while (!found)
                             {
-                                if (_url.IndexOf("youtube.com") > -1 || _url.IndexOf("youtu.be") > -1)
-                                {
-                                    Studio.SetStatus(this, "Detecting quality settings. Please wait a second.");
-                                    st = VideoScanner.GetQualityStrings(_url, ref quality);
-                                    Studio.SetStatus(this, "Ready.");
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
-                                {
-                                    App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
-                                    Invoke((Action)delegate()
-                                    {
-                                        progressBar1.Style = ProgressBarStyle.Continuous;
-                                        button3.Enabled = true;
-                                    });
-                                    return;
-                                }
-                                else if (ex.Message.IndexOf("404") > -1)
-                                    return;
+                                if (killQualityScan)
+                                    found = true;
                                 else
-                                    throw;
-                            }
-                            try
-                            {
-                                Invoke((Action)delegate()
                                 {
-                                    if (st != null && st.Length > 0)
+                                    string[] st = null;
+                                    try
                                     {
-                                        comboBox1.Items.Clear();
-                                        comboBox1.Items.AddRange(st);
-                                        comboBox1.SelectedIndex = 0;
-                                        comboBox1.Enabled = true;
+                                        Studio.SetStatus(this, "Detecting quality settings. Please wait a second.");
+                                        st = VideoScanner.GetQualityStrings(_url, ref quality);
                                     }
-                                    button3.Enabled = true;
-                                });
+                                    catch (Exception ex)
+                                    {
+                                        if (ex.Message.IndexOf("The remote name could not be resolved") > -1)
+                                        {
+                                            App.HandleError(IntPtr.Zero, "Unable to contact server. Your internet connection may be down.", ex, 18);
+                                            Invoke((Action)delegate()
+                                            {
+                                                progressBar1.Style = ProgressBarStyle.Continuous;
+                                                button3.Enabled = true;
+                                            });
+                                            return;
+                                        }
+                                        else if (ex.Message.IndexOf("404") > -1)
+                                            return;
+                                        else
+                                            throw;
+                                    }
+                                    try
+                                    {
+                                        bool giveBreak = false;
+                                        Invoke((Action)delegate()
+                                        {
+                                            if (st != null && st.Length > 0)
+                                            {
+                                                comboBox1.Items.Clear();
+                                                comboBox1.Items.AddRange(st);
+                                                comboBox1.SelectedIndex = 0;
+                                                comboBox1.Enabled = true;
+                                                Studio.SetStatus(this, "Ready.");
+                                                found = true;
+                                                giveBreak = true;
+                                            }
+                                        });
+                                        if (giveBreak)
+                                            break;
+                                        if (!killQualityScan && !found)
+                                            System.Threading.Thread.Sleep(1500);
+                                    }
+                                    catch (Exception) { }
+                                }
                             }
-                            catch (Exception) { }
+                            System.Threading.Thread.Sleep(300);
+                            worker = null;
+                            Invoke((Action)delegate()
+                            {
+                                button3.Enabled = true;
+                            });
                         }));
                 worker.Priority = System.Threading.ThreadPriority.Highest;
                 worker.Start();

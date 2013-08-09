@@ -150,8 +150,10 @@ namespace Gifbrary.Utilities
                         qua = qual.TagQuality;
                     }
                 }
-                if (qq == null)
+                if (qq == null && yvq != null && yvq.Count > 0)
                     qq = yvq[0];
+                if (qq == null)
+                    throw new Exception("Scanner couldn't get video");
                 SpecialReferrer = "http://www.ytimg.com";
                 VideoURL = qq.DownloadUrl;
                 Ready = true;

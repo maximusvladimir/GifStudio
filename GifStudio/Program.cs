@@ -21,7 +21,7 @@ namespace GifStudio
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-                Gifbrary.Common.FFmpeg.Init();
+                App.Init();
                 Application.Run(new Studio());
             }
 

