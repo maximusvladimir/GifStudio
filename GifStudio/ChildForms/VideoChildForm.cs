@@ -98,9 +98,9 @@ namespace GifStudio
             //VideoControl.Player.Width = Width;
             //VideoControl.Player.Height = Height;
             //VideoControl.Player.InvalidateVisual();
-            Player.Width = Width;
-            Player.Height = Height;
-            Invalidate();
+            //Player.Width = Width;
+            //Player.Height = Height;
+            //Invalidate();
         }
 
         private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,7 +119,6 @@ namespace GifStudio
                     Invoke((Action)delegate()
                     {
                         Player.Ctlcontrols.play();
-                        //VideoControl.Player.Play();
                     });
                 }));
             thread.Start();
