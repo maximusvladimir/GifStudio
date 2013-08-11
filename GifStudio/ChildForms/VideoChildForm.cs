@@ -26,6 +26,14 @@ namespace GifStudio
             trackBar1.MouseMove += trackBar1_MouseMove;
         }
 
+        public AxWMPLib.AxWindowsMediaPlayer Player
+        {
+            get
+            {
+                return axWindowsMediaPlayer1;
+            }
+        }
+
         public string FilePath
         {
             get;
@@ -37,18 +45,32 @@ namespace GifStudio
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 trackBar1_Scroll(null, null);
         }
+        public static int SecondsToMilliseconds(double value)
+        {
+            double v2 = (value / Math.Ceiling(value));
+            string pav = v2.ToString();
+            if (pav.IndexOf("0.") > -1)
+                pav = pav.Replace("0.", "");
+            int newval = 0;
+            if (int.TryParse(pav, out newval))
+            {
+                return newval;
+            }
+            else
+                return -1;
+        }
         bool mediaOpened = false;
         private void scrubAnayliser_Tick(object sender, EventArgs e)
         {
             if (!mediaOpened)
                 return;
-            long dur = 0;//VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
-            long pos = 0;// VideoControl.Player.Position.Ticks;
-            TimeSpan span = new TimeSpan(pos);
+            double dur = Player.currentMedia.duration;//0;//VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
+            double pos = Player.Ctlcontrols.currentPosition;//0;// VideoControl.Player.Position.Ticks;
+            TimeSpan span = new TimeSpan(0, 0, 0, 0, SecondsToMilliseconds(pos));
             timeElapsed.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") + 
                 ":" + span.Seconds.ToString("D2");
 
-            span = new TimeSpan(dur);
+            span = new TimeSpan(0,0,0,0,SecondsToMilliseconds(dur));
             timeDuration.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") +
                 ":" + span.Seconds.ToString("D2");
 
@@ -86,13 +108,14 @@ namespace GifStudio
         public void SetVideo(string filePath)
         {
             FilePath = filePath;
-            //VideoControl.Player.Source = new Uri(filePath);
+            Player.URL = filePath;
             System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(
                 delegate()
                 {
                     System.Threading.Thread.Sleep(1500);
                     Invoke((Action)delegate()
                     {
+                        Player.Ctlcontrols.play();
                         //VideoControl.Player.Play();
                     });
                 }));
@@ -101,12 +124,10 @@ namespace GifStudio
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            /*if (!VideoControl.Player.NaturalDuration.HasTimeSpan)
-                return;
-            long dur = VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
-            VideoControl.Player.Pause();
-            VideoControl.Player.Position = new TimeSpan(((trackBar1.Value * dur) / trackBar1.Maximum));
-            VideoControl.Player.Play();*/
+            double dur = Player.NaturalDuration.TimeSpan.Ticks;
+            Player.Ctlcontrols.pause();
+            Player.Ctlcontrols.currentPosition = ((double)(new TimeSpan(((trackBar1.Value * dur) / trackBar1.Maximum)).TotalMilliseconds))*1000;
+            Player.Play();
             button1.Text = "Play";
             playing = true;
 
