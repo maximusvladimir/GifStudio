@@ -98,6 +98,9 @@ namespace GifStudio
             //VideoControl.Player.Width = Width;
             //VideoControl.Player.Height = Height;
             //VideoControl.Player.InvalidateVisual();
+            Player.Width = Width;
+            Player.Height = Height;
+            Invalidate();
         }
 
         private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -124,11 +127,11 @@ namespace GifStudio
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double dur = Player.NaturalDuration.TimeSpan.Ticks;
+            double dur = Player.currentMedia.duration;
             Player.Ctlcontrols.pause();
-            Player.Ctlcontrols.currentPosition = ((double)(new TimeSpan(((trackBar1.Value * dur) / trackBar1.Maximum)).TotalMilliseconds))*1000;
-            Player.Play();
-            button1.Text = "Play";
+            Player.Ctlcontrols.currentPosition = (trackBar1.Value * dur) / trackBar1.Maximum*1000;
+            Player.Ctlcontrols.play();
+            buttonPlayPause.Text = "Play";
             playing = true;
 
         }
@@ -146,13 +149,13 @@ namespace GifStudio
         {
             if (playing)
             {
-                button1.Text = "Play";
+                buttonPlayPause.Text = "Play";
                 //VideoControl.Player.Pause();
                 playing = false;
             }
             else
             {
-                button1.Text = "Pause";
+                buttonPlayPause.Text = "Pause";
                 //VideoControl.Player.Play();
                 playing = true;
             }

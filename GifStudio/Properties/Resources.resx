@@ -124,8 +124,11 @@
   <data name="STR_EXP_ANI_GIF_HELP_FPS" xml:space="preserve">
     <value>Sets the number of frames to display in one second of GIF playback.</value>
   </data>
-  <data name="download-cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\download-cloud.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="counter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\counter.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1376004565_youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1376004565_youtube.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_INVALIDURL" xml:space="preserve">
     <value>Currently, the FLV downloader only supports downloading videos from http:// or https://.\nThe URL should look something like "http://www.google.com/video", or "https://www.google.com/video", or "www.google.com/video", or "http://google.com/video", etc... (No quotes though).</value>
@@ -142,20 +145,20 @@
   <data name="STR_EXP_ANI_GIF_HELP_FPS_DETAILS" xml:space="preserve">
     <value>The FPS, or frames per second, is the total number of frames that will be shows to the eye in 1 second. A high FPS looks better to the naked eye, however it will cause the file size to be larger.</value>
   </data>
-  <data name="application_tile_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_tile_horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="STR_EXP_ERROR_BAD_PATH" xml:space="preserve">
+    <value>Invalid file path(s) or permissions to the files were denied.</value>
   </data>
-  <data name="logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo_96.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="STR_EXP_ANI_GIF_HELP_TRIM_TOPIC" xml:space="preserve">
-    <value>Adjusting the video length and start time</value>
+  <data name="download-cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download-cloud.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO" xml:space="preserve">
     <value>No video could be found at the given url.</value>
   </data>
-  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="STR_EXP_ANI_GIF_HELP_TRIM_TOPIC" xml:space="preserve">
+    <value>Adjusting the video length and start time</value>
+  </data>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="photo-album--minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo-album--minus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,14 +169,14 @@
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO_DETAILS" xml:space="preserve">
     <value>The video downloader may not be able to detect all videos. Some videos are streamed to the player, and those cannot be downloaded with this simple downloader.\nOther videos are loaded via JavaScript, and those cannot be detected with this downloader.</value>
   </data>
+  <data name="application_tile_vertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_tile_vertical.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="logo_300" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_300.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY" xml:space="preserve">
     <value>A higher quality setting will allow a greater number of colors to be placed in the image.</value>
-  </data>
-  <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_cascade.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="photo_delete (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo_delete (2).png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,26 +187,26 @@
   <data name="STR_EXP_ERROR_BAD_PATH_DETAILS" xml:space="preserve">
     <value>Look at the path(s) again, and ensure they are valid. Check the filepath and make sure you have permission to access it, and that you have given this program rights to those permissions.</value>
   </data>
+  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\report.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_96.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="films" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\films.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo_120" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_120.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY_TOPIC" xml:space="preserve">
     <value>Output quality</value>
   </data>
-  <data name="counter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\counter.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="application_tile_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_tile_horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\report.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_cascade.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_QUALITY_DETAILS" xml:space="preserve">
     <value>If you would like to make your image appear to be more photorealistic, increase the quality, if you need the image to render faster, chose a lower quality setting, if you understand that the image may dither more.</value>
@@ -214,8 +217,8 @@
   <data name="photo_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logo_120" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo_120.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ERROR_NO_INTERNET" xml:space="preserve">
     <value>Unable to contact server. Your internet connection may be down.</value>
@@ -223,17 +226,14 @@
   <data name="photo-album--plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\photo-album--plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1376004565_youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1376004565_youtube.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="camcorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camcorder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="door_in" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\door_in.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application_tile_vertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_tile_vertical.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_FLV_DWL_ALERT_NOVIDEO_TOPIC" xml:space="preserve">
     <value>No video</value>
@@ -244,23 +244,26 @@
   <data name="STR_EXP_ANI_GIF_HELP_FPS_TOPIC" xml:space="preserve">
     <value>Adjusting playback speed</value>
   </data>
-  <data name="camcorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\camcorder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE" xml:space="preserve">
     <value>Resizing an image will stretch the size of an image to make it bigger or smaller from its original size.</value>
   </data>
-  <data name="STR_EXP_ERROR_BAD_PATH" xml:space="preserve">
-    <value>Invalid file path(s) or permissions to the files were denied.</value>
+  <data name="films" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\films.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ANI_GIF_HELP_RESIZE_TOPIC" xml:space="preserve">
     <value>Resizing the output image</value>
+  </data>
+  <data name="lock-warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock-warning.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="STR_EXP_ERROR_BAD_PATH_TOPIC" xml:space="preserve">
     <value>Unable to create/open file</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lock-warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lock-warning.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1376197341_25_Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1376197341_25_Pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

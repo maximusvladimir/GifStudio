@@ -272,6 +272,7 @@
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
     <Content Include="1375233411_49848.ico" />
+    <None Include="Resources\1376197341_25_Pause.png" />
     <None Include="Resources\lock-warning.gif" />
     <None Include="Resources\1376004565_youtube.png" />
     <None Include="Resources\logo_96.png" />
