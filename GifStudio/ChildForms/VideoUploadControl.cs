@@ -15,6 +15,8 @@ namespace GifStudio.ChildForms
         {
             InitializeComponent();
             Paint += VideoUploadControl_Paint;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
         }
 
         void VideoUploadControl_Paint(object sender, PaintEventArgs e)
