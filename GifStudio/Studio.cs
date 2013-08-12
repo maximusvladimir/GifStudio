@@ -224,8 +224,11 @@ namespace GifStudio
             {
                 using (VideoChildForm vcf = (VideoChildForm)f)
                 {
-                    //export = new AnimatedGifExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
-                    export.ShowDialog(this);
+                    using (export = new AnimatedGifExport(vcf.FilePath, vcf.Player.currentMedia.imageSourceWidth, 
+                        vcf.Player.currentMedia.imageSourceHeight))
+                    {
+                        export.ShowDialog(this);
+                    }
                 }
             }
         }
@@ -245,8 +248,11 @@ namespace GifStudio
             {
                 using (VideoChildForm vcf = (VideoChildForm)f)
                 {
-                    //export = new FrameExport(vcf.FilePath, vcf.VideoControl.Player.NaturalVideoWidth, vcf.VideoControl.Player.NaturalVideoHeight);
-                    export.ShowDialog(this);
+                    using (export = new FrameExport(vcf.FilePath, vcf.Player.currentMedia.imageSourceWidth, 
+                        vcf.Player.currentMedia.imageSourceHeight))
+                    {
+                        export.ShowDialog(this);
+                    }
                 }
             }
         }
@@ -281,8 +287,10 @@ namespace GifStudio
 
         private void gifCompressorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GifCompressor compressor = new GifCompressor();
-            compressor.ShowDialog(this);
+            using (GifCompressor compressor = new GifCompressor())
+            {
+                compressor.ShowDialog(this);
+            }
         }
 
         private void openFramesToolStripMenuItem_Click(object sender, EventArgs e)

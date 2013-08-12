@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace GifStudio
 {
+    /// <summary>
+    /// TODO: For every property getting or setting for Player, catch for "COM object that has been separated from its underlying RCW cannot be used."
+    /// </summary>
     public partial class VideoChildForm : Form
     {
         Timer scrubAnayliser;
@@ -17,6 +20,23 @@ namespace GifStudio
             DoChildResize();
             Resize += VideoChildForm_Resize;
             //VideoControl.Player.Loop = true;
+            Player.enableContextMenu = false;
+            Player.ContextMenuStrip = null;
+            Player.uiMode = "none";
+            Player.stretchToFit = true;
+            Player.settings.enableErrorDialogs = false;
+            Player.StatusChange += delegate(object sender, EventArgs args)
+            {
+                //System.Diagnostics.Debug.WriteLine(Player.status);
+                /*
+                
+                
+                Connecting...
+                Connecting...
+                Playing 'coyote caught on a fence': 258 K bits/second
+                Playing 'coyote caught on a fence': 258 K bits/second
+                 */
+            };
             scrubAnayliser = new Timer();
             scrubAnayliser.Enabled = true;
             scrubAnayliser.Interval = 150;
@@ -24,6 +44,21 @@ namespace GifStudio
             scrubAnayliser.Start();
 
             trackBar1.MouseMove += trackBar1_MouseMove;
+
+            FormClosed += VideoChildForm_FormClosed;
+        }
+
+        void VideoChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            scrubAnayliser.Enabled = false;
+            scrubAnayliser.Stop();
+            try
+            {
+                if (!IsDisposed)
+                    Dispose();
+            }
+            catch (Exception)
+            { }
         }
 
         public AxWMPLib.AxWindowsMediaPlayer Player
@@ -45,38 +80,63 @@ namespace GifStudio
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 trackBar1_Scroll(null, null);
         }
-        public static int SecondsToMilliseconds(double value)
+
+        public TimeSpan VideoDuration
         {
-            double v2 = (value / Math.Ceiling(value));
-            string pav = v2.ToString();
-            if (pav.IndexOf("0.") > -1)
-                pav = pav.Replace("0.", "");
-            int newval = 0;
-            if (int.TryParse(pav, out newval))
-            {
-                return newval;
-            }
-            else
-                return -1;
+            get;
+            set;
         }
-        bool mediaOpened = false;
+
         private void scrubAnayliser_Tick(object sender, EventArgs e)
         {
-            if (!mediaOpened)
-                return;
-            double dur = Player.currentMedia.duration;//0;//VideoControl.Player.NaturalDuration.TimeSpan.Ticks;
-            double pos = Player.Ctlcontrols.currentPosition;//0;// VideoControl.Player.Position.Ticks;
-            TimeSpan span = new TimeSpan(0, 0, 0, 0, SecondsToMilliseconds(pos));
+            if (VideoDuration == TimeSpan.Zero)
+            {
+                try
+                {
+                    string dyu = Player.currentMedia.durationString;
+                    if (!string.IsNullOrEmpty(dyu))
+                    {
+                        int crs = 0;
+                        if (dyu.IndexOf(":") > -1)
+                        {
+                            crs = dyu.Length - dyu.Replace(":", "").Length;
+                        }
+                        if (crs == 1)
+                            dyu = "00:" + dyu;
+                        VideoDuration = TimeSpan.Parse(dyu);
+                    }
+                }
+                catch (Exception)
+                { }
+            }
+            TimeSpan span = TimeSpan.Zero;
+            try
+            {
+                string dyu = Player.Ctlcontrols.currentPositionString;
+                if (!string.IsNullOrEmpty(dyu))
+                {
+                    int crs = 0;
+                    if (dyu.IndexOf(":") > -1)
+                    {
+                        crs = dyu.Length - dyu.Replace(":", "").Length;
+                    }
+                    if (crs == 1)
+                        dyu = "00:" + dyu;
+                    span = TimeSpan.Parse(dyu);
+                }
+            }
+            catch (Exception)
+            { }
             timeElapsed.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") + 
                 ":" + span.Seconds.ToString("D2");
 
-            span = new TimeSpan(0,0,0,0,SecondsToMilliseconds(dur));
-            timeDuration.Text = span.Hours.ToString("D2") + ":" + span.Minutes.ToString("D2") +
-                ":" + span.Seconds.ToString("D2");
+            TimeSpan dur = VideoDuration;
+            timeDuration.Text = dur.Hours.ToString("D2") + ":" + dur.Minutes.ToString("D2") +
+                ":" + dur.Seconds.ToString("D2");
 
-            if (dur != 0 && pos != 0)
+            if (dur.TotalMilliseconds != 0 && span.TotalMilliseconds != 0)
             {
-                int yu = (int)(pos * trackBar1.Maximum / dur);
+                int yu = (int)(span.TotalMilliseconds * trackBar1.Maximum / dur.TotalMilliseconds);
                 if (yu < 0)
                     yu = 0;
                 if (yu > trackBar1.Maximum)
@@ -99,13 +159,8 @@ namespace GifStudio
             //VideoControl.Player.Height = Height;
             //VideoControl.Player.InvalidateVisual();
             //Player.Width = Width;
-            //Player.Height = Height;
+            //Player.Height = Height-panel1.Height;
             //Invalidate();
-        }
-
-        private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
         }
 
         public void SetVideo(string filePath)
@@ -118,20 +173,68 @@ namespace GifStudio
                     System.Threading.Thread.Sleep(1500);
                     Invoke((Action)delegate()
                     {
-                        Player.Ctlcontrols.play();
+                        PlayingState = PlayerState.Play;
+                        try
+                        {
+                            string dyu = Player.currentMedia.durationString;
+                            if (!string.IsNullOrEmpty(dyu))
+                            {
+                                int crs = 0;
+                                if (dyu.IndexOf(":") > -1)
+                                {
+                                    crs = dyu.Length - dyu.Replace(":", "").Length;
+                                }
+                                if (crs == 1)
+                                    dyu = "00:" + dyu;
+                                VideoDuration = TimeSpan.Parse(dyu);
+                            }
+                        }
+                        catch (Exception)
+                        { }
                     });
                 }));
             thread.Start();
         }
 
+        private void InternalPlayerState(PlayerState state)
+        {
+            if (state == PlayerState.Play)
+                Player.Ctlcontrols.play();
+            else if (state == PlayerState.Pause)
+                Player.Ctlcontrols.pause();
+        }
+
+        PlayerState state;
+        public PlayerState PlayingState
+        {
+            set
+            {
+                state = value;
+                InternalPlayerState(state);
+                if (state == PlayerState.Play)
+                {
+                }
+                else if (state == PlayerState.Pause)
+                {
+                }
+            }
+            get
+            {
+                return state;
+            }
+        }
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            double dur = Player.currentMedia.duration;
-            Player.Ctlcontrols.pause();
-            Player.Ctlcontrols.currentPosition = (trackBar1.Value * dur) / trackBar1.Maximum*1000;
-            Player.Ctlcontrols.play();
-            buttonPlayPause.Text = "Play";
-            playing = true;
+            try
+            {
+                double dur = Player.currentMedia.duration;
+                InternalPlayerState(PlayerState.Pause);
+                Player.Ctlcontrols.currentPosition = (trackBar1.Value * dur) / trackBar1.Maximum;
+                PlayingState = PlayerState.Play;
+            }
+            catch (Exception)
+            { }
 
         }
 
@@ -143,21 +246,23 @@ namespace GifStudio
                 VideoControl.Player.Play();
             }*/
         }
-        bool playing = true;
         private void button1_Click(object sender, EventArgs e)
         {
-            if (playing)
+            if (PlayingState == GifStudio.PlayerState.Play)
             {
-                buttonPlayPause.Text = "Play";
-                //VideoControl.Player.Pause();
-                playing = false;
+                PlayingState = PlayerState.Pause;
             }
             else
             {
-                buttonPlayPause.Text = "Pause";
-                //VideoControl.Player.Play();
-                playing = true;
+                PlayingState = PlayerState.Play;
             }
         }
+    }
+
+    public enum PlayerState
+    {
+        Play,
+        Pause,
+        Error
     }
 }
