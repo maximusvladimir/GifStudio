@@ -166,6 +166,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Slider\MediaSlider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Slider\MediaSlider.designer.cs">
+      <DependentUpon>MediaSlider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Studio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Slider\MediaSlider.resx">
+      <DependentUpon>MediaSlider.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Studio.resx">
       <DependentUpon>Studio.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +290,7 @@
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
     <Content Include="1375233411_49848.ico" />
+    <None Include="Resources\tbimage.bmp" />
     <None Include="Resources\1376197341_25_Pause.png" />
     <None Include="Resources\lock-warning.gif" />
     <None Include="Resources\1376004565_youtube.png" />

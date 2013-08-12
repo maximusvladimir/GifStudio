@@ -14,6 +14,7 @@ namespace GifStudio
     public partial class VideoChildForm : Form
     {
         Timer scrubAnayliser;
+        
         public VideoChildForm()
         {
             InitializeComponent();
@@ -73,6 +74,45 @@ namespace GifStudio
         {
             get;
             set;
+        }
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+        bool internalFullscreen = false;
+        FormWindowState prevState;
+        Form oldParent;
+        Size oldSize;
+        public bool Fullscreen
+        {
+            get
+            {
+                return internalFullscreen;
+            }
+            set
+            {
+                internalFullscreen = value;
+                if (internalFullscreen)
+                {
+                    oldParent = MdiParent;
+                    oldSize = Size;
+                    SetParent(Handle, IntPtr.Zero);
+                    MdiParent = null;
+                    Location = oldParent.Location;
+                    TopMost = true;
+                    FormBorderStyle = FormBorderStyle.None;
+                    prevState = WindowState;
+                    WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    TopMost = false;
+                    WindowState = prevState;
+                    FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+                    MdiParent = oldParent;
+                    //SetParent(Handle, oldParent.Handle);
+                    MdiParent = oldParent;
+                    Size = oldSize;
+                }
+            }
         }
 
         private void trackBar1_MouseMove(object sender, MouseEventArgs e)
@@ -158,9 +198,9 @@ namespace GifStudio
             //VideoControl.Player.Width = Width;
             //VideoControl.Player.Height = Height;
             //VideoControl.Player.InvalidateVisual();
-            //Player.Width = Width;
-            //Player.Height = Height-panel1.Height;
-            //Invalidate();
+            Player.Width = Width;
+            Player.Height = Height - (panel1.Height + 39);
+            Invalidate(true);
         }
 
         public void SetVideo(string filePath)
@@ -191,6 +231,8 @@ namespace GifStudio
                         }
                         catch (Exception)
                         { }
+                        Player.Width = Width;
+                        Player.Height = Height - (panel1.Height + 39);
                     });
                 }));
             thread.Start();
@@ -223,7 +265,7 @@ namespace GifStudio
                 return state;
             }
         }
-
+        bool lastSdf = false;
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             try
@@ -232,6 +274,16 @@ namespace GifStudio
                 InternalPlayerState(PlayerState.Pause);
                 Player.Ctlcontrols.currentPosition = (trackBar1.Value * dur) / trackBar1.Maximum;
                 PlayingState = PlayerState.Play;
+                if (lastSdf)
+                {
+                    lastSdf = false;
+                    Size = new Size(Size.Width - 1, Size.Height - 1);
+                }
+                else
+                {
+                    lastSdf = true;
+                    Size = new Size(Size.Width + 1, Size.Height + 1);
+                }
             }
             catch (Exception)
             { }
@@ -256,6 +308,11 @@ namespace GifStudio
             {
                 PlayingState = PlayerState.Play;
             }
+        }
+
+        private void buttonFullscreen_Click(object sender, EventArgs e)
+        {
+            Fullscreen = !Fullscreen;
         }
     }
 
