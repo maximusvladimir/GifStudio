@@ -140,6 +140,7 @@ namespace Gif.Components
 		{
 			if ((im == null) || !started) 
 			{
+                System.Diagnostics.Debug.WriteLine("Image is null or device not started.");
 				return false;
 			}
 			bool ok = true;
@@ -302,12 +303,13 @@ namespace Gif.Components
 			try 
 			{
 				//			bw = new BinaryWriter( new FileStream( file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None ) );
-				fs = new FileStream( file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None );
+				fs = new FileStream( file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read );
 				ok = Start(fs);
 				closeStream = true;
 			} 
-			catch (IOException) 
+			catch (IOException ex) 
 			{
+                System.Diagnostics.Debug.WriteLine(ex.Message);
 				ok = false;
 			}
 			return started = ok;

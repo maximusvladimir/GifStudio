@@ -50,13 +50,13 @@ namespace GifStudio.ChildForms
 
         private void buttonCompress_Click(object sender, EventArgs e)
         {
-            if (!App.IsValidPath(textBoxInput.Text) || !App.IsValidPath(textBoxOutput.Text))
+            /*if (!App.IsValidPath(textBoxInput.Text) || !App.IsValidPath(textBoxOutput.Text))
             {
                 App.HandleHelp(Handle, global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH,
                     global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_DETAILS,
                     global::GifStudio.Properties.Resources.STR_EXP_ERROR_BAD_PATH_TOPIC);
                 return;
-            }
+            }*/
             worker = new ColorTableReplacer(textBoxInput.Text, textBoxOutput.Text);
             worker.QualityColors = (uint)decimal.ToInt32(numericColors.Value);
             progressBar1.Style = ProgressBarStyle.Blocks;

@@ -66,6 +66,7 @@ namespace Gifbrary.Utilities
         {
             Bitmap gif = new Bitmap(intput);
             AnimatedGifEncoder e = new AnimatedGifEncoder();
+            System.Diagnostics.Debug.WriteLine(output);
             e.Start(output);
             byte[] repeats = gif.GetPropertyItem(0x5101).Value;
             if (repeats != null && repeats.Length >= 1)
@@ -127,8 +128,9 @@ namespace Gifbrary.Utilities
                 Progress = ((float)c) / ((float)frames);
                 OnProgressChanged();
             }
-            gif.Dispose();
             e.Finish();
+            System.Diagnostics.Debug.WriteLine("Finalised");
+            gif.Dispose();
             OnFinished();
         }
         protected ColorPalette GetColorPalette(uint nColors)

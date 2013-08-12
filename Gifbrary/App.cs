@@ -125,7 +125,7 @@ namespace Gifbrary
             }
         }
 
-        public static bool IsValidPath(string file)
+        /*public static bool IsValidPath(string file)
         {
             bool valid = true;
             bool delete = true;
@@ -136,7 +136,7 @@ namespace Gifbrary
                 else
                 {
                     delete = false;
-                    using (FileStream reader = new FileStream(file, FileMode.Open, FileAccess.ReadWrite))
+                    using (FileStream reader = new FileStream(file, FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
                     {
                         
                     }
@@ -155,7 +155,7 @@ namespace Gifbrary
             catch (Exception)
             { }
             return valid;
-        }
+        }*/
 
         public static void HandleHelp(IntPtr handler, string rootMSG, string moreDetails, string helpTopic)
         {
