@@ -12,6 +12,8 @@ TestResults
 *.user
 *.sln.docstates
 *.sln
+GifStudio.sln
+*.vshost.exe
 
 # Build results
 x64/
