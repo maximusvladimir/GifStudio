@@ -257,6 +257,18 @@ namespace GifStudio
                     vcf.Close();
                 }
             }
+            else if (f != null && f is AnimatedGifChildForm)
+            {
+                using (AnimatedGifChildForm vcf = (AnimatedGifChildForm)f)
+                {
+                    using (export = new FrameExport(vcf.FilePath, vcf.ImageWidth,
+                        vcf.ImageHeight))
+                    {
+                        export.ShowDialog(this);
+                    }
+                    vcf.Close();
+                }
+            }
         }
 
         private void toAnimatedPNGToolStripMenuItem_Click(object sender, EventArgs e)

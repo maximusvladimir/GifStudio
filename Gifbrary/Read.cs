@@ -44,6 +44,9 @@ namespace Gifbrary.Reader
         public static Conversion CreateConversion(Exportable data, System.Drawing.Imaging.ImageFormat format)
         {
             //if (GetFormat(data.SourceFilePath) == Formats.WMV)
+            if (GetFormat(data.SourceFilePath) == Formats.GIF)
+                return new GIFtoFrames(data, format);
+            else
                 return new WMVtoFrames(data, format);
             //return null;
         }

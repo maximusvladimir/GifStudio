@@ -112,6 +112,7 @@
     <Compile Include="Common\LZWEncoder.cs" />
     <Compile Include="Common\NeuQuant.cs" />
     <Compile Include="Common\VideoFramePullerConversion.cs" />
+    <Compile Include="Converter\GIFtoFrames.cs" />
     <Compile Include="Converter\WMVtoFrames.cs" />
     <Compile Include="Common\GifConversion.cs" />
     <Compile Include="Converter\WMVtoGIF.cs" />
