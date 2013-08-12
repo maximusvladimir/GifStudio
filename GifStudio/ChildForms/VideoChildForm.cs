@@ -255,9 +255,11 @@ namespace GifStudio
                 InternalPlayerState(state);
                 if (state == PlayerState.Play)
                 {
+                    buttonPlayPause.Image = global::GifStudio.Properties.Resources._1376336478_gtk_media_pause;
                 }
                 else if (state == PlayerState.Pause)
                 {
+                    buttonPlayPause.Image = global::GifStudio.Properties.Resources._1376336525_gtk_media_play_ltr;
                 }
             }
             get
@@ -312,6 +314,10 @@ namespace GifStudio
 
         private void buttonFullscreen_Click(object sender, EventArgs e)
         {
+            if (Fullscreen)
+                buttonFullscreen.Image =  global::GifStudio.Properties.Resources.fullscreenicon;
+            else
+                buttonFullscreen.Image = global::GifStudio.Properties.Resources.fullscreeniconhide;
             Fullscreen = !Fullscreen;
         }
     }

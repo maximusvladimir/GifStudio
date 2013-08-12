@@ -31,16 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoChildForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar1 = new MediaSlider.MediaSlider();
             this.timeDuration = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonFullscreen = new System.Windows.Forms.Button();
             this.buttonPlayPause = new System.Windows.Forms.Button();
             this.timeElapsed = new System.Windows.Forms.Label();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.loopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonFullscreen = new System.Windows.Forms.Button();
-            this.trackBar1 = new MediaSlider.MediaSlider();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
@@ -58,6 +58,48 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(463, 39);
             this.panel1.TabIndex = 2;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Animated = true;
+            this.trackBar1.AnimationSize = 0.2F;
+            this.trackBar1.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
+            this.trackBar1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.trackBar1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.trackBar1.BackColor = System.Drawing.Color.Transparent;
+            this.trackBar1.BackGroundImage = null;
+            this.trackBar1.ButtonAccentColor = System.Drawing.Color.SlateGray;
+            this.trackBar1.ButtonBorderColor = System.Drawing.Color.Black;
+            this.trackBar1.ButtonColor = System.Drawing.Color.SteelBlue;
+            this.trackBar1.ButtonCornerRadius = ((uint)(6u));
+            this.trackBar1.ButtonSize = new System.Drawing.Size(20, 10);
+            this.trackBar1.ButtonStyle = MediaSlider.MediaSlider.ButtonType.RoundedRectInline;
+            this.trackBar1.ContextMenuStrip = null;
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trackBar1.LargeChange = 0;
+            this.trackBar1.Location = new System.Drawing.Point(28, 0);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar1.Maximum = 500;
+            this.trackBar1.Minimum = 0;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.trackBar1.ShowButtonOnHover = true;
+            this.trackBar1.Size = new System.Drawing.Size(317, 39);
+            this.trackBar1.SliderFlyOut = MediaSlider.MediaSlider.FlyOutStyle.None;
+            this.trackBar1.SmallChange = 0;
+            this.trackBar1.SmoothScrolling = false;
+            this.trackBar1.TabIndex = 4;
+            this.trackBar1.TickColor = System.Drawing.Color.DarkGray;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar1.TickType = MediaSlider.MediaSlider.TickMode.Standard;
+            this.trackBar1.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.trackBar1.TrackDepth = 4;
+            this.trackBar1.TrackFillColor = System.Drawing.Color.Transparent;
+            this.trackBar1.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
+            this.trackBar1.TrackShadow = false;
+            this.trackBar1.TrackShadowColor = System.Drawing.Color.DarkGray;
+            this.trackBar1.TrackStyle = MediaSlider.MediaSlider.TrackType.Progress;
+            this.trackBar1.Value = 0;
             // 
             // timeDuration
             // 
@@ -81,9 +123,21 @@
             this.panel2.Size = new System.Drawing.Size(90, 39);
             this.panel2.TabIndex = 2;
             // 
+            // buttonFullscreen
+            // 
+            this.buttonFullscreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFullscreen.Image = global::GifStudio.Properties.Resources.fullscreenicon;
+            this.buttonFullscreen.Location = new System.Drawing.Point(44, 0);
+            this.buttonFullscreen.Name = "buttonFullscreen";
+            this.buttonFullscreen.Size = new System.Drawing.Size(43, 39);
+            this.buttonFullscreen.TabIndex = 1;
+            this.buttonFullscreen.UseVisualStyleBackColor = true;
+            this.buttonFullscreen.Click += new System.EventHandler(this.buttonFullscreen_Click);
+            // 
             // buttonPlayPause
             // 
-            this.buttonPlayPause.Image = global::GifStudio.Properties.Resources._1376197341_25_Pause;
+            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlayPause.Image = global::GifStudio.Properties.Resources._1376336478_gtk_media_pause;
             this.buttonPlayPause.Location = new System.Drawing.Point(0, 0);
             this.buttonPlayPause.Name = "buttonPlayPause";
             this.buttonPlayPause.Size = new System.Drawing.Size(43, 39);
@@ -133,58 +187,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(98, 6);
-            // 
-            // buttonFullscreen
-            // 
-            this.buttonFullscreen.Image = global::GifStudio.Properties.Resources._1376197341_25_Pause;
-            this.buttonFullscreen.Location = new System.Drawing.Point(44, 0);
-            this.buttonFullscreen.Name = "buttonFullscreen";
-            this.buttonFullscreen.Size = new System.Drawing.Size(43, 39);
-            this.buttonFullscreen.TabIndex = 1;
-            this.buttonFullscreen.UseVisualStyleBackColor = true;
-            this.buttonFullscreen.Click += new System.EventHandler(this.buttonFullscreen_Click);
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Animated = true;
-            this.trackBar1.AnimationSize = 0.2F;
-            this.trackBar1.AnimationSpeed = MediaSlider.MediaSlider.AnimateSpeed.Normal;
-            this.trackBar1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.trackBar1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.trackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.trackBar1.BackGroundImage = null;
-            this.trackBar1.ButtonAccentColor = System.Drawing.Color.SlateGray;
-            this.trackBar1.ButtonBorderColor = System.Drawing.Color.Black;
-            this.trackBar1.ButtonColor = System.Drawing.Color.SteelBlue;
-            this.trackBar1.ButtonCornerRadius = ((uint)(6u));
-            this.trackBar1.ButtonSize = new System.Drawing.Size(20, 10);
-            this.trackBar1.ButtonStyle = MediaSlider.MediaSlider.ButtonType.RoundedRectInline;
-            this.trackBar1.ContextMenuStrip = null;
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.LargeChange = 0;
-            this.trackBar1.Location = new System.Drawing.Point(28, 0);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar1.Maximum = 500;
-            this.trackBar1.Minimum = 0;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.trackBar1.ShowButtonOnHover = true;
-            this.trackBar1.Size = new System.Drawing.Size(317, 39);
-            this.trackBar1.SliderFlyOut = MediaSlider.MediaSlider.FlyOutStyle.None;
-            this.trackBar1.SmallChange = 0;
-            this.trackBar1.SmoothScrolling = false;
-            this.trackBar1.TabIndex = 4;
-            this.trackBar1.TickColor = System.Drawing.Color.DarkGray;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.TickType = MediaSlider.MediaSlider.TickMode.Standard;
-            this.trackBar1.TrackBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.trackBar1.TrackDepth = 4;
-            this.trackBar1.TrackFillColor = System.Drawing.Color.Transparent;
-            this.trackBar1.TrackProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(101)))), ((int)(((byte)(188)))));
-            this.trackBar1.TrackShadow = false;
-            this.trackBar1.TrackShadowColor = System.Drawing.Color.DarkGray;
-            this.trackBar1.TrackStyle = MediaSlider.MediaSlider.TrackType.Progress;
-            this.trackBar1.Value = 0;
             // 
             // VideoChildForm
             // 

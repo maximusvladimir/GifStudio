@@ -83,6 +83,26 @@ namespace GifStudio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1376336478_gtk_media_pause {
+            get {
+                object obj = ResourceManager.GetObject("1376336478_gtk-media-pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1376336525_gtk_media_play_ltr {
+            get {
+                object obj = ResourceManager.GetObject("1376336525_gtk-media-play-ltr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap application_cascade {
             get {
                 object obj = ResourceManager.GetObject("application_cascade", resourceCulture);
@@ -186,6 +206,26 @@ namespace GifStudio.Properties {
         internal static System.Drawing.Bitmap films {
             get {
                 object obj = ResourceManager.GetObject("films", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fullscreenicon {
+            get {
+                object obj = ResourceManager.GetObject("fullscreenicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fullscreeniconhide {
+            get {
+                object obj = ResourceManager.GetObject("fullscreeniconhide", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

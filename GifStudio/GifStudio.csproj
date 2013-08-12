@@ -290,6 +290,10 @@
   <ItemGroup>
     <Content Include="1373919121_115777.ico" />
     <Content Include="1375233411_49848.ico" />
+    <None Include="Resources\fullscreeniconhide.png" />
+    <None Include="Resources\fullscreenicon.png" />
+    <None Include="Resources\1376336525_gtk-media-play-ltr.png" />
+    <None Include="Resources\1376336478_gtk-media-pause.png" />
     <None Include="Resources\tbimage.bmp" />
     <None Include="Resources\1376197341_25_Pause.png" />
     <None Include="Resources\lock-warning.gif" />
