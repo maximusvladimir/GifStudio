@@ -229,6 +229,7 @@ namespace GifStudio
                     {
                         export.ShowDialog(this);
                     }
+                    vcf.Close();
                 }
             }
         }
@@ -253,6 +254,7 @@ namespace GifStudio
                     {
                         export.ShowDialog(this);
                     }
+                    vcf.Close();
                 }
             }
         }
